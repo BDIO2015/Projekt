@@ -1,13 +1,29 @@
-#menu{
-	width: 10%;
-	height: 70%;
-	}
-fieldset {
-	height: 100%;
-	}
+#strona{
+	position: relative;
+}
+#naglowek {
+	height: 10%;
+}
 #logowanie {
+	height: 1%;
 	text-align: right;
+	border-bottom: 1px solid;
 	}
+#menu{
+	width: 12%;
+	height: 70%;
+	border-right: 1px solid;
+	}
+#container{
+	width: 88%;
+	height: 70%;
+}
+#stopka {
+	border-top: 1px solid;
+}
+a {
+	text-align: right;
+}
 button {
 	width: 30px;
 	display: block;	

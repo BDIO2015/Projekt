@@ -4,40 +4,36 @@ body {
 
 #head {
 	height: 10%;
+	border-bottom: 1px solid;
 }
 #login {
 	text-align: right;
 }
-#logowanie {
-	height: 1%;
-	text-align: right;
-	border-bottom: 1px solid;
-	}
 #menu{
-	width: 12%;
-	height: 70%;
+	float: left;
+	width: 13%;
+	height: 75%;
 	border-right: 1px solid;
 	}
 #container{
-	width: 88%;
-	height: 70%;
+	margin-left: 0.5%;
+	float: left;
+	width: 85.5%;
+	height: 75%;
 }
-#stopka {
+#footer {
+	clear: both;
 	border-top: 1px solid;
 }
-a {
+a{
 	text-align: right;
+	background: url("images/button.png"); 
+	display: block;
+	height: 40px;
+	text-align: center;
+	background-repeat: repeat;
+	color: white;
 }
-button {
-	width: 30px;
-	display: block;	
-}
-table {
-	align: top;
-	width: 100%;
-	height: 100%;
-	
-	}
-td {
-	vertical-align: top;
+a:hover{
+	color: red;
 }

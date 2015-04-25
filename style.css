@@ -1,5 +1,5 @@
 body {
-	background-color: #f8f8f8;
+	background-color: #f0f0f0;
 }
 
 #head {
@@ -16,7 +16,7 @@ body {
 	border-right: 1px solid;
 	}
 #container{
-	margin-left: 0.5%;
+	background-color: #ffffff;
 	float: left;
 	width: 85.5%;
 	height: 75%;
@@ -25,15 +25,15 @@ body {
 	clear: both;
 	border-top: 1px solid;
 }
-a{
-	text-align: right;
-	background: url("images/button.png"); 
-	display: block;
+
+input[type=submit] {
+	width: 100%;
 	height: 40px;
-	text-align: center;
+	background: url("images/button.png");
 	background-repeat: repeat;
 	color: white;
 }
-a:hover{
+input[type=submit]:hover{
 	color: red;
+	background: url("images/button_hover.png");
 }

@@ -1,0 +1,115 @@
+<!-- IS_PROJECT_EXIST -->
+<tr>
+    <td rowspan="6" class="method-name">isProjectExist</td>
+    <td colspan="2" class="method-description">sprawdza czy projekt istnieje</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejsciowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/isProjectExist</br></br>
+                    <b>id_projekt</b> - id projektu
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">id_projekt=1</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":200,"result":{"id_projekt":1,"nazwa":"projekt1","opis":"","termin":"2015-04-23 13:16:31","miejsce":"","wytyczne":"","id_koordynator":0,"id_grupa":0,"id_ocena":""}}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty bledow</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>
+
+<!-- ADD_USER -->
+<tr>
+    <td rowspan="6" class="method-name">addUser</td>
+    <td colspan="2" class="method-description">dodaje uzytkownika do projektu</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejściowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/addUser</br></br>
+                    <b>id_projekt</b> - id projektu </br>
+                    <b>id_uzytkownik</b> - id dodawanego uzytkownika
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">id_projekt=2&amp;id_uzytkownik=3</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":200,"result":"User has been added to the project"}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty blędów</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>
+
+<!-- REMOVE_USER -->
+<tr>
+    <td rowspan="6" class="method-name">removeUser</td>
+    <td colspan="2" class="method-description">usuwa uzytkownika z projektu</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejściowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/removeUser</br></br>
+                    <b>id_projekt</b> - id projektu </br>
+                    <b>id_uzytkownik</b> - id usuwanego uzytkownika
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">id_projekt=2&amp;id_uzytkownik=3</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":200,"result":"User has been deleted from project"}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty blędów</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>

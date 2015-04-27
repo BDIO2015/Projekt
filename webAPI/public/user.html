@@ -1,0 +1,206 @@
+<!-- LOGIN -->
+<tr>
+    <td rowspan="6" class="method-name">login</td>
+    <td colspan="2" class="method-description">logowanie</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejściowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/login</br></br>
+                    <b>login</b> - login użytkownika,</br>
+                    <b>haslo</b> - haslo użytkownika
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">login=test&amp;haslo=test</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":200,"result":{"user":{"id_uzytkownik":2,"login":"test","haslo":"098f6bcd4621d373cade4e832627b4f6","poziom":1,"imie":"","nazwisko":"","email":"test@test.com","telefon":"","id_wydzial":0,"kierunek":"","rok":0,"id_specjalizacja":0,"id_katedra":0,"stanowisko":"","tytul":"","id_sieciowy":"","studenci":""}}}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty blędów</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>
+<!-- CREATE_USER -->
+<tr>
+    <td rowspan="6" class="method-name">createUser</td>
+    <td colspan="2" class="method-description">tworzenie użytkownika</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejściowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/createUser</br></br>
+                    <b>email</b> - adres email użytkownika,</br>
+                    <b>login</b> - login użytkownika,</br>
+                    <b>haslo</b> - haslo użytkownika,</br>
+                    <b>poziom</b> - (1-student, 2-prowadzacy, 3-admin)
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (201 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">email=test@test.com&amp;login=test&amp;haslo=test&amp;poziom=1</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":201,"result":"Account created"}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty blędów</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>
+<!-- IS_USER_EXIST -->
+<tr>
+    <td rowspan="6" class="method-name">isUserExist</td>
+    <td colspan="2" class="method-description">(NIE DZIALA)sprawdzanie czy uzytkownik istnieje</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejsciowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/isUserExist</br></br>
+                    <b>login</b> - login użytkownika
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">login=test</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":200,"result":{"id_uzytkownik":3,"login":"kierownik","haslo":"7815696ecbf1c96e6894b779456d330e","poziom":2,"imie":"","nazwisko":"","email":"a@s.d","telefon":"","id_wydzial":0,"kierunek":"","rok":0,"id_specjalizacja":0,"przedmioty":"","projekty":"","id_katedra":0,"stanowisko":"","tytul":"","id_sieciowy":"","studenci":""}}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty bledow</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>
+<!-- UPDATE_USER -->
+<tr>
+    <td rowspan="6" class="method-name">updateUser</td>
+    <td colspan="2" class="method-description">aktualizuje dane uzytkownika (akualizuje podane parametry, pozostale pozostaja niezmienione)</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejsciowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/updateUser</br></br>
+                    <b>login</b> - login użytkownika</br></br>
+                    parametry opcjonalne: </br>
+                    <div style="margin:0px 0px 0px 10px">
+                    <b><i>telefon</i></b>
+                    <b><i>tworzenie_watkow</i></b></br>
+                    <b><i>przedmiot</i></b></br>
+                    <b><i>projekty</i></b></br>
+                    <b><i>imie</i></b></br>
+                    <b><i>nazwisko</i></b></br>
+                    <b><i>nr_albumu</i></b></br>
+                    <b><i>wydzial</i></b></br>
+                    <b><i>kierunek</i></b></br>
+                    <b><i>rok</i></b></br>
+                    <b><i>specjalizacja</i></b>
+                    </div>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">ID_student=28&amp;telefon=123456789&amp;tworzenie_watkow=1&amp;specjalizacja=sieci</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":201,"result":"Update successful"}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty bledow</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>
+<!-- CHANGE_PASS -->
+<tr>
+    <td rowspan="6" class="method-name">changePass</td>
+    <td colspan="2" class="method-description">zmienia haslo</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejsciowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/changePass</br></br>
+                    <b>id_uzytkownik</b> - id uzytkownika</br>
+                    <b>login</b> - login uzytkownika</br>
+                    <b>haslo</b> - haslo uzytkownika</br>
+                    <b>nowe_haslo</b> - nowe haslo uzytkownika
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">id_uzytkownik=28&amp;login=test&amp;haslo=stare&amp;nowe_haslo=nowe</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":200,"result":"Change password successful"}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty bledow</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>

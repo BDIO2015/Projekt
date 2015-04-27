@@ -1,0 +1,230 @@
+<!-- ADD_THREAD -->
+<tr>
+    <td rowspan="6" class="method-name">addThread</td>
+    <td colspan="2" class="method-description">dodaje nowy watek do projektu</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejsciowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/addThread</br></br>
+                    <b>id_projekt</b> - id projektu nadrzednego</br>
+                    <b>text</b> - tresc watku
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (201 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">id_projekt=1&amp;text=test</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":201,"result":"Thread created"}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty bledow</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>
+
+<!-- DELETE_THREAD -->
+<tr>
+    <td rowspan="6" class="method-name">deleteThread</td>
+    <td colspan="2" class="method-description">usuwa watek z projektu</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejsciowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/deleteThread</br></br>
+                    <b>id_watek</b> - id watku</br>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">id_watek=19</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":200,"result":"Thread deleted"}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty bledow</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>
+
+<!-- ADD_COMMENT -->
+<tr>
+    <td rowspan="6" class="method-name">addComment</td>
+    <td colspan="2" class="method-description">dodaje nowy komentarz do watku</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejsciowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/addComment</br></br>
+                    <b>id_projekt</b> - id projektu nadrzednego</br>
+                    <b>id_nadrzedny</b> - id watku nadrzednego</br>
+                    <b>text</b> - tresc komentarza
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (201 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">id_projekt=1&amp;id_nadrzedny=12&amp;text=test</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":201,"result":"Comment added"}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty bledow</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>
+
+<!-- DELETE_COMMENT -->
+<tr>
+    <td rowspan="6" class="method-name">deleteComment</td>
+    <td colspan="2" class="method-description">usuwa komentarz z watku</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejsciowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/deleteComment</br></br>
+                    <b>id_watek</b> - id watku</br>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">id_watek=19</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":200,"result":"Comment deleted"}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty bledow</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>
+
+<!-- GET_THREAD -->
+<tr>
+    <td rowspan="6" class="method-name">getThread</td>
+    <td colspan="2" class="method-description">pobiera watek wraz z komentarzami</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejsciowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/getThread</br></br>
+                    <b>id_watek</b> - id watku</br>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">id_watek=12</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":200,"result":{"id_watek":12,"id_projekt":1,"text":"test@test.com","id_nadrzedny":null,"id_zalacznik":null,"date":"2015-04-23 13:32:38","komentarze":[{"id_watek":17,"id_projekt":1,"text":"tekst2","id_nadrzedny":12,"id_zalacznik":null,"date":"2015-04-23 13:35:29"},{"id_watek":16,"id_projekt":1,"text":"tekst1","id_nadrzedny":12,"id_zalacznik":null,"date":"2015-04-23 13:35:27"},{"id_watek":18,"id_projekt":1,"text":"tekst3","id_nadrzedny":12,"id_zalacznik":null,"date":"2015-04-23 13:35:33"},{"id_watek":20,"id_projekt":1,"text":"tekst2","id_nadrzedny":12,"id_zalacznik":null,"date":"2015-04-23 14:34:01"}]}}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty bledow</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>
+
+<!-- GET_THREADS -->
+<tr>
+    <td rowspan="6" class="method-name">getThreads</td>
+    <td colspan="2" class="method-description">pobiera wszytkie watki projektu</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejsciowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/getThreads</br></br>
+                    <b>id_projekt</b> - id projektu</br>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">id_projekt=12</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":200,"result":{"watki":[{"id_watek":12,"id_projekt":1,"text":"test@test.com","id_nadrzedny":null,"id_zalacznik":null,"date":"2015-04-23 13:32:38","komentarze":[{"id_watek":17,"id_projekt":1,"text":"tekst2","id_nadrzedny":12,"id_zalacznik":null,"date":"2015-04-23 13:35:29"},{"id_watek":16,"id_projekt":1,"text":"tekst1","id_nadrzedny":12,"id_zalacznik":null,"date":"2015-04-23 13:35:27"},{"id_watek":18,"id_projekt":1,"text":"tekst3","id_nadrzedny":12,"id_zalacznik":null,"date":"2015-04-23 13:35:33"},{"id_watek":20,"id_projekt":1,"text":"tekst2","id_nadrzedny":12,"id_zalacznik":null,"date":"2015-04-23 14:34:01"}]},{"id_watek":21,"id_projekt":1,"text":"test@test.com","id_nadrzedny":null,"id_zalacznik":null,"date":"2015-04-23 14:36:31","komentarze":[]},{"id_watek":22,"id_projekt":1,"text":"test@test.com","id_nadrzedny":null,"id_zalacznik":null,"date":"2015-04-23 14:36:32","komentarze":[]}]}}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty bledow</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>

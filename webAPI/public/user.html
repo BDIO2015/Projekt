@@ -36,6 +36,7 @@
             400 - zle parametry
     </td>
 </tr>
+
 <!-- CREATE_USER -->
 <tr>
     <td rowspan="6" class="method-name">createUser</td>
@@ -113,6 +114,7 @@
             400 - zle parametry
     </td>
 </tr>
+
 <!-- UPDATE_USER -->
 <tr>
     <td rowspan="6" class="method-name">updateUser</td>
@@ -123,20 +125,23 @@
     <td class="method-using-val">
             <ul>
                     <b>URL: </b>http://deveo.pl/efdi/webAPI/updateUser</br></br>
-                    <b>login</b> - login użytkownika</br></br>
+                    <b>id_uzytkownik</b> - id uzytkownika</br></br>
                     parametry opcjonalne: </br>
-                    <div style="margin:0px 0px 0px 10px">
-                    <b><i>telefon</i></b>
-                    <b><i>tworzenie_watkow</i></b></br>
-                    <b><i>przedmiot</i></b></br>
-                    <b><i>projekty</i></b></br>
-                    <b><i>imie</i></b></br>
-                    <b><i>nazwisko</i></b></br>
-                    <b><i>nr_albumu</i></b></br>
-                    <b><i>wydzial</i></b></br>
-                    <b><i>kierunek</i></b></br>
-                    <b><i>rok</i></b></br>
-                    <b><i>specjalizacja</i></b>
+                    <div style="margin-left:20px">
+                        <b><i>imie</b></i> - imie uzytkownika</br>
+                        <b><i>nazwisko</b></i> - nazwisko uzytkownika</br>
+                        <b><i>telefon</b></i> - numer telefonu</br>
+                        <b><i>id_wydzial</b></i> - id wydzialu</br>
+                        <b><i>kierunek</b></i> - kierunek</br>
+                        <b><i>rok</b></i> - rok</br>
+                        <b><i>id_specjalizacja</b></i> - specjalizacja</br>
+                        <b><i>przedmioty</b></i> - przedmioty</br>
+                        <b><i>projekty</b></i> - projekty</br>
+                        <b><i>id_katedra</b></i> - id katedry</br>
+                        <b><i>stanowisko</b></i> - stanowisko</br>
+                        <b><i>tytul</b></i> - tytul</br>
+                        <b><i>id_sieciowy</b></i> - identyfikator sieciowy</br>
+                        <b><i>studenci</b> - studenci</i>
                     </div>
             </ul>
     </td>
@@ -151,11 +156,11 @@
 </tr>
 <tr>
     <td class="method-using-key">Przyklad komunikatu POST</td>
-    <td class="method-using-val">ID_student=28&amp;telefon=123456789&amp;tworzenie_watkow=1&amp;specjalizacja=sieci</td>
+    <td class="method-using-val">id_uzytkownik=28&amp;telefon=123456789&amp;tytul=magiste&amp;id_katedra=2</td>
 </tr>
 <tr>
     <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
-    <td class="method-using-val">{"status":201,"result":"Update successful"}</td>
+    <td class="method-using-val">{"status":201,"result":"User updated successful"}</td>
 </tr>
 <tr>
     <td class="method-using-key">Komunikaty bledow</td>
@@ -164,6 +169,7 @@
             400 - zle parametry
     </td>
 </tr>
+
 <!-- CHANGE_PASS -->
 <tr>
     <td rowspan="6" class="method-name">changePass</td>

@@ -19,7 +19,7 @@ class threadController{
       
                   if ($project) 
                   {
-		    		$stmt = $this->conn->prepare("INSERT INTO `watek` (`id_watek`, `id_projekt`, `text`, `id_nadrzedny`, `  id_zalacznik`, `date`) 
+		    		$stmt = $this->conn->prepare("INSERT INTO `watek` (`id_watek`, `id_projekt`, `text`, `id_nadrzedny`, `id_zalacznik`, `date`) 
                                                	  VALUES (NULL,?, ?, NULL, NULL, NULL)");
                   	$stmt->bind_param("ss", $_POST['id_projekt'], $_POST['text']);
                   	$result = $stmt->execute();
@@ -37,21 +37,43 @@ class threadController{
 		if(isset($_POST['id_watek']))
 		{
 			$stmt = $this->conn->prepare( "DELETE FROM `watek` WHERE `id_nadrzedny` = ?");
-            $stmt->bind_param("s", $_POST['id_watek']);
-            $result = $stmt->execute();
-            $error = $stmt->error;
-            $stmt->close();
+                  $stmt->bind_param("s", $_POST['id_watek']);
+                  $result = $stmt->execute();
+                  $error = $stmt->error;
+                  $stmt->close();
 
 			$stmt = $this->conn->prepare( "DELETE FROM `watek` WHERE `id_watek` = ?");
-            $stmt->bind_param("s", $_POST['id_watek']);
-            $result = $stmt->execute();
-            $error = $stmt->error;
-            $stmt->close();
+                  $stmt->bind_param("s", $_POST['id_watek']);
+                  $result = $stmt->execute();
+                  $error = $stmt->error;
+                  $stmt->close();
 
             if ($result) return "{\"status\":200,\"result\":\"Thread deleted\"}";
             else return "{\"status\": 400,\"result\":\"".$error."\"}";
 		} else return "{\"status\": 400, \"result\":\"Bad params\"}";
 	}
+
+      public function deleteThreads()
+      {
+            if(isset($_POST['id_projekt']))
+            {
+                  if(!(json_decode($GLOBALS['db']->getProjectController()->isProjectExist())->status == 200)) return "{\"status\": 400, \"result\":\"Project with id ".$_POST['id_projekt']." doesn't exist \"}";
+
+                  $stmt = $this->conn->prepare("SELECT id_watek FROM `watek` WHERE `id_projekt` = ? AND `id_nadrzedny` IS NULL");
+                  $stmt->bind_param("s", $_POST['id_projekt']);
+                  $result = $stmt->execute();
+                  $error = $stmt->error;
+                  $threads = $stmt->get_result();
+                  $data = array();
+                  $stmt->close();
+                  while($thread = $threads->fetch_assoc()) 
+                  {
+                        $_POST['id_watek'] = $thread['id_watek'];
+                        $this->deleteThread();
+                  }
+                  return "{\"status\":200,\"result\":\"Threads has been deleted\"}";
+            } else return "{\"status\": 400, \"result\":\"Bad params\"}";
+      }
 
 	public function addComment()
 	{
@@ -59,12 +81,12 @@ class threadController{
 		{
 			$stmt = $this->conn->prepare("INSERT INTO `watek` (`id_watek`, `id_projekt`, `text`, `id_nadrzedny`, `id_zalacznik`, `date`)
 										  VALUES (NULL,?, ?, ?, NULL, NULL)");
-            $stmt->bind_param("sss", $_POST['id_projekt'], $_POST['text'], $_POST['id_nadrzedny']);
-            $result = $stmt->execute();
-            $error = $stmt->error;
-            $stmt->close();
-            if ($result) return "{\"status\":201,\"result\":\"Comment added\"}";
-            else return "{\"status\": 400,\"result\":\"".$error."\"}";
+                  $stmt->bind_param("sss", $_POST['id_projekt'], $_POST['text'], $_POST['id_nadrzedny']);
+                  $result = $stmt->execute();
+                  $error = $stmt->error;
+                  $stmt->close();
+                  if ($result) return "{\"status\":201,\"result\":\"Comment added\"}";
+                  else return "{\"status\": 400,\"result\":\"".$error."\"}";
 		} else return "{\"status\": 400, \"result\":\"Bad params\"}";
 	}
 
@@ -116,16 +138,14 @@ class threadController{
 	{
 		if(isset($_POST['id_projekt']))
 		{
-			$isProjectExist = json_decode($GLOBALS['db']->getProjectController()->isProjectExist());
+                  if(!(json_decode($GLOBALS['db']->getProjectController()->isProjectExist())->status == 200)) return "{\"status\": 400, \"result\":\"Project with id ".$_POST['id_projekt']." doesn't exist \"}";
 
-            if ($isProjectExist->status == 200) 
-            {
             	$stmt = $this->conn->prepare("SELECT id_watek FROM `watek` WHERE `id_projekt` = ? AND `id_nadrzedny` IS NULL");
             	$stmt->bind_param("s", $_POST['id_projekt']);
             	$result = $stmt->execute();
             	$error = $stmt->error;
             	$comments = $stmt->get_result();
-				$data = array();
+			$data = array();
             	$stmt->close();
             	while($comment = $comments->fetch_assoc()) 
             	{
@@ -136,8 +156,6 @@ class threadController{
 				
             	$threads['watki'] = $data;
             	return "{\"status\":200,\"result\":".json_encode($threads)."}";
-            }
-            else return "{\"status\": 400,\"result\":\"Project don't exist\"}";
 		} else return "{\"status\": 400, \"result\":\"Bad params\"}";
 	}
 }

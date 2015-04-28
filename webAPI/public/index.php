@@ -109,6 +109,12 @@
                             :thread:
                         </table>
                     </dd>
+                     <dt>Other</dt>
+                    <dd>
+                        <table class="method-list" border="0" cellspacing="0" cellpadding="0">
+                            :other:
+                        </table>
+                    </dd>
                 </dl>
                 <script type="text/javascript"> new Menu('menu0'); </script>   
                     

@@ -28,8 +28,12 @@ switch($method)
 		$file = fopen($path, "r");
 		$thread = fread($file, filesize($path));
 
-    	$search = array(":user:", ":project:", ":thread:"); 
-    	$replace = array($user, $project, $thread); 
+		$path = "public/other.html";
+		$file = fopen($path, "r");
+		$other = fread($file, filesize($path));
+
+    	$search = array(":user:", ":project:", ":thread:", ":other:"); 
+    	$replace = array($user, $project, $thread, $other); 
     	$html = str_replace($search, $replace, $html);
 
 		echo $html;
@@ -48,23 +52,26 @@ switch($method)
 	//projektController
 	case "isProjectExist": $result = $db->getProjectController()->isProjectExist(); break;
 	case "createProject": $result = $db->getProjectController()->createProject(); break;
+	case "deleteProject": $result = $db->getProjectController()->deleteProject(); break;
 	case "addUser": $result = $db->getProjectController()->addUser(); break;
 	case "removeUser": $result = $db->getProjectController()->removeUser(); break;
-	case "acceptGroup": $result = $db->getProjectController()->acceptGroup(); break;
+	case "updateProject": $result = $db->getProjectController()->updateProject(); break;
+
 
 	//threadController
 	case "addThread": $result = $db->getThreadController()->addThread(); break;
 	case "deleteThread": $result = $db->getThreadController()->deleteThread(); break;
+	case "deleteThreads": $result = $db->getThreadController()->deleteThreads(); break;
 	case "addComment": $result = $db->getThreadController()->addComment(); break;
 	case "deleteComment": $result = $db->getThreadController()->deleteComment(); break;
 	case "getThread": $result = $db->getThreadController()->getThread(); break;
 	case "getThreads": $result = $db->getThreadController()->getThreads(); break;
 
-	
+	//otherController
+	case "getDepartments": $result = $db->getOtherController()->getDepartments(); break;
+	case "getSpecializations": $result = $db->getOtherController()->getSpecializations(); break;
+	case "getCathedral": $result = $db->getOtherController()->getCathedral(); break;
 
-
-
-	
 	default: $result = "{\"status\":400,\"result\":\"Can't find method: '".$method."'\"}"; break;
 }
 

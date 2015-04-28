@@ -1,0 +1,111 @@
+<!-- GET_DEPARTMENTS -->
+<tr>
+    <td rowspan="6" class="method-name">getDepartments</td>
+    <td colspan="2" class="method-description">pobiera liste wydziałów</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejsciowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/getDepartments</br></br>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val"></td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":200,"result":{"wydzialy":[{"id_wydzial":1,"nazwa":"Informatyki"},{"id_wydzial":2,"nazwa":"Matematyki"}]}}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty bledow</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>
+
+<!-- GET_SPECIALIZARIONS -->
+<tr>
+    <td rowspan="6" class="method-name">getSpecializations</td>
+    <td colspan="2" class="method-description">pobiera liste specjalizacji</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejsciowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/getSpecializations</br></br>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val"></td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":200,"result":{"specjalizacje":[{"id_specjalizacja":1,"nazwa":"sieci"},{"id_specjalizacja":2,"nazwa":"grafika"}]}}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty bledow</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>
+
+
+<!-- GET_CATHEDRALS -->
+<tr>
+    <td rowspan="6" class="method-name">getCathedral</td>
+    <td colspan="2" class="method-description">pobiera liste katedr na uczelni</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejsciowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/getCathedral</br></br>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val"></td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":200,"result":{"katedry":[{"id_katedra":2,"nazwa":"Automatyki i robotyki"}]}}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty bledow</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>

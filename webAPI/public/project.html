@@ -36,6 +36,133 @@
     </td>
 </tr>
 
+<!-- CREATE_PROJECT -->
+<tr>
+    <td rowspan="6" class="method-name">createProject</td>
+    <td colspan="2" class="method-description">tworzy projekt</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejsciowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/createProject</br></br>
+                    <b>nazwa</b> - nazwa projektu </br>
+                    <b>opis</b> - opis projektu </br>
+                    <b>id_koordynator</b> - id koordynatora projektu
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">nazwa="Jakis projekt"&amp;opis="Jakis opis"&amp;id_koordynator=3</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":201,"result":"Project created successful"}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty bledow</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>
+
+<!-- DELETE_PROJECT -->
+<tr>
+    <td rowspan="6" class="method-name">deleteProject</td>
+    <td colspan="2" class="method-description">usuwa projekt</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejsciowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/deleteProject</br></br>
+                    <b>id_projekt</b> - id projektu
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">id_projekt=3</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":201,"result":"Project deleted successful"}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty bledow</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>
+
+<!-- UPDATE_PROJECT -->
+<tr>
+    <td rowspan="6" class="method-name">updateProject</td>
+    <td colspan="2" class="method-description">tworzy projekt</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejsciowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/updateProject</br></br>
+                    <b>id_projekt</b> - id projektu </br></br>
+                    opcjonalnie: </br>
+                    <div style="margin-left:20px"> 
+                        <b><i>nazwa</i></b> - nazwa projektu</br>
+                        <b><i>opis</i></b> - opis projektu</br>
+                        <b><i>termin</i></b> - termin</br>
+                        <b><i>miejsce</i></b> - miejsce</br>
+                        <b><i>wytyczne</i></b> - wytyczne</br>
+                        <b><i>id_koordynator</i></b> - id koordynatora</br>
+                        <b><i>id_kierownik</i></b> - id kierownika grupy</br>
+                        <b><i>id_ocena</i> - id oceny</b>
+                    </div>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">id_projekt=3&amp;opis="Jakis nowy opis"&amp;miejsce=Rzeszow</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":201,"result":"Project updated successful"}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty bledow</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>
+
 <!-- ADD_USER -->
 <tr>
     <td rowspan="6" class="method-name">addUser</td>

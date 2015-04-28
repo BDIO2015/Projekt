@@ -75,6 +75,44 @@
     </td>
 </tr>
 
+<!-- DELETE_THREADS -->
+<tr>
+    <td rowspan="6" class="method-name">deleteThreads</td>
+    <td colspan="2" class="method-description">usuwa wszystkie watki z projektu</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejsciowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/deleteThreads</br></br>
+                    <b>id_projekt</b> - id projektu</br>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">id_projekt=2</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":200,"result":"Threads has been deleted"}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty bledow</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>
+
 <!-- ADD_COMMENT -->
 <tr>
     <td rowspan="6" class="method-name">addComment</td>

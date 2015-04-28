@@ -50,31 +50,34 @@ class userController{
     }
 
     public function updateUser() {
-        if(isset($_POST['id_urzytkownik']))
+        if(isset($_POST['id_uzytkownik']))
         {
             $i = 0;
-            if(isset($_POST['telefon'])){$telefon = $i > 0 ? " AND" : "";$telefon .= " `telefon` = \"".$_POST['telefon']."\"";$i++;}else $telefon = "";
-            if(isset($_POST['tworzenie_watkow'])){$tworzenie_watkow = $i > 0 ? " AND" : "";$tworzenie_watkow .= " `tworzenie_watkow` = \"".$_POST['tworzenie_watkow']."\"";$i++;}else $tworzenie_watkow = "";
-            if(isset($_POST['przedmiot'])){$przedmiot = $i > 0 ? " AND" : "";$przedmiot .= " `przedmiot` = \"".$_POST['przedmiot']."\"";$i++;}else $przedmiot = "";
-            if(isset($_POST['projekty'])){$projekty = $i > 0 ? " AND" : "";$projekty .= " `projekty` = \"".$_POST['projekty']."\"";$i++;}else $projekty = "";
-            if(isset($_POST['imie'])){$imie = $i > 0 ? " AND" : "";$imie .= " `imie` = \"".$_POST['imie']."\"";$i++;}else $imie = "";
-            if(isset($_POST['nazwisko'])){$nazwisko = $i > 0 ? " AND" : "";$nazwisko .= " `nazwisko` = \"".$_POST['nazwisko']."\"";$i++;}else $nazwisko = "";
-            if(isset($_POST['nr_albumu'])){$nr_albumu = $i > 0 ? " AND" : "";$nr_albumu .= " `nr_albumu` = \"".$_POST['nr_albumu']."\"";$i++;}else $nr_albumu = "";
-            if(isset($_POST['wydzial'])){$wydzial = $i > 0 ? " AND" : "";$wydzial .= " `wydzial` = \"".$_POST['wydzial']."\"";$i++;}else $wydzial = "";
-            if(isset($_POST['kierunek'])){$kierunek = $i > 0 ? " AND" : "";$kierunek .= " `kierunek` = \"".$_POST['kierunek']."\"";$i++;}else $kierunek = "";
-            if(isset($_POST['rok'])){$rok = $i > 0 ? " AND" : "";$rok .= " `rok` = \"".$_POST['rok']."\"";$i++;}else $rok = "";
-            if(isset($_POST['specjalizacja'])){$specjalizacja = $i > 0 ? " AND" : "";$specjalizacja .= " `specjalizacja` = \"".$_POST['specjalizacja']."\"";$i++;}else $specjalizacja = "";
+            if(isset($_POST['imie'])){$imie = $i > 0 ? ", " : "";$imie .= " `imie` = \"".$_POST['imie']."\"";$i++;}else $imie = "";
+            if(isset($_POST['nazwisko'])){$nazwisko = $i > 0 ? ", " : "";$nazwisko .= " `nazwisko` = \"".$_POST['nazwisko']."\"";$i++;}else $nazwisko = "";
+            if(isset($_POST['telefon'])){$telefon = $i > 0 ? ", " : "";$telefon .= " `telefon` = \"".$_POST['telefon']."\"";$i++;}else $telefon = "";
+            if(isset($_POST['id_wydzial'])){$id_wydzial = $i > 0 ? ", " : "";$id_wydzial .= " `id_wydzial` = \"".$_POST['id_wydzial']."\"";$i++;}else $id_wydzial = "";
+            if(isset($_POST['kierunek'])){$kierunek = $i > 0 ? ", " : "";$kierunek .= " `kierunek` = \"".$_POST['kierunek']."\"";$i++;}else $kierunek = "";
+            if(isset($_POST['rok'])){$rok = $i > 0 ? ", " : "";$rok .= " `rok` = \"".$_POST['rok']."\"";$i++;}else $rok = "";
+            if(isset($_POST['id_specjalizacja'])){$id_specjalizacja = $i > 0 ? ", " : "";$id_specjalizacja .= " `id_specjalizacja` = \"".$_POST['id_specjalizacja']."\"";$i++;}else $id_specjalizacja = "";
+            if(isset($_POST['przedmioty'])){$przedmioty = $i > 0 ? ", " : "";$przedmioty .= " `przedmioty` = \"".$_POST['przedmioty']."\"";$i++;}else $przedmioty = "";
+            if(isset($_POST['projekty'])){$projekty = $i > 0 ? ", " : "";$projekty .= " `projekty` = \"".$_POST['projekty']."\"";$i++;}else $projekty = "";
+            if(isset($_POST['id_katedra'])){$id_katedra = $i > 0 ? ", " : "";$id_katedra .= " `id_katedra` = \"".$_POST['id_katedra']."\"";$i++;}else $id_katedra = "";
+            if(isset($_POST['stanowisko'])){$stanowisko = $i > 0 ? ", " : "";$stanowisko .= " `stanowisko` = \"".$_POST['stanowisko']."\"";$i++;}else $stanowisko = "";
+            if(isset($_POST['tytul'])){$tytul = $i > 0 ? ", " : "";$tytul .= " `tytul` = \"".$_POST['tytul']."\"";$i++;}else $tytul = "";
+            if(isset($_POST['id_sieciowy'])){$id_sieciowy = $i > 0 ? ", " : "";$id_sieciowy .= " `id_sieciowy` = \"".$_POST['id_sieciowy']."\"";$i++;}else $id_sieciowy = "";
+            if(isset($_POST['studenci'])){$studenci = $i > 0 ? ", " : "";$studenci .= " `studenci` = \"".$_POST['studenci']."\"";$i++;}else $studenci = "";
             if($i > 0)
             {
                 $query = "UPDATE `uzytkownicy` SET";
-                $query .= $telefon.$tworzenie_watkow.$przedmiot.$projekty.$imie.$nazwisko.$nr_albumu.$wydzial.$kierunek.$rok.$specjalizacja;
-                $query .= " WHERE `ID_student` = ".$_POST['ID_student'];   
+                $query .= $imie.$nazwisko.$telefon.$id_wydzial.$kierunek.$rok.$id_specjalizacja.$przedmioty.$projekty.$id_katedra.$stanowisko.$tytul.$id_sieciowy.$studenci;
+                $query .= " WHERE `id_uzytkownik` = ".$_POST['id_uzytkownik'];   
                 $stmt = $this->conn->prepare($query);
                 $stmt->execute();
                 $result = $stmt->execute();
                 $error = $stmt->error;
                 $stmt->close();
-                if ($result) return "{\"status\":200,\"result\":\"Update successful\"}";
+                if ($result) return "{\"status\":200,\"result\":\"User updated successful\"}";
                  else return "{\"status\": 400,\"result\":\"".$error."\"}";
             } else return "{\"status\": 400,\"result\":\"Set some params\"}";
         } else return "{\"status\": 400,\"result\":\"Bad params\"}";

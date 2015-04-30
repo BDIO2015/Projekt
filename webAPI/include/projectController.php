@@ -47,7 +47,7 @@ class projectController{
             $result = $stmt->execute();
             $error = $stmt->error;
             $stmt->close();
-            if ($result) return "{\"status\":201,\"result\":\"Project deleted successful\"}";
+            if ($result) return "{\"status\":200,\"result\":\"Project deleted successful\"}";
             else return "{\"status\": 400,\"result\":\"".$error."\"}";
 		} else return "{\"status\": 400, \"result\":\"Bad params\"}";
 	}
@@ -166,5 +166,57 @@ class projectController{
             	 else return "{\"status\": 400,\"result\":\"".$error."\"}";
             }else return "{\"status\": 400,\"result\":\"".$error."\"}";
 		} else return "{\"status\": 400, \"result\":\"Bad params\"}";
+	}
+
+	public function archiveProject()
+	{
+		if(isset($_POST['id_projekt']) && isset($_POST['nazwa']))
+		{
+			$projectJSON = json_decode($this->isProjectExist());
+			if(!($projectJSON->status == 200)) return "{\"status\": 400, \"result\":\"Project with id ".$_POST['id_projekt']." doesn't exist \"}";
+			else $project = $projectJSON->result;
+			$archive['projekt'] = $project;
+
+			$threadsJSON = json_decode($GLOBALS['db']->getThreadController()->getThreads());
+			if(!($threadsJSON->status == 200)) return $threadsJSON->result;
+			else $threads = $threadsJSON->result;
+			$archive['threads'] = $threads->watki;
+
+			$stmt = $this->conn->prepare("INSERT INTO `archiwum`(`id_archiwum`, `id_projekt`, `nazwa`, `dane`, `data`) 
+										  VALUES (NULL,?, ?, ?, NULL);");
+            $stmt->bind_param("sss", $_POST['id_projekt'], $_POST['nazwa'], json_encode($archive));
+            $result = $stmt->execute();
+            $error = $stmt->error;
+            $stmt->close();
+            if ($result) 
+            {
+				$projectJSON = json_decode($this->deleteProject());
+				if(!($projectJSON->status == 200)) return "{\"status\": 400, \"result\":\"Project with id ".$_POST['id_projekt']." doesn't exist \"}";
+				return "{\"status\":201,\"result\":\"Project archived successful\"}";
+            } else return "{\"status\": 400,\"result\":\"".$error."\"}";
+		} else return "{\"status\": 400, \"result\":\"Bad params\"}";
+	}
+
+	public function getFromArchiv()
+	{
+		if(isset($_POST['id_archiwum']) ||isset($_POST['id_projekt']) || isset($_POST['nazwa']))
+		{
+			$query = isset($_POST['id_archiwum'])? "id_archiwum": (isset($_POST['id_projekt'])? "id_projekt": (isset($_POST['nazwa'])? "nazwa": ""));
+			$data = isset($_POST['id_archiwum'])? $_POST['id_archiwum']: (isset($_POST['id_projekt'])? $_POST['id_projekt']: (isset($_POST['nazwa'])? $_POST['nazwa']: ""));
+
+ 			$stmt = $this->conn->prepare("SELECT * FROM `archiwum` WHERE `".$query."` = ? ");
+            $stmt->bind_param("s", $data);
+            $result = $stmt->execute();
+            $projekt = $stmt->get_result()->fetch_assoc();
+            $stmt->close();
+            if ($projekt) 
+            {
+            	$data = array();
+            	$data['archiwum'] = $projekt;
+            	$data['archiwum']['dane'] = json_decode($data['archiwum']['dane']);
+            	return "{\"status\":200,\"result\":".json_encode($data)."}";
+            } else return "{\"status\": 400, \"result\":\"Projekt don't exist\"}";
+		} else return "{\"status\": 400, \"result\":\"Bad params\"}";
+		
 	}
 }

@@ -240,3 +240,85 @@
             400 - zle parametry
     </td>
 </tr>
+
+<!-- ARCHIVE_PROJECT -->
+<tr>
+    <td rowspan="6" class="method-name">archiveProject</td>
+    <td colspan="2" class="method-description">archiwizuje projekt</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejsciowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/archiveProject</br></br>
+                    <b>id_projekt</b> - id projektu </br>
+                    <b>nazwa</b> - nazwa w archiwum
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (201 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">id_projekt=3&amp;nazwa="Jakas nowa nazwa"</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":201,"result":"Project archived successful"}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty bledow</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>
+
+<!-- GET_FORM_ARCHIV -->
+<tr>
+    <td rowspan="6" class="method-name">getFromArchiv</td>
+    <td colspan="2" class="method-description">pobiera projekt z archiwum</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejsciowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/getFromArchiv</br></br>
+                    jedno z podanych: </br>
+                    <div style="margin-left:20px"> 
+                        <b><i>id_archiwum</i></b> - id archiwum</br>
+                        <b><i>id_projekt</i></b> - id projektu</br>
+                        <b><i>nazwa</i></b> - nazwa archiwum</br>
+                    </div>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">nazwa="Jakas nowa nazwa"</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":200,"result":{"archiwum":{"id_archiwum":11,"id_projekt":1,"nazwa":"asd","dane":{"projekt":{"id_projekt":1,"nazwa":"projekt1","opis":"","termin":"2015-04-27 13:02:39","miejsce":"","wytyczne":"","id_koordynator":0,"studenci":"[]","id_kierownik":0,"id_ocena":""},"threads":[{"id_watek":12,"id_projekt":1,"text":"test@test.com","id_nadrzedny":null,"id_zalacznik":null,"date":"2015-04-23 13:32:38","komentarze":[{"id_watek":17,"id_projekt":1,"text":"tekst2","id_nadrzedny":12,"id_zalacznik":null,"date":"2015-04-23 13:35:29"},{"id_watek":16,"id_projekt":1,"text":"tekst1","id_nadrzedny":12,"id_zalacznik":null,"date":"2015-04-23 13:35:27"},{"id_watek":18,"id_projekt":1,"text":"tekst3","id_nadrzedny":12,"id_zalacznik":null,"date":"2015-04-23 13:35:33"},{"id_watek":20,"id_projekt":1,"text":"tekst2","id_nadrzedny":12,"id_zalacznik":null,"date":"2015-04-23 14:34:01"}]},{"id_watek":21,"id_projekt":1,"text":"test@test.com","id_nadrzedny":null,"id_zalacznik":null,"date":"2015-04-23 14:36:31","komentarze":[]}]},"data":"2015-04-30 14:31:26"}}}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty bledow</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>

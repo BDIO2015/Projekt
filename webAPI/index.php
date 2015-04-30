@@ -56,7 +56,9 @@ switch($method)
 	case "addUser": $result = $db->getProjectController()->addUser(); break;
 	case "removeUser": $result = $db->getProjectController()->removeUser(); break;
 	case "updateProject": $result = $db->getProjectController()->updateProject(); break;
-
+	case "archiveProject": $result = $db->getProjectController()->archiveProject(); break;
+	case "getFromArchiv": $result = $db->getProjectController()->getFromArchiv(); break;
+	
 
 	//threadController
 	case "addThread": $result = $db->getThreadController()->addThread(); break;

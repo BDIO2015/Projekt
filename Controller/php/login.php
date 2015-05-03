@@ -1,5 +1,6 @@
 ﻿<?php
 session_start();
+
 if($_POST['login']=="login")
 	{
 	$nazwaUzytkownika=$_POST['nazwaUzytkownika'];
@@ -17,4 +18,5 @@ if($_POST['login']=="login")
 			$_SESSION['userProjekt']=$nazwaUzytkownika;
 	}
 	}
+	
 ?>

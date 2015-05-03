@@ -31,6 +31,7 @@ function login(user,password){
 						 {
 							 $(".input_form").css({ border:"#FF0033 solid 2px"});
 							 alert("Nie udalo sie :(");
+							 window.open('index.php','_self');
 						 }
 				},
 				error : function(err) {

@@ -168,6 +168,22 @@ class projectController{
 		} else return "{\"status\": 400, \"result\":\"Bad params\"}";
 	}
 
+	public function getProjects()
+	{
+        $stmt = $this->conn->prepare("SELECT `id_projekt`, `nazwa` FROM `projekty`");
+        $result = $stmt->execute();
+        $projekts = $stmt->get_result();
+        $stmt->close();
+        if ($projekts) 
+        {
+        	$data = array();
+        	while($projekt = $projekts->fetch_assoc()) $data [] = $projekt;
+        	return "{\"status\":200,\"result\":".json_encode($data)."}";
+        }
+        else return "{\"status\": 400, \"result\":\"Any projekt doesn't exist\"}";
+	}
+
+
 	public function archiveProject()
 	{
 		if(isset($_POST['id_projekt']) && isset($_POST['nazwa']))
@@ -217,6 +233,5 @@ class projectController{
             	return "{\"status\":200,\"result\":".json_encode($data)."}";
             } else return "{\"status\": 400, \"result\":\"Projekt don't exist\"}";
 		} else return "{\"status\": 400, \"result\":\"Bad params\"}";
-		
 	}
 }

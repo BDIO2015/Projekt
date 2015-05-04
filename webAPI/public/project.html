@@ -241,6 +241,81 @@
     </td>
 </tr>
 
+<!-- GET_PROJECT -->
+<tr>
+    <td rowspan="6" class="method-name">getProject</td>
+    <td colspan="2" class="method-description">pobiera informacje o projekcie</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejsciowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/getProject</br></br>
+                    <b>id_projekt</b> - id projektu
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">id_projekt=1</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":200,"result":{"id_projekt":1,"nazwa":"projekt1","opis":"","termin":"2015-04-23 13:16:31","miejsce":"","wytyczne":"","id_koordynator":0,"id_grupa":0,"id_ocena":""}}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty bledow</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>
+
+<!-- GET_PROJECTS -->
+<tr>
+    <td rowspan="6" class="method-name">getProjects</td>
+    <td colspan="2" class="method-description">pobiera nazwy wszystkich projektór</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejsciowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/getProjects</br></br>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val"></td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":200,"result":[{"id_projekt":5,"nazwa":"nowy"},{"id_projekt":6,"nazwa":"inny"},{"id_projekt":7,"nazwa":"inny"}]}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty bledow</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>
+
 <!-- ARCHIVE_PROJECT -->
 <tr>
     <td rowspan="6" class="method-name">archiveProject</td>

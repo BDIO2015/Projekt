@@ -36,11 +36,11 @@ class userController{
 
     public function createUser() {
 
-        if(isset($_POST['email']) && isset($_POST['login']) && isset($_POST['haslo']) && isset($_POST['poziom']))
+        if(isset($_POST['email']) && isset($_POST['login']) && isset($_POST['haslo']) && isset($_POST['poziom'])&& isset($_POST['imie']) && isset($_POST['nazwisko']))
         {
             $stmt = $this->conn->prepare("INSERT INTO `uzytkownicy` (`id_uzytkownik`, `login`, `haslo`, `poziom`, `imie`, `nazwisko`, `email`, `telefon`, `id_wydzial`, `kierunek`, `rok`, `id_specjalizacja`, `przedmioty`, `projekty`, `id_katedra`, `stanowisko`, `tytul`, `id_sieciowy`, `studenci`) 
-                                                         VALUES (NULL, ?, ?, ?, '', '', ?, '', '', '', '', '', '', '', '', '', '','','')");
-            $stmt->bind_param("ssss", $_POST['login'], md5($_POST['haslo']), $_POST['poziom'], $_POST['email']);
+                                                         VALUES (NULL, ?, ?, ?, ?, ?, ?, '', '', '', '', '', '', '', '', '', '','','')");
+            $stmt->bind_param("ssssss", $_POST['login'], md5($_POST['haslo']), $_POST['poziom'], $_POST['imie'], $_POST['nazwisko'], $_POST['email']);
             $result = $stmt->execute();
             $error = $stmt->error;
             $stmt->close();

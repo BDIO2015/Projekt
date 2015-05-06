@@ -8,17 +8,59 @@ $(document).ready(function(e) {
 			login(nazwaUzytkownika,haslo);
 		}
 	});
-	$("button#logout").click(function(){ //wylogowanie sie
-		window.open('Controller/php/logout.php','_self');
-	})
-});
+	$("input#zarejestruj").click(function(){ //zdarzenie obslugujące przycisk ZAREJESTRUJ
+	var login=$("#username").val();
+	var password=$("#password").val();
+	var email=$("#email").val();
+	if($("#poziom").prop('checked'))
+	var poziom=2;
+	else
+	var poziom=1;
+	var name=$("#imie").val();
+	var surname=$("#nazwisko").val();
+	if(username.length!=0 && password.length!=0 && email.length!=0)
+	{
+	rejestruj(login,password,email,poziom,name,surname);
+	}
+	});
+function rejestruj(username,pass,mail,level,name,surname){
+	$.ajax({
+		url:'ajaxController.php',
+		dataType:'json',
+		type:'POST',
+		data:{
+			"przyciskGosc":"register",
+			"username":username,
+			"password":pass,
+			"email":mail,
+			"imie":name,
+			"nazwisko":surname,
+			"poziom":level			
+		},
+		success : function(json) {
+		if(json["status"]==201)
+		{
+			window.open('index.php','_self');
+		}
+		else
+		{
+			$(".input_form").css({ border:"‪#‎FF0033‬ solid 2px"});
+			alert("Nie udalo sie Emotikon frown");
+			window.open('index.php','_self');
+		}
+		},
+			error : function(err) {
+			alert("Blad");
+		} 
+		});
+}
 function login(user,password){
 			$.ajax({
-				url:'Controller/php/login.php',
+				url:'ajaxController.php',
 				dataType:'json',
 				type:'POST',
 				data:{
-					"login":"login",
+					"przyciskGosc":"login",
 					"nazwaUzytkownika":user,
 					"haslo":password
 					},
@@ -31,7 +73,6 @@ function login(user,password){
 						 {
 							 $(".input_form").css({ border:"#FF0033 solid 2px"});
 							 alert("Nie udalo sie :(");
-							 window.open('index.php','_self');
 						 }
 				},
 				error : function(err) {
@@ -39,3 +80,4 @@ function login(user,password){
 					}		
 			})
 }
+});

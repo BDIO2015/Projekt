@@ -3,7 +3,6 @@ body {
 }
 
 #head {
-	height: 10%;
 	border-bottom: 1px solid;
 }
 #login {
@@ -12,14 +11,12 @@ body {
 #menu{
 	float: left;
 	width: 13%;
-	height: 75%;
 	border-right: 1px solid;
 	}
 #container{
 	margin-left: 0.5%;
 	float: left;
 	width: 85.5%;
-	height: 75%;
 }
 #footer {
 	clear: both;

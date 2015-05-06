@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once "./View/Gui.php";
 class studentController{
 	protected function getHead()
@@ -10,16 +10,26 @@ class studentController{
 	public function studentLoad()
 	{
 		$gui= new Gui();
-		$gui->setHead("View/headZalogowanego.html");
-		$gui->setMenu("View/menuStudenta.html");
-		$gui->setContainer("View/contenierZalogowanego.html");       											  
-		$gui->setFooter("View/footer.html");
-		if(isset($_POST['wyloguj']))              
-		{															
-			session_destroy();
-			header('refresh: 0.01;');
+		if(isset($_POST['przyciskStudent']))
+		{
+			switch($_POST['przyciskStudent'])
+			{
+				case "Wyloguj":															
+						session_destroy();
+						header('refresh: 0.01;');
+						return;
+				break;
+			}
 		}
-		$gui->showGui();
+		else
+			{
+					$gui->setHead("View/student/head/headStudent.html");
+					$gui->setMenu("View/student/menu/menuStudent.html");
+					$gui->setContainer("View/student/container/containerStudent.html");     							
+					$gui->setFooter("View/student/footer/footer.html");
+					$gui->showGui();
+			}
+		
 	}
 }
 ?>

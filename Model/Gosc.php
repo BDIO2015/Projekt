@@ -26,6 +26,7 @@
 		if($wynik->status==200)
 		{
 			$_SESSION['userProjekt']=$nazwaUzytkownika;
+			$_SESSION['poziom']=$wynik->result->user->poziom;
 		}
 		$wynik=json_encode($wynik);
 		return $wynik;
@@ -45,6 +46,7 @@
 		if($wynik->status==201)
 		{
 			$_SESSION['userProjekt']=$username;
+			$_SESSION['poziom']=$poziom;
 		}
 		$wynik=json_encode($wynik);
 		return $wynik;

@@ -27,8 +27,6 @@ class studentController{
 			}
 		}
 		$this->gui->showGui();
-
-		
 	}
 }
 ?>

@@ -1,6 +1,6 @@
 <?php
 require_once "./View/Gui.php";
-require_once "./Model/gosc.php";
+require_once "./Model/Gosc.php";
 class goscController{
 	private $gosc;
 	private $gui;
@@ -14,7 +14,6 @@ class goscController{
 		$this->gui->setFooter("View/gosc/footer/footer.html");
 		
 	}
-	
 	public function goscLoad()
 	{
 		if(isset($_POST['przyciskGosc']) || isset($_GET['przyciskGosc']))

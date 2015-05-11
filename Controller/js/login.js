@@ -10,6 +10,7 @@ $(document).ready(function(e) {
 	});
 	$("input#zarejestruj").click(function(){ //zdarzenie obslugujące przycisk ZAREJESTRUJ
 	var login=$("#username").val();
+	alert(login);
 	var password=$("#password").val();
 	var email=$("#email").val();
 	if($("#poziom").prop('checked'))
@@ -40,6 +41,7 @@ function rejestruj(username,pass,mail,level,name,surname){
 		success : function(json) {
 		if(json["status"]==201)
 		{
+			alert("Udalo sie");
 			window.open('index.php','_self');
 		}
 		else
@@ -61,7 +63,7 @@ function login(user,password){
 				type:'POST',
 				data:{
 					"przyciskGosc":"login",
-					"nazwaUzytkownika":user,
+					"username":user,
 					"haslo":password
 					},
 				success : function(json) {

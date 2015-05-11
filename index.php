@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("Setings/head.html");
+include("Settings/head.html");
 require_once "./Controller/php/Controller.php";
 $main=new Controller();
 $main->load();

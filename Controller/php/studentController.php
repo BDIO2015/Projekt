@@ -1,34 +1,33 @@
 <?php
 require_once "./View/Gui.php";
+require_once "./Model/Student.php";
 class studentController{
-	protected function getHead()
+	private $student;
+	private $gui;
+	public function __construct()
 	{
-	}
-	protected function getContainer()
-	{
+		$this->student=new Student();
+		$this->gui=new Gui();
+		$this->gui->setHead("View/student/head/headStudent.html");
+		$this->gui->setMenu("View/student/menu/menuStudent.html");
+		$this->gui->setContainer("View/student/container/containerStudent.html");															
+		$this->gui->setFooter("View/student/footer/footer.html");
+		
 	}
 	public function studentLoad()
 	{
-		$gui= new Gui();
-		if(isset($_POST['przyciskStudent']))
+		if(isset($_POST['przyciskStudent']) || isset($_GET['przyciskStudent']))
 		{
-			switch($_POST['przyciskStudent'])
+			isset($_POST['przyciskStudent'])?$method=$_POST['przyciskStudent']:$method=$_GET['przyciskStudent'];
+			switch($method)
 			{
 				case "Wyloguj":															
-						session_destroy();
-						header('refresh: 0.01;');
-						return;
+					$this->student->wyloguj();
 				break;
 			}
 		}
-		else
-			{
-					$gui->setHead("View/student/head/headStudent.html");
-					$gui->setMenu("View/student/menu/menuStudent.html");
-					$gui->setContainer("View/student/container/containerStudent.html");     							
-					$gui->setFooter("View/student/footer/footer.html");
-					$gui->showGui();
-			}
+		$this->gui->showGui();
+
 		
 	}
 }

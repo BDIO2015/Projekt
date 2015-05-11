@@ -24,6 +24,9 @@ class studentController{
 				case "Wyloguj":															
 					$this->student->wyloguj();
 				break;
+				case "Edytuj Konto":
+					$this->gui->setContainer("View/student/container/containerEdytujKonto.html");															
+				break;
 			}
 		}
 		$this->gui->showGui();

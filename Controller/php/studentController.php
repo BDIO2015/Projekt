@@ -46,6 +46,9 @@ class studentController{
 				case "wyslijWiadomosc":
 					return $this->student->wiadomosc();
 				break;
+				case "sprawdzCzyIstnieje":
+				 	return $this->student->sprawdzCzyIstnieje();
+				break;
 			}
 		}
 		$this->gui->showGui();

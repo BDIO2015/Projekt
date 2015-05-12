@@ -23,5 +23,8 @@
     "getThreads": "http://deveo.pl/efdi/webAPI/getThreads",
     "getDepartments": "http://deveo.pl/efdi/webAPI/getDepartments",
     "getSpecializations": "http://deveo.pl/efdi/webAPI/getSpecializations",
-    "getCathedral": "http://deveo.pl/efdi/webAPI/getCathedral"
+    "getCathedral": "http://deveo.pl/efdi/webAPI/getCathedral",
+	"getReceivedMessages": "http://deveo.pl/efdi/webAPI/getReceivedMessages",
+	"getSendedMessages": "http://deveo.pl/efdi/webAPI/getSendedMessages",
+	"sendMessage": "http://deveo.pl/efdi/webAPI/sendMessage"
 }

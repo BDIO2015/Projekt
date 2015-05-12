@@ -12,6 +12,14 @@ class Student extends Gosc{
 		header('refresh: 0.01;');
 		return;
 	}
+	public function sprawdzCzyIstnieje()
+	{
+		$nazwaUzytkownika=$_POST['nazwaUzytkownika'];
+		$wiadomosc='login='.$nazwaUzytkownika;
+		$adres=$this->api->isUserExist;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+		return $wynik;
+	}
 	public function wiadomosc()
 	{
 		$idNadawcy=$_SESSION['userId'];
@@ -19,7 +27,7 @@ class Student extends Gosc{
 		$tytul=$_POST['tytul'];
 		$trescWiadomosci=$_POST['trescWiadomosci'];
 		$wiadomosc='id_nadawca='.$idNadawcy.'&id_odbiorca='.$nazwaUzytkownika.'&tytul='.$tytul.'&tresc='.$trescWiadomosci;
-		$adres='http://deveo.pl/efdi/webAPI/sendMessage';
+		$adres=$this->api->sendMessage;
 		$wynik=$this->requestApi($wiadomosc,$adres);
 		return $wynik;
 	}

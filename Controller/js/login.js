@@ -9,19 +9,41 @@ $(document).ready(function(e) {
 		}
 	});
 	$("input#zarejestruj").click(function(){ //zdarzenie obslugujące przycisk ZAREJESTRUJ
-	var login=$("#username").val();
-	var password=$("#password").val();
-	var email=$("#email").val();
 	if($("#poziom").prop('checked'))
-	var poziom=2;
-	else
-	var poziom=1;
-	var name=$("#imie").val();
-	var surname=$("#nazwisko").val();
-	if(username.length!=0 && password.length!=0 && email.length!=0)
-	{
-	rejestruj(login,password,email,poziom,name,surname);
-	}
+		var login=$("#username").val();
+		var password=$("#password").val();
+		var email=$("#email").val();
+		if($("#poziom").prop('checked'))
+		var poziom=2;
+		else
+		var poziom=1;
+		var name=$("#imie").val();
+		var surname=$("#nazwisko").val();
+		if(username.length!=0 && password.length!=0 && email.length!=0)
+		{
+		rejestruj(login,password,email,poziom,name,surname);
+		}
+	});
+$("input#wyslijWiadomosc").click(function(){ //zdarzenie obslugujące przycisk wyslijWiadomosc
+		var odbiorca=$("#nazwaUzytkownika").val();
+		var tytul=$("#tytul").val();
+		var tresc=$("#trescWiadomosci").val();
+		if(tresc.length!=0 && odbiorca.length!=0 && tytul.length!=0)
+		{
+			var wynik=sprawdz(odbiorca);
+			wynik.success(function(wynik){
+			if( wynik.status==200 )
+			{
+				wyslij(wynik.result.id_uzytkownik,tytul,tresc);
+			}
+			else
+			{
+				alert("Taki użytkownik nie istnieje");
+			}
+			});
+			
+		}
+		
 	});
 function rejestruj(username,pass,mail,level,name,surname){
 	$.ajax({
@@ -81,42 +103,34 @@ function login(user,password){
 					}		
 			})
 }
-
-$("input#wyslijWiadomosc").click(function(){ //zdarzenie obslugujące przycisk wyslijWiadomosc
-		var odbiorca=$("#nazwaUzytkownika").val();
-		var tytul=$("#tytul").val();
-		var tresc=$("#trescWiadomosci").val();
-		if(tresc.length!=0 && odbiorca.length!=0 && tytul.length!=0)
-		{
-			wyslij(odbiorca,tytul,tresc);
-		}
-	});
 function wyslij(adresat,temat,wiadomosc){
 			$.ajax({
+			 url:"ajaxController.php",
+			 dataType:'json',
+			 type:'POST',
+			 data:
+			 {
+				"przyciskStudent":"wyslijWiadomosc",
+				"nazwaUzytkownika":adresat,
+				"tytul":temat,
+				"trescWiadomosci":wiadomosc
+			 },
+			 success : function(json)
+					 {
+						 alert("Wiadomość została wysłana");
+						 window.open('index.php','_self');
+					 }
+			 });
+}
+function sprawdz(adresat){
+			return $.ajax({
 				url:'ajaxController.php',
 				dataType:'json',
 				type:'POST',
 				data:{
-					"przyciskStudent":"wyslijWiadomosc",
-					"nazwaUzytkownika":adresat,
-					"tytul":temat,
-					"trescWiadomosci":wiadomosc
+					"przyciskStudent":"sprawdzCzyIstnieje",
+					"nazwaUzytkownika":adresat
 					},
-				success : function(json) {
-           				 if(json["status"]==201)
-						 {
-							 alert("Wiadomość została wysłana");
-							 window.open('index.php','_self');
-						 }
-						 else
-						 {
-							 $(".input_form").css({ border:"#FF0033 solid 2px"});
-							 alert("Nie udalo sie :(");
-						 }
-				},
-				error : function(err) {
-					alert("Blad");
-					}		
-			})
+			});
 }
 });

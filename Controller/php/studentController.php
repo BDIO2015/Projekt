@@ -43,6 +43,9 @@ class studentController{
 				case "Wysłane":
 					$this->gui->setContainer("View/student/container/containerWyslane.html");
 				break;
+				case "wyslijWiadomosc":
+					return $this->student->wiadomosc();
+				break;
 			}
 		}
 		$this->gui->showGui();

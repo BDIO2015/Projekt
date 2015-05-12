@@ -1,5 +1,5 @@
 <?php
- class gosc{
+ class Gosc{
 	 private $api;
 	 public function __construct()
 	{
@@ -27,6 +27,7 @@
 		{
 			$_SESSION['userProjekt']=$nazwaUzytkownika;
 			$_SESSION['poziom']=$wynik->result->user->poziom;
+			$_SESSION['userId']=$wynik->result->user->id_uzytkownik;
 		}
 		$wynik=json_encode($wynik);
 		return $wynik;

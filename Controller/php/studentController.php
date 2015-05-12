@@ -27,9 +27,30 @@ class studentController{
 				case "Edytuj Konto":
 					$this->gui->setContainer("View/student/container/containerEdytujKonto.html");															
 				break;
+				
+				case "Wiadomości":															
+					$this->gui->setContainer("View/student/container/containerOdbior.html");
+				break;
+				
+				case "Napisz wiadomość":
+					$this->gui->setContainer("View/student/container/containerWiadomosc.html");
+				break;
+				
+				case "Otrzymane":
+					$this->gui->setContainer("View/student/container/containerOdbior.html");
+				break;
+				
+				case "Wysłane":
+					$this->gui->setContainer("View/student/container/containerWyslane.html");
+				break;
+				case "wyslijWiadomosc":
+					return $this->student->wiadomosc();
+				break;
 			}
 		}
 		$this->gui->showGui();
+
+		
 	}
 }
 ?>

@@ -10,6 +10,7 @@ $(document).ready(function(e) {
 	});
 	$("input#zarejestruj").click(function(){ //zdarzenie obslugujące przycisk ZAREJESTRUJ
 	var login=$("#username").val();
+	alert(login);
 	var password=$("#password").val();
 	var email=$("#email").val();
 	if($("#poziom").prop('checked'))
@@ -68,6 +69,44 @@ function login(user,password){
 				success : function(json) {
            				 if(json["status"]==200)
 						 {
+							 window.open('index.php','_self');
+						 }
+						 else
+						 {
+							 $(".input_form").css({ border:"#FF0033 solid 2px"});
+							 alert("Nie udalo sie :(");
+						 }
+				},
+				error : function(err) {
+					alert("Blad");
+					}		
+			})
+}
+
+$("input#wyslijWiadomosc").click(function(){ //zdarzenie obslugujące przycisk wyslijWiadomosc
+		var odbiorca=$("#nazwaUzytkownika").val();
+		var tytul=$("#tytul").val();
+		var tresc=$("#trescWiadomosci").val();
+		if(tresc.length!=0 && odbiorca.length!=0 && tytul.length!=0)
+		{
+			wyslij(odbiorca,tytul,tresc);
+		}
+	});
+function wyslij(adresat,temat,wiadomosc){
+			$.ajax({
+				url:'ajaxController.php',
+				dataType:'json',
+				type:'POST',
+				data:{
+					"przyciskStudent":"wyslijWiadomosc",
+					"nazwaUzytkownika":adresat,
+					"tytul":temat,
+					"trescWiadomosci":wiadomosc
+					},
+				success : function(json) {
+           				 if(json["status"]==201)
+						 {
+							 alert("Wiadomość została wysłana");
 							 window.open('index.php','_self');
 						 }
 						 else

@@ -10,7 +10,6 @@ $(document).ready(function(e) {
 	});
 	$("input#zarejestruj").click(function(){ //zdarzenie obslugujące przycisk ZAREJESTRUJ
 	var login=$("#username").val();
-	alert(login);
 	var password=$("#password").val();
 	var email=$("#email").val();
 	if($("#poziom").prop('checked'))

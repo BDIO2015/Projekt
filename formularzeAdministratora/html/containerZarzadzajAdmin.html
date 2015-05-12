@@ -1,0 +1,25 @@
+﻿<div id="containterZarzadzajAdmin">
+
+Użytkownicy do aktywowania <br> 
+<select name="uzytkownicyAkceptuj" multiple="multiple" size="10"> 
+	{uzytkownicyDoAktywowania}
+</select>
+<br>
+	<input type="submit" value="Aktywuj konto" name="przyciskAdministrator" id="aktywuj"/>
+	<input type="submit" value="Odrzuć aktywacje" name="przyciskAdministrator" id="odrzuc"/>
+	
+	
+<br><br><br>
+
+Wszyscy użytkownicy: <br> 
+	<select name="uzytkownicyLista" multiple="multiple" size="10"> 
+	{uzytkownicy}
+	</select>
+
+	<form method="post" name="manage" id="interfejsZarzadzania">
+		<input type="submit" value="Dezaktywuj konto" name="przyciskAdministrator" id="dezaktywuj"/> 
+		<input type="submit" value="Resetuj hasło" name="przyciskAdministrator" id="resetuj"/> 
+		<input type="submit" value="Zmień Dane" name="przyciskAdministrator" id="zmien"/>
+		
+	</form>
+</div>

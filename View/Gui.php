@@ -2,20 +2,31 @@
 class Gui{
 	public function setHead($adres)
 	{
+		if(file_exists($adres))
 		$_SESSION['contentHead']=file_get_contents($adres);
+		else
+		$_SESSION['contentHead']=$adres;
 	}
 	public function setMenu($adres)
 	{
+		if(file_exists($adres))
 		$_SESSION['contentMenu']=file_get_contents($adres);
+		else
+		$_SESSION['contentMenu']=$adres;
 	}
 	public function setContainer($adres)
 	{
+		if(file_exists($adres))
 		$_SESSION['contentContainer']=file_get_contents($adres);
-		
+		else
+		$_SESSION['contentContainer']=$adres;
 	}
 	public function setFooter($adres)
 	{
-		$_SESSION['contentFooter']=file_get_contents($adres,-1);
+		if(file_exists($adres))
+		$_SESSION['contentFooter']=file_get_contents($adres);
+		else
+		$_SESSION['contentFooter']=$adres;
 	}
 	public function showGui()
 	{

@@ -52,5 +52,15 @@
 		$wynik=json_encode($wynik);
 		return $wynik;
 	}
+	public function podmien($adres,$tresc,$slowoKlucz)
+	{
+		if(file_exists($adres))
+		{
+			$adres=file_get_contents($adres);
+			return str_replace($slowoKlucz,$tresc,$adres);
+		}
+		else
+		return "Blad";
+	}
  }
 ?>

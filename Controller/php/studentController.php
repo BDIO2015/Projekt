@@ -25,26 +25,32 @@ class studentController{
 					$this->student->wyloguj();
 				break;
 				case "Edytuj Konto":
-					$this->gui->setContainer("View/student/container/containerEdytujKonto.html");															
+					$this->gui->setContainer("View/student/container/containerEdytujKontoStudent.html");															
 				break;
 				
 				case "Wiadomości":															
-					$this->gui->setContainer("View/student/container/containerOdbior.html");
+					$this->gui->setContainer("View/student/container/containerMenuWiadomosciStudent.html");
 				break;
 				
 				case "Napisz wiadomość":
-					$this->gui->setContainer("View/student/container/containerWiadomosc.html");
+					$this->gui->setContainer("View/student/container/containerNowaWiadomoscStudent.html");
 				break;
 				
 				case "Otrzymane":
-					$this->gui->setContainer("View/student/container/containerOdbior.html");
+					$wynik=$this->student->pobierzWiadomosci();
+					$wynik=$this->student->podmien("View/student/container/containerOdebraneStudent.html",$wynik,"{wiadomosci}");
+					$this->gui->setContainer($wynik);
 				break;
 				
 				case "Wysłane":
-					$this->gui->setContainer("View/student/container/containerWyslane.html");
+					$this->gui->setContainer("View/student/container/containerWyslaneStudent.html");
+				break;
+				case "pobierzWiadomosc":
+					$wynik=$this->student->pokazWiadomosc($_GET['idWiadomosc']);
+					$this->gui->setContainer($wynik);
 				break;
 				case "wyslijWiadomosc":
-					return $this->student->wiadomosc();
+					return $this->student->wiadomoscWyslij();
 				break;
 				case "sprawdzCzyIstnieje":
 				 	return $this->student->sprawdzCzyIstnieje();

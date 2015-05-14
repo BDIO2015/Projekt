@@ -133,4 +133,40 @@ function sprawdz(adresat){
 					},
 			});
 }
+ $("input#stworz").click(function(){ //zdarzenie obslugujące przycisk stworz (nowy projekt)
+		var nazwaProjektu=$("#nazwaProjektu").val();
+		var opisProjektu=$("#opisProjektu").val();
+		if(nazwaProjektu.length!=0 && opisProjektu.length!=0)
+		{
+			stworzProjektProwadzacy(nazwaProjektu,opisProjektu);
+		}
+	});
+	function stworzProjektProwadzacy(nazwa,opis){
+		return $.ajax({
+				url:'ajaxController.php',
+				dataType:'json',
+				type:'POST',
+				data:{
+					"przyciskProwadzacy":"stworz",
+					"menuOpcjaProwadzacy":"stworz",
+					"nazwaProjektu":nazwa,
+					"opisProjektu":opis
+					},
+				success : function(json) {
+           				 if(json["status"]==201)
+						 {
+							alert("Projekt stworzono pomyślnie");
+							window.open('index.php','_self');
+						 }
+						 else
+						 {
+							 $(".input_form").css({ border:"#FF0033 solid 2px"});
+							 alert("Nie udalo sie :(");
+						 }
+				},
+				error : function(err) {
+					alert("Blad");
+					}		
+			});
+	}
 });

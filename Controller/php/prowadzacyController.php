@@ -22,8 +22,25 @@ class prowadzacyController{
 			switch($method)
 			{
 				case "Wyloguj":													
-						return $this->prowadzacy->wyloguj();
+					return $this->prowadzacy->wyloguj();
 				break;
+				case "Wybierz":
+					isset($_POST['menuOpcjaProwadzacy'])?$method2=$_POST['menuOpcjaProwadzacy']:$method2=$_GET['menuOpcjaProwadzacy'];
+					switch($method2)
+					{
+						case "przeprowadzane":
+							$this->gui->setContainer("View/prowadzacy/container/containerPrzeprowadzaneProjektyProwadzacy.html");										
+						break;
+						case "stworz":
+							$this->gui->setContainer("View/prowadzacy/container/containerNowyProjektProwadzacy.html");										
+						break;
+						case "zakonczone":
+							$this->gui->setContainer("View/prowadzacy/container/containerZakonczoneProjektyProwadzacy.html");										
+						break;
+					}
+				break;
+                                case "stworz":
+                                    return $this->prowadzacy->stworzNowyProjekt();
 			}
 		}
 		$this->gui->showGui();

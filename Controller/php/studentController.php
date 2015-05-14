@@ -55,6 +55,9 @@ class studentController{
 				case "sprawdzCzyIstnieje":
 				 	return $this->student->sprawdzCzyIstnieje();
 				break;
+				case "czyProjektIstnieje":
+					return $this->student->czyProjektIstnieje($idProjektu);
+				break;
 			}
 		}
 		$this->gui->showGui();

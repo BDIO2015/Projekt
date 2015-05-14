@@ -62,5 +62,12 @@ class Student extends Gosc{
 		}
 		return 0;
 	}
+	public function czyProjektIstnieje($idProjektu)
+	{
+		$adres=$this->api->isProjectExist;
+		$wiadomosc='id_projekt='.$idProjektu;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+		return $wynik;
+	}
 }
 ?>

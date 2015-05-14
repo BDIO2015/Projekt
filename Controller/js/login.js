@@ -141,6 +141,7 @@ function sprawdz(adresat){
 			stworzProjektProwadzacy(nazwaProjektu,opisProjektu);
 		}
 	});
+	
 	function stworzProjektProwadzacy(nazwa,opis){
 		return $.ajax({
 				url:'ajaxController.php',
@@ -171,28 +172,13 @@ function sprawdz(adresat){
 	}
 
 	function czyProjektIstnieje(){
-		return $.ajax({
+	return $.ajax({
 				url:'ajaxController.php',
 				dataType:'json',
 				type:'POST',
 				data:{
-					"przyciskStudent":"czyProjektIstnieje",
+					"przyciskStudent":"czyProjektIstnieje"
 					},
-				success : function(json) {
-           				 if(json["status"]==200)
-						 {
-							alert("Projekt istnieje");
-							window.open('index.php','_self');
-						 }
-						 else
-						 {
-							 $(".input_form").css({ border:"#FF0033 solid 2px"});
-							 alert("Nie istnieje :(");
-						 }
-				},
-				error : function(err) {
-					alert("Blad");
-					}		
 			});
 	}
 });

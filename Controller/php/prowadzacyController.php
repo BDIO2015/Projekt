@@ -25,13 +25,13 @@ class prowadzacyController{
 					return $this->prowadzacy->wyloguj();
 				break;
 				case "Wybierz":
-					isset($_POST['menuOpcjaProwadzacy'])?$method2=$_POST['menuOpcjaProwadzacy']:$method2=$_GET['menuOpcjaProwadzacy'];
-					switch($method2)
+					switch($_GET['menuOpcjaProwadzacy'])
 					{
 						case "przeprowadzane":
 							$wynik=$this->prowadzacy->pobierzListeProjektow();
-							$this->gui->setContainer($wynik);										
-						break;
+							$wynik=$this->prowadzacy->podmien("View/prowadzacy/container/containerProjekty.html",$wynik,"{projekty}");
+							$this->gui->setContainer($wynik);
+							break;
 						case "stworz":
 							$this->gui->setContainer("View/prowadzacy/container/containerNowyProjektProwadzacy.html");										
 						break;
@@ -40,7 +40,11 @@ class prowadzacyController{
 						break;
 					}
 				break;
-                case "stworz":
+				case "pobierzProjekt":
+					$wynik=$this->prowadzacy->pokazProjekt($_GET['idProjekt']);
+					$this->gui->setContainer($wynik);
+				break;
+				case "stworz":
                   return $this->prowadzacy->stworzNowyProjekt();
 				break;
 			}

@@ -6,6 +6,7 @@ class Prowadzacy extends Student{
 		$this->api=file_get_contents("./Settings/api.json");
 		$this->api=json_decode($this->api);		
 	}
+	
 	public function stworzNowyProjekt()
 	{
 		$idKoordynatora=$_SESSION['userId'];
@@ -16,6 +17,7 @@ class Prowadzacy extends Student{
 		$wynik=$this->requestApi($wiadomosc,$adres);
 		return $wynik;
 	}
+	
 	public function pobierzListeProjektow()
 	{
 		$adres=$this->api->getProjects;
@@ -26,12 +28,39 @@ class Prowadzacy extends Student{
 			$lista="";
 			foreach($wynik->result as $odbior)
 			{
-				//if($wynik->result->id_koordynator==$_SESSION['userId'])
 				$lista='<tr><td><a href="?przyciskProwadzacy=pobierzProjekt&idProjekt='.$odbior->id_projekt.'">'.$odbior->nazwa.'</a></td></tr>'.$lista;
 			}
 			$lista='<table>'.$lista.'</table>';
+			$_SESSION['result']=$wynik->result;
 			return $lista;
 		}
+	}
+	
+	public function pokazProjekt($idProjektu)
+	{
+		$result=$_SESSION['result'];
+		foreach($result as $odbior)
+		{
+			if($odbior->id_projekt==$idProjektu)
+			{		
+				
+				$wiadomosc='id_projekt='.$idProjektu;
+				$adres=$this->api->getProject;
+				$wynik=$this->requestApi($wiadomosc,$adres);
+				$wynik=json_decode($wynik);
+				if($wynik->status=200)
+				{
+					return $wynik='ID projektu='.$idProjektu.'<br \>Nazwa='.$wynik->result->nazwa.'<br \>Opis='.$wynik->result->opis.'<br \>Termin='.$wynik->result->termin.'<br \>Miejsce='.$wynik->result->miejsce.'<br \>Wytyczne'.$wynik->result->wytyczne.'<br \>Id koordynatora='.$wynik->result->id_koordynator.'<br \>Id grupy='.$wynik->result->id_grupy.'<br \>Id oceny='.$wynik->result->id_ocena;
+				}
+			} 
+		}
+		return 0;
+	}
+	
+	public function pokazPrzypisanychStudentow()
+	{
+			
+			$adres=$this->api->getProject;
 	}
 }
 ?>

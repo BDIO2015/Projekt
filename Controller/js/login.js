@@ -140,6 +140,10 @@ function sprawdz(adresat){
 		{
 			stworzProjektProwadzacy(nazwaProjektu,opisProjektu);
 		}
+		else
+		{
+			alert("Uzupełnij wszystkie dane!");
+		}
 	});
 	
 	function stworzProjektProwadzacy(nazwa,opis){
@@ -182,3 +186,63 @@ function sprawdz(adresat){
 			});
 	}
 });
+
+$("input#archiwizuj").click(function(){ //zdarzenie obslugujące przycisk archiwizuj
+		archiwizuj();
+	});
+	
+function archiwizuj(){
+	return $.ajax({
+				url:'ajaxController.php',
+				dataType:'json',
+				type:'POST',
+				data:{
+					"przyciskProwadzacy":"Archiwizuj"
+					},
+				success : function(json) {
+           				 if(json["status"]==201)
+						 {
+							alert("Projekt zarchiwizowano pomyślnie");
+							window.open('index.php','_self');
+						 }
+						 else
+						 {
+							 $(".input_form").css({ border:"#FF0033 solid 2px"});
+							 alert("Nie udalo sie :(");
+						 }
+				},
+				error : function(err) {
+					alert("Blad");
+					}	
+			});
+	}
+$("input#usunProjekt").click(function(){ //zdarzenie obslugujące przycisk archiwizuj
+		usunProjekt();
+	});
+	
+function usunProjekt(){
+	return $.ajax({
+				url:'ajaxController.php',
+				dataType:'json',
+				type:'POST',
+				data:{
+					"przyciskProwadzacy":"Usuń projekt"
+					},
+				success : function(json) {
+           				 if(json["status"]==200)
+						 {
+							alert("Projekt usunięty pomyślnie");
+							window.open('index.php','_self');
+						 }
+						 else
+						 {
+							 $(".input_form").css({ border:"#FF0033 solid 2px"});
+							 alert("Nie udalo sie :(");
+						 }
+				},
+				error : function(err) {
+					alert("Blad");
+					}
+});					
+			
+}

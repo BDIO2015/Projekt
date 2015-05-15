@@ -59,8 +59,40 @@ class Prowadzacy extends Student{
 	
 	public function pokazPrzypisanychStudentow()
 	{
-			
 			$adres=$this->api->getProject;
+	}
+	
+	public function archiwizujProjekt($idProjektu)
+	{	
+		$result=$_SESSION['result'];
+		foreach($result as $odbior)
+		{
+			if($odbior->id_projekt==$idProjektu)
+			{
+				$nazwaProjektu=$odbior->nazwa.'_zarchiwizowany';
+				$adres=$this->api->archiveProject;
+				$wiadomosc='id_projekt='.$idProjektu.'&nazwa='.$nazwaProjektu;
+				$wynik=$this->requestApi($wiadomosc,$adres);
+				return $wynik=json_decode($wynik);
+			}	
+		}	
+		return 0;
+	}
+	
+	public function usunProjekt($idProjektu)
+	{	
+		$result=$_SESSION['result'];
+		foreach($result as $odbior)
+		{
+			if($odbior->id_projekt==$idProjektu)
+			{
+				$adres=$this->api->deleteProject;
+				$wiadomosc='id_projekt='.$idProjektu;
+				$wynik=$this->requestApi($wiadomosc,$adres);
+				return $wynik=json_decode($wynik);
+			}
+		}	
+		return 0;
 	}
 }
 ?>

@@ -40,12 +40,14 @@ class Student extends Gosc{
 		$wynik=json_decode($wynik);
 		if($wynik->status==200)
 		{
-			$lista='<table>';
+			$lista="";
 			foreach ($wynik->result->wiadomosci as $odebrana)
 			{
-				$lista=$lista.'<tr><td><a href="?przyciskStudent=pobierzWiadomosc&idWiadomosc='.$odebrana->id_wiadomosc.'">'.$odebrana->tytul.'</a></td></tr>';
+				$tytul='<tr><td><a href="?przyciskStudent=pobierzWiadomosc&idWiadomosc='.$odebrana->id_wiadomosc.'">'.$odebrana->tytul.'</a></td>';
+				$data='<td>Data: '.$odebrana->data.'</td></tr>';
+				$lista=$tytul.$data.$lista;
 			}
-			$lista=$lista.'</table>';
+			$lista='<table>'.$lista.'</table>';
 			$_SESSION['wiadomosci']=$wynik->result->wiadomosci;
 			return $lista;
 		}

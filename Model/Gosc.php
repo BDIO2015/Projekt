@@ -42,7 +42,7 @@
 		$poziom=$_POST['poziom'];
 		$wiadomosc='email='.$email.'&login='.$username.'&haslo='.$password.'&poziom='.$poziom.'&imie='.$name.'&nazwisko='.$surname;
 		$adres=$this->api->createUser;															
-		$wynik=$this->requestApi($wiadomosc,$adres,201);
+		$wynik=$this->requestApi($wiadomosc,$adres);
 		$wynik=json_decode($wynik);
 		if($wynik->status==201)
 		{

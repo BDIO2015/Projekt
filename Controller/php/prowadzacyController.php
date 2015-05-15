@@ -29,7 +29,8 @@ class prowadzacyController{
 					switch($method2)
 					{
 						case "przeprowadzane":
-							$this->gui->setContainer("View/prowadzacy/container/containerPrzeprowadzaneProjektyProwadzacy.html");										
+							$wynik=$this->prowadzacy->pobierzListeProjektow();
+							$this->gui->setContainer($wynik);;										
 						break;
 						case "stworz":
 							$this->gui->setContainer("View/prowadzacy/container/containerNowyProjektProwadzacy.html");										

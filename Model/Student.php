@@ -40,12 +40,12 @@ class Student extends Gosc{
 		$wynik=json_decode($wynik);
 		if($wynik->status==200)
 		{
-			$lista='<table>';
+			$lista="";
 			foreach ($wynik->result->wiadomosci as $odebrana)
 			{
-				$lista=$lista.'<tr><td><a href="?przyciskStudent=pobierzWiadomosc&idWiadomosc='.$odebrana->id_wiadomosc.'">'.$odebrana->tytul.'</a></td></tr>';
+				$lista='<tr><td><a href="?przyciskStudent=pobierzWiadomosc&idWiadomosc='.$odebrana->id_wiadomosc.'">'.$odebrana->tytul.'</a></td></tr>'.$lista;
 			}
-			$lista=$lista.'</table>';
+			$lista='<table>'.$lista.'</table>';
 			$_SESSION['wiadomosci']=$wynik->result->wiadomosci;
 			return $lista;
 		}
@@ -61,13 +61,6 @@ class Student extends Gosc{
 			 return $odebrana->tresc;
 		}
 		return 0;
-	}
-	public function czyProjektIstnieje($idProjektu)
-	{
-		$adres=$this->api->isProjectExist;
-		$wiadomosc='id_projekt='.$idProjektu;
-		$wynik=$this->requestApi($wiadomosc,$adres);
-		return $wynik;
 	}
 }
 ?>

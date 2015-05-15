@@ -16,5 +16,22 @@ class Prowadzacy extends Student{
 		$wynik=$this->requestApi($wiadomosc,$adres);
 		return $wynik;
 	}
+
+	public function pobierzListeProjektow()
+	{
+		$adres=$this->api->getProjects;
+		$wynik=$this->requestApi("",$adres);
+		$wynik=json_decode($wynik);
+		if($wynik->status=200)
+		{
+			$lista="";
+			foreach($wynik->result as $odbior)
+			{
+				$lista='<tr><td><a>'.$odbior->nazwa.'</a></td></tr>'.$lista;
+			}
+			$lista='<table>'.$lista.'</table>';
+			return $lista;
+		}
+	}
 }
 ?>

@@ -43,7 +43,7 @@ class prowadzacyController{
 				case "pobierzProjekt":
 					$_SESSION['idProjektu']=$_GET['idProjekt'];
 					$wynik=$this->prowadzacy->pokazProjekt($_GET['idProjekt']);
-					$wynik=$wynik.'<br /><br /><form method="get" action="index.php" id="obslugaProjektu"><input type="submit" name="przyciskProwadzacy" id="archiwizuj" value="Archiwizuj" /><input type="submit" name="przyciskProwadzacy" id="usunProjekt" value="Usuń projekt" /></form>';
+					$wynik=$wynik.'<br /><br /><form method="get" id="obslugaProjektu"><input type="submit" name="przyciskProwadzacy" id="archiwizuj" value="Archiwizuj" /><input type="submit" name="przyciskProwadzacy" id="usunProjekt" value="Usuń projekt" /></form>';
 					$this->gui->setContainer($wynik);
 				break;
 				case "stworz":

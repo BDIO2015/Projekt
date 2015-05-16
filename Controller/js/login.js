@@ -185,7 +185,7 @@ function sprawdz(adresat){
 					},
 			});
 	}
-});
+
 
 $("input#archiwizuj").click(function(){ //zdarzenie obslugujące przycisk archiwizuj
 		archiwizuj();
@@ -246,3 +246,4 @@ function usunProjekt(){
 });					
 			
 }
+});

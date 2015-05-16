@@ -28,6 +28,17 @@
 			$_SESSION['userProjekt']=$nazwaUzytkownika;
 			$_SESSION['poziom']=$wynik->result->user->poziom;
 			$_SESSION['userId']=$wynik->result->user->id_uzytkownik;
+			
+			$_SESSION['userImie']=$wynik->result->user->imie;
+			$_SESSION['userNazwisko']=$wynik->result->user->nazwisko;
+			$_SESSION['userTelefon']=$wynik->result->user->telefon;
+			$_SESSION['userWydzial']=$wynik->result->user->id_wydzial;
+			$_SESSION['userKierunek']=$wynik->result->user->kierunek;
+			$_SESSION['userSpecjalizacja']=$wynik->result->user->id_specjalizacja;
+			$_SESSION['userKatedra']=$wynik->result->user->id_katedra;
+			$_SESSION['userSieciowe']=$wynik->result->user->id_sieciowy;
+		
+		
 		}
 		$wynik=json_encode($wynik);
 		return $wynik;

@@ -71,5 +71,68 @@ class Student extends Gosc{
 		$wynik=$this->requestApi($wiadomosc,$adres);
 		return $wynik;
 	}
+	public function uzupelnienieFormularza()
+	{
+		return $wynik='Edycja danych osobowych:
+		<form id="edytujKonto">
+		Imię: <input type="text" name="imie"id="imie" value="'.$_SESSION['userImie'].'" /><br />
+		Nazwisko: <input type="text" name="nazwisko"id="nazwisko" value="'.$_SESSION['userNazwisko'].'"/><br />
+		Nr telefonu: <input type="text" name="nrtel"id="nrtel" value="'.$_SESSION['userTelefon'].'"/><br />
+		ID wydziału: <input type="text" name="idwydz"id="idwydz"value="'.$_SESSION['userWydzial'].'" /><br />
+		Kierunek: <input type="text" name="kierunek"id="kierunek" value="'.$_SESSION['userKierunek'].'"/><br />
+		ID specjalizacji: <input type="text" name="idspec"id="idspec" value="'.$_SESSION['userSpecjalizacja'].'"/><br />
+		ID katedry: <input type="text" name="idkat"id="idkat" value="'.$_SESSION['userKatedra'].'"/><br />
+		ID sieciowe: <input type="text" name="idsiec"id="idsiec"value="'.$_SESSION['userSieciowe'].'" /><br />
+		<input type="submit" value="Prześlij" name="przyciskStudent" id="przeslijZmiany" /></form>';
+	}
+	
+	public function edytujKontoStudenta()
+	{
+		$idUz=$_SESSION['userId'];
+		$imieUz=$_POST['imie'];
+		$nazwiskoUz=$_POST['nazwisko'];
+		$telefonUz=$_POST['nrtel'];
+		$idWydzialuUz=$_POST['idwydz'];
+		$kierunekUz=$_POST['kierunek'];
+		$idSpecjalizacjiUz=$_POST['idspec'];
+		$idKatedryUz=$_POST['idkat'];
+		$idSiecioweUz=$_POST['idsiec'];
+		
+		$wiadomosc='id_uzytkownik='.$idUz.'&imie='.$imieUz.'&nazwisko ='.$nazwiskoUz.'&telefon='.$telefonUz.'&id_wydzial='.$idWydzialuUz.'&kierunek='.$kierunekUz.'&id_specjalizacja='.$idSpecjalizacjiUz.'&id_katedra='.$idKatedryUz.'&id_sieciowy='.$idSiecioweUz;
+		$adres=$this->api->updateUser;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+		$wynik=json_decode($wynik);
+		if($wynik->status==200)
+		{
+			$_SESSION['userId']=$idUz;
+			$_SESSION['userImie']=$imieUz;
+			$_SESSION['userNazwisko']=$nazwiskoUz;
+			$_SESSION['userTelefon']=$telefonUz;
+			$_SESSION['userWydzial']=$idWydzialuUz;
+			$_SESSION['userKierunek']=$kierunekUz;
+			$_SESSION['userSpecjalizacja']=$idSpecjalizacjiUz;
+			$_SESSION['userKatedra']=$idKatedryUz;
+			$_SESSION['userSieciowe']=$idSiecioweUz;
+			$wynik=json_encode($wynik);
+			return $wynik;
+		}
+		return 0;
+	}
+	public function zmienHaslo()
+	{
+		$idUz=$_SESSION['userId'];
+		$nazwaUz=$_POST['username'];
+		$hasloUz=$_POST['password'];
+		$noweUz=$_POST['newpassword'];
+		$wiadomosc='id_uzytkownik='.$idUz.'login='.$nazwaUz.'haslo='.$hasloUz.'nowe_haslo='.$noweUz;
+		$adres=$this->api->changePass;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+		$wynik=json_decode($wynik);
+		if($wynik->status==200)
+		{
+			$wynik=json_encode($wynik);
+			return $wynik;
+		}
+	}
 }
 ?>

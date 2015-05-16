@@ -8,17 +8,17 @@ class adminController{
 	{
 		$this->admin=new Admin();
 		$this->gui=new Gui();
-		$this->gui->setHead("View/admin/head/headStudent.html");
-		$this->gui->setMenu("View/admin/menu/menuStudent.html");
-		$this->gui->setContainer("View/admin/container/containerStudent.html");															
+		$this->gui->setHead("View/admin/head/headadmin.html");
+		$this->gui->setMenu("View/admin/menu/menuadmin.html");
+		$this->gui->setContainer("View/admin/container/containeradmin.html");															
 		$this->gui->setFooter("View/admin/footer/footer.html");
 		
 	}
-	public function studentLoad()
+	public function adminLoad()
 	{
 		if(isset($_POST['przyciskAdmin']) || isset($_GET['przyciskAdmin']))
 		{
-			isset($_POST['przyciskAdmin'])?$method=$_POST['przyciskStudent']:$method=$_GET['przyciskAdmin'];
+			isset($_POST['przyciskAdmin'])?$method=$_POST['przyciskAdmin']:$method=$_GET['przyciskAdmin'];
 			switch($method)
 			{
 				case "Wyloguj":															

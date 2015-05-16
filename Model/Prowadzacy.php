@@ -50,6 +50,7 @@ class Prowadzacy extends Student{
 				$wynik=json_decode($wynik);
 				if($wynik->status=200)
 				{
+					$_SESSION['nazwaProjektu']=$wynik->result->nazwa;
 					return $wynik='ID projektu='.$idProjektu.'<br \>Nazwa='.$wynik->result->nazwa.'<br \>Opis='.$wynik->result->opis.'<br \>Termin='.$wynik->result->termin.'<br \>Miejsce='.$wynik->result->miejsce.'<br \>Wytyczne'.$wynik->result->wytyczne.'<br \>Id koordynatora='.$wynik->result->id_koordynator.'<br \>Id grupy='.$wynik->result->id_grupy.'<br \>Id oceny='.$wynik->result->id_ocena;
 				}
 			} 
@@ -59,40 +60,24 @@ class Prowadzacy extends Student{
 	
 	public function pokazPrzypisanychStudentow()
 	{
-			$adres=$this->api->getProject;
+		$adres=$this->api->getProject;
 	}
 	
-	public function archiwizujProjekt($idProjektu)
+	public function archiwizujProjekt($idProjektu, $nazwaProjektu)
 	{	
-		$result=$_SESSION['result'];
-		foreach($result as $odbior)
-		{
-			if($odbior->id_projekt==$idProjektu)
-			{
-				$nazwaProjektu=$odbior->nazwa.'_zarchiwizowany';
+				$nazwaProjektu=$nazwaProjektu.'_zarchiwizowany';
 				$adres=$this->api->archiveProject;
 				$wiadomosc='id_projekt='.$idProjektu.'&nazwa='.$nazwaProjektu;
 				$wynik=$this->requestApi($wiadomosc,$adres);
-				return $wynik=json_decode($wynik);
-			}	
-		}	
-		return 0;
+				return $wynik;
 	}
 	
 	public function usunProjekt($idProjektu)
 	{	
-		$result=$_SESSION['result'];
-		foreach($result as $odbior)
-		{
-			if($odbior->id_projekt==$idProjektu)
-			{
-				$adres=$this->api->deleteProject;
-				$wiadomosc='id_projekt='.$idProjektu;
-				$wynik=$this->requestApi($wiadomosc,$adres);
-				return $wynik=json_decode($wynik);
-			}
-		}	
-		return 0;
+		$adres=$this->api->deleteProject;
+		$wiadomosc='id_projekt='.$idProjektu;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+		return $wynik;
 	}
 }
 ?>

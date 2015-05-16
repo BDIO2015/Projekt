@@ -192,7 +192,7 @@ $("input#archiwizuj").click(function(){ //zdarzenie obslugujące przycisk archiw
 	});
 	
 function archiwizuj(){
-	return $.ajax({
+		$.ajax({
 				url:'ajaxController.php',
 				dataType:'json',
 				type:'POST',
@@ -217,11 +217,11 @@ function archiwizuj(){
 			});
 	}
 $("input#usunProjekt").click(function(){ //zdarzenie obslugujące przycisk archiwizuj
-		usunProjekt();
+	usunProjekt();
 	});
 	
 function usunProjekt(){
-	return $.ajax({
+		$.ajax({
 				url:'ajaxController.php',
 				dataType:'json',
 				type:'POST',

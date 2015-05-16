@@ -79,5 +79,14 @@ class Prowadzacy extends Student{
 		$wynik=$this->requestApi($wiadomosc,$adres);
 		return $wynik;
 	}
+	
+	public function nowyWatek($idProjektu)
+	{
+		$tresc=$_POST['tresc'];
+		$adres=$this->api->addThread;
+		$wiadomosc='id_projekt='.$idProjektu.'&text='.$tresc;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+		return $wynik;
+	}
 }
 ?>

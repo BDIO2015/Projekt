@@ -182,7 +182,50 @@ function sprawdz(adresat){
 					},
 			});
 	}
+	//------------------------------------------------
+	$("input#zmien").click(function(){
+		var username=$("#username").val();
+		var password=$("#password").val();
+		var newpassword=$("#newpassword").val();
+		
+		zmienHaslo(username,password,newpassword);
+	});
 	
+	function zmienHaslo(username2,password2,newpassword2){
+			$.ajax({
+				url:'ajaxController.php',
+				dataType:'json',
+				type:'POST',
+				data:{
+					"przyciskStudent":"zmien",
+					"username":username2,
+					"password":password2,
+					"newpassword":newpassword2,
+					},
+					success:function(json){
+						if(json["status"]==200)
+						{
+							alert("Pomyslna zmiana hasla");
+							window.open('index.php','_self');
+						}
+						else if(json["status"]==400)
+						{
+							alert("zle param");
+							window.open('index.php','_self');
+						}
+						else
+						{
+							alert("Nie udało się");
+							window.open('index.php','_self');
+						}
+					},
+					error:function(err){
+						alert("Blad");
+					}
+			});
+			}
+	
+	//------------------------------------------------
 	$("input#przeslijZmiany").click(function(){
 		var imie=$("#imie").val();
 		var nazwisko=$("#nazwisko").val();

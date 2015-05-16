@@ -61,7 +61,7 @@ class studentController{
 				 	return $this->student->edytujKontoStudenta();
 				break;
 				
-				case "Zmień":
+				case "zmien":
 				 	return $this->student->zmienHaslo();
 				break;
 			}

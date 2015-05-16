@@ -83,9 +83,33 @@ class Student extends Gosc{
 		ID specjalizacji: <input type="text" name="idspec"id="idspec" value="'.$_SESSION['userSpecjalizacja'].'"/><br />
 		ID katedry: <input type="text" name="idkat"id="idkat" value="'.$_SESSION['userKatedra'].'"/><br />
 		ID sieciowe: <input type="text" name="idsiec"id="idsiec"value="'.$_SESSION['userSieciowe'].'" /><br />
-		<input type="submit" value="Prześlij" name="przyciskStudent" id="przeslijZmiany" /></form>';
+		<input type="submit" value="Prześlij" name="przyciskStudent" id="przeslijZmiany" /><br />
+		</form>
+		Zmień hasło:
+		<form id="zmienHaslo">
+		Login: <input type="text" name="username"id="username" /><br />
+		Hasło: <input type="password" name="password" id="password"/><br />
+		Nowe hasło: <input type="password" name="newpassword" id="newpassword"/><br />
+		<input type="submit" value="Zmień" name="przyciskStudent" id="zmien" /></form>';
+		
 	}
-	
+	public function zmienHaslo()
+	{
+		$idUz=$_SESSION['userId'];
+		$nazwaUz=$_POST['username'];
+		$hasloUz=$_POST['password'];
+		$noweUz=$_POST['newpassword'];
+		$wiadomosc='id_uzytkownik='.$idUz.'&login='.$nazwaUz.'&haslo='.$hasloUz.'&nowe_haslo='.$noweUz;
+		$adres=$this->api->changePass;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+		$wynik=json_decode($wynik);
+		if($wynik->status==200)
+		{
+			$wynik=json_encode($wynik);
+			return $wynik;
+		}
+		return 0;
+	}
 	public function edytujKontoStudenta()
 	{
 		$idUz=$_SESSION['userId'];
@@ -118,21 +142,6 @@ class Student extends Gosc{
 		}
 		return 0;
 	}
-	public function zmienHaslo()
-	{
-		$idUz=$_SESSION['userId'];
-		$nazwaUz=$_POST['username'];
-		$hasloUz=$_POST['password'];
-		$noweUz=$_POST['newpassword'];
-		$wiadomosc='id_uzytkownik='.$idUz.'login='.$nazwaUz.'haslo='.$hasloUz.'nowe_haslo='.$noweUz;
-		$adres=$this->api->changePass;
-		$wynik=$this->requestApi($wiadomosc,$adres);
-		$wynik=json_decode($wynik);
-		if($wynik->status==200)
-		{
-			$wynik=json_encode($wynik);
-			return $wynik;
-		}
-	}
+
 }
 ?>

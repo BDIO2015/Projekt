@@ -37,13 +37,7 @@ class Prowadzacy extends Student{
 	}
 	
 	public function pokazProjekt($idProjektu)
-	{
-		$result=$_SESSION['result'];
-		foreach($result as $odbior)
-		{
-			if($odbior->id_projekt==$idProjektu)
-			{		
-				
+	{				
 				$wiadomosc='id_projekt='.$idProjektu;
 				$adres=$this->api->getProject;
 				$wynik=$this->requestApi($wiadomosc,$adres);
@@ -53,8 +47,6 @@ class Prowadzacy extends Student{
 					$_SESSION['nazwaProjektu']=$wynik->result->nazwa;
 					return $wynik='ID projektu='.$idProjektu.'<br \>Nazwa='.$wynik->result->nazwa.'<br \>Opis='.$wynik->result->opis.'<br \>Termin='.$wynik->result->termin.'<br \>Miejsce='.$wynik->result->miejsce.'<br \>Wytyczne'.$wynik->result->wytyczne.'<br \>Id koordynatora='.$wynik->result->id_koordynator.'<br \>Id grupy='.$wynik->result->id_grupy.'<br \>Id oceny='.$wynik->result->id_ocena;
 				}
-			} 
-		}
 		return 0;
 	}
 	
@@ -88,5 +80,26 @@ class Prowadzacy extends Student{
 		$wynik=$this->requestApi($wiadomosc,$adres);
 		return $wynik;
 	}
+	
+	public function pobierzWatki($idProjektu)
+	{
+		$wiadomosc='id_projekt='.$idProjektu;
+		$adres=$this->api->getThreads;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+		$wynik=json_decode($wynik);
+		if($wynik->status=200)
+		{
+			$lista="";
+			foreach($wynik->result->watki as $odbierz)
+			{
+				$lista='<tr><td><a href="?przyciskProwadzacy=pobierzKomentarz&idWatek='.$odbierz->id_watek.'">'.$odbierz->text.' </a>'.$odbierz->date.'</a></td></tr>'.$lista;
+			}
+			$lista='<table>'.$lista.'</table>';
+			$_SESSION['result']=$wynik->result;
+			return $lista;
+		}
+	}
+
+	
 }
 ?>

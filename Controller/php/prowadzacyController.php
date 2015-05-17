@@ -47,6 +47,9 @@ class prowadzacyController{
 																			<input type="submit" name="przyciskProwadzacy" id="usunProjekt" value="Usuń projekt" /><br />
 																			<br /><input type="submit" name="przyciskProwadzacy" id="nowyWatek" value="Nowy Wątek" />
 																			</form>';
+					$wynik2=$this->prowadzacy->pobierzWatki($_GET['idProjekt']);
+					
+					$wynik=$wynik.'<br />'.$wynik2;
 					$this->gui->setContainer($wynik);
 				break;
 				case "stworz":

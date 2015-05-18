@@ -340,7 +340,7 @@ function usunProjekt(){
 });					
 			
 }
-<<<<<<< HEAD
+
 $("input#stworzWatek").click(function(){ //zdarzenie obslugujące przycisk archiwizuj
 	var tresc=$("#trescWatku").val();;
 	if(tresc.length!=0)
@@ -375,6 +375,4 @@ $("input#stworzWatek").click(function(){ //zdarzenie obslugujące przycisk archi
 					});
 					}
 });
-=======
-});
->>>>>>> Edycja_danych
+

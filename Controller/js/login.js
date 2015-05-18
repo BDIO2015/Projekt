@@ -122,6 +122,7 @@ function wyslij(adresat,temat,wiadomosc){
 					 }
 			 });
 }
+
 function sprawdz(adresat){
 			return $.ajax({
 				url:'ajaxController.php',
@@ -185,9 +186,102 @@ function sprawdz(adresat){
 					},
 			});
 	}
-
-
-$("input#archiwizuj").click(function(){ //zdarzenie obslugujące przycisk archiwizuj
+	//------------------------------------------------
+	$("input#zmien").click(function(){
+		var username=$("#username").val();
+		var password=$("#password").val();
+		var newpassword=$("#newpassword").val();
+		
+		zmienHaslo(username,password,newpassword);
+	});
+	
+	function zmienHaslo(username2,password2,newpassword2){
+			$.ajax({
+				url:'ajaxController.php',
+				dataType:'json',
+				type:'POST',
+				data:{
+					"przyciskStudent":"zmien",
+					"username":username2,
+					"password":password2,
+					"newpassword":newpassword2,
+					},
+					success:function(json){
+						if(json["status"]==200)
+						{
+							alert("Pomyslna zmiana hasla");
+							window.open('index.php','_self');
+						}
+						else if(json["status"]==400)
+						{
+							alert("zle param");
+							window.open('index.php','_self');
+						}
+						else
+						{
+							alert("Nie udało się");
+							window.open('index.php','_self');
+						}
+					},
+					error:function(err){
+						alert("Blad");
+					}
+			});
+			}
+	
+	//------------------------------------------------
+	$("input#przeslijZmiany").click(function(){
+		var imie=$("#imie").val();
+		var nazwisko=$("#nazwisko").val();
+		var nrtel=$("#nrtel").val();
+		var idwydz=$("#idwydz").val();
+		var kierunek=$("#kierunek").val();
+		var idspec=$("#idspec").val();
+		var idkat=$("#idkat").val();
+		var idsiec=$("#idsiec").val();
+		edytujKontoStudenta(imie,nazwisko,nrtel,idwydz,kierunek,idspec,idkat,idsiec);
+	});
+		function edytujKontoStudenta(imie2,nazwisko2,nrtel2,idwydz2,kierunek2,idspec2,idkat2,idsiec2){
+			$.ajax({
+				url:'ajaxController.php',
+				dataType:'json',
+				type:'POST',
+				data:{
+					"przyciskStudent":"przeslijZmiany",
+					"imie":imie2,
+					"nazwisko":nazwisko2,
+					"nrtel":nrtel2,
+					"idwydz":idwydz2,
+					"kierunek":kierunek2,
+					"idspec":idspec2,
+					"idkat":idkat2,
+					"idsiec":idsiec2
+					},
+					success:function(json){
+						if(json["status"]==200)
+						{
+							alert("Zaktualizowano pomyślnie");
+							window.open('index.php','_self');
+						}
+						else if(json["status"]==400)
+						{
+							alert("zle param");
+							window.open('index.php','_self');
+						}
+						else
+						{
+							alert("Nie udało się");
+							window.open('index.php','_self');
+						}
+					},
+					error:function(err){
+						alert("Blad");
+					}
+			});
+			}	
+			
+			
+			$("input#archiwizuj").click(function(){ //zdarzenie obslugujące przycisk archiwizuj
 		archiwizuj();
 	});
 	
@@ -246,6 +340,7 @@ function usunProjekt(){
 });					
 			
 }
+<<<<<<< HEAD
 $("input#stworzWatek").click(function(){ //zdarzenie obslugujące przycisk archiwizuj
 	var tresc=$("#trescWatku").val();;
 	if(tresc.length!=0)
@@ -280,3 +375,6 @@ $("input#stworzWatek").click(function(){ //zdarzenie obslugujące przycisk archi
 					});
 					}
 });
+=======
+});
+>>>>>>> Edycja_danych

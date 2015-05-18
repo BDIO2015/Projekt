@@ -24,8 +24,9 @@ class studentController{
 				case "Wyloguj":															
 					$this->student->wyloguj();
 				break;
-				case "Edytuj Konto":
-					$this->gui->setContainer("View/student/container/containerEdytujKontoStudent.html");															
+				case "Edytuj konto":
+					$wynik=$this->student->uzupelnienieFormularza();
+					$this->gui->setContainer($wynik);															
 				break;
 				
 				case "Wiadomości":															
@@ -54,6 +55,14 @@ class studentController{
 				break;
 				case "sprawdzCzyIstnieje":
 				 	return $this->student->sprawdzCzyIstnieje();
+				break;
+				
+				case "przeslijZmiany":
+				 	return $this->student->edytujKontoStudenta();
+				break;
+				
+				case "zmien":
+				 	return $this->student->zmienHaslo();
 				break;
 			}
 		}

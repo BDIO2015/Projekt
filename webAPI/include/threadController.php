@@ -95,13 +95,13 @@ class threadController{
 		if(isset($_POST['id_watek']))
 		{
 			$stmt = $this->conn->prepare( "DELETE FROM `watek` WHERE `id_watek` = ? and id_nadrzedny IS NOT NULL");
-            $stmt->bind_param("s", $_POST['id_watek']);
-            $result = $stmt->execute();
-            $error = $stmt->error;
-            $stmt->close();
+                  $stmt->bind_param("s", $_POST['id_watek']);
+                  $result = $stmt->execute();
+                  $error = $stmt->error;
+                  $stmt->close();
 
-            if ($result) return "{\"status\":200,\"result\":\"Comment deleted\"}";
-            else return "{\"status\": 400,\"result\":\"".$error."\"}";
+                  if ($result) return "{\"status\":200,\"result\":\"Comment deleted\"}";
+                  else return "{\"status\": 400,\"result\":\"".$error."\"}";
 		} else return "{\"status\": 400, \"result\":\"Bad params\"}";
 	}
 
@@ -110,27 +110,27 @@ class threadController{
 		if(isset($_POST['id_watek']))
 		{
 			$stmt = $this->conn->prepare( "SELECT * FROM `watek` WHERE `id_watek` = ? AND `id_nadrzedny` IS NULL" );
-            $stmt->bind_param("s", $_POST['id_watek']);
-            $result = $stmt->execute();
-            $error = $stmt->error;
-            $thread = $stmt->get_result()->fetch_assoc();
-            $stmt->close();
+                  $stmt->bind_param("s", $_POST['id_watek']);
+                  $result = $stmt->execute();
+                  $error = $stmt->error;
+                  $thread = $stmt->get_result()->fetch_assoc();
+                  $stmt->close();
 
-            if ($thread) 
-            {
-            	$stmt = $this->conn->prepare( "SELECT * FROM `watek` WHERE `id_nadrzedny` = ?" );
-            	$stmt->bind_param("s", $_POST['id_watek']);
-            	$result = $stmt->execute();
-            	$error = $stmt->error;
-            	$comments = $stmt->get_result();
-				$data = array();
-            	$stmt->close();
-            	while($comment = $comments->fetch_assoc()) $data[] = $comment;
-				
-            	$thread['komentarze'] = $data;
-            	return "{\"status\":200,\"result\":".json_encode($thread)."}";
-            }
-            else return "{\"status\": 400,\"result\":\"Thread don't exist\"}";
+                  if ($thread) 
+                  {
+                  	$stmt = $this->conn->prepare( "SELECT * FROM `watek` WHERE `id_nadrzedny` = ?" );
+                  	$stmt->bind_param("s", $_POST['id_watek']);
+                  	$result = $stmt->execute();
+                  	$error = $stmt->error;
+                  	$comments = $stmt->get_result();
+      				$data = array();
+                  	$stmt->close();
+                  	while($comment = $comments->fetch_assoc()) $data[] = $comment;
+      				
+                  	$thread['komentarze'] = $data;
+                  	return "{\"status\":200,\"result\":".json_encode($thread)."}";
+                  }
+                  else return "{\"status\": 400,\"result\":\"Thread don't exist\"}";
 		} else return "{\"status\": 400, \"result\":\"Bad params\"}";
 	}
 

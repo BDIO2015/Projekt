@@ -4,6 +4,8 @@ include_once __DIR__.'/userController.php';
 include_once __DIR__.'/projectController.php';
 include_once __DIR__.'/threadController.php';
 include_once __DIR__.'/otherController.php';
+include_once __DIR__.'/messagesController.php';
+
 
 
 class DbHandler {
@@ -13,7 +15,7 @@ class DbHandler {
     public $projektController;
     public $threadController;
     public $otherController;
-
+    public $messagesController;
 
     public function __construct() {
         require_once __DIR__.'/DbConnect.php';
@@ -24,12 +26,14 @@ class DbHandler {
         $this->projectController = new projectController($this->conn);
         $this->threadController = new threadController($this->conn);
         $this->otherController = new otherController($this->conn);
+        $this->messagesController = new messagesController($this->conn);
     }  
 
     public function getUserController() { return $this->userController; }
     public function getProjectController() { return $this->projectController; }
     public function getThreadController() { return $this->threadController; }
     public function getOtherController() { return $this->otherController; }
+    public function getMessagesController() { return $this->messagesController; }
 }
  
 ?>

@@ -109,10 +109,16 @@
                             :thread:
                         </table>
                     </dd>
-                     <dt>Other</dt>
+                    <dt>Other</dt>
                     <dd>
                         <table class="method-list" border="0" cellspacing="0" cellpadding="0">
                             :other:
+                        </table>
+                    </dd>
+                    <dt>Message</dt>
+                    <dd>
+                        <table class="method-list" border="0" cellspacing="0" cellpadding="0">
+                            :message:
                         </table>
                     </dd>
                 </dl>

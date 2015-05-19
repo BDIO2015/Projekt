@@ -23,7 +23,6 @@ switch($method)
 		$file = fopen($path, "r");
 		$project = fread($file, filesize($path));
 
-
 		$path = "public/thread.html";
 		$file = fopen($path, "r");
 		$thread = fread($file, filesize($path));
@@ -32,8 +31,13 @@ switch($method)
 		$file = fopen($path, "r");
 		$other = fread($file, filesize($path));
 
-    	$search = array(":user:", ":project:", ":thread:", ":other:"); 
-    	$replace = array($user, $project, $thread, $other); 
+		$path = "public/message.html";
+		$file = fopen($path, "r");
+		$message = fread($file, filesize($path));
+
+
+    	$search = array(":user:", ":project:", ":thread:", ":other:", ":message:"); 
+    	$replace = array($user, $project, $thread, $other, $message); 
     	$html = str_replace($search, $replace, $html);
 
 		echo $html;
@@ -45,9 +49,13 @@ switch($method)
 	//userController
 	case "login": $result = $db->getUserController()->login(); break;
 	case "createUser": $result = $db->getUserController()->createUser(); break;
+	case "isUserActive": $result = $db->getUserController()->isUserActive(); break;
 	case "isUserExist": $result = $db->getUserController()->isUserExist(); break;
 	case "updateUser": $result = $db->getUserController()->updateUser(); break;
 	case "changePass": $result = $db->getUserController()->changePass(); break;
+	case "changeActivity": $result = $db->getUserController()->changeActivity(); break;
+	case "showAllUsers": $result = $db->getUserController()->showAllUsers(); break;
+
 
 	//projektController
 	case "isProjectExist": $result = $db->getProjectController()->isProjectExist(); break;
@@ -62,7 +70,6 @@ switch($method)
 
 	case "archiveProject": $result = $db->getProjectController()->archiveProject(); break;
 	case "getFromArchiv": $result = $db->getProjectController()->getFromArchiv(); break;
-	
 
 	//threadController
 	case "addThread": $result = $db->getThreadController()->addThread(); break;
@@ -77,6 +84,11 @@ switch($method)
 	case "getDepartments": $result = $db->getOtherController()->getDepartments(); break;
 	case "getSpecializations": $result = $db->getOtherController()->getSpecializations(); break;
 	case "getCathedral": $result = $db->getOtherController()->getCathedral(); break;
+
+	//messagesController
+	case "getReceivedMessages": $result = $db->getMessagesController()->getReceivedMessages(); break;
+	case "getSendedMessages": $result = $db->getMessagesController()->getSendedMessages(); break;
+	case "sendMessage": $result = $db->getMessagesController()->sendMessage(); break;
 
 	default: $result = "{\"status\":400,\"result\":\"Can't find method: '".$method."'\"}"; break;
 }

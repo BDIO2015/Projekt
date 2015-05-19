@@ -1,0 +1,116 @@
+<!-- GET_RECEIVED_MESSAGES -->
+<tr>
+    <td rowspan="6" class="method-name">getReceivedMessages</td>
+    <td colspan="2" class="method-description">pobiera odebrane wiadomosci uzytkownika</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejsciowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/getReceivedMessages</br></br>
+                    <b>id_uzytkownik</b> - id uzytkownika
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">id_uzytkownik=1</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":200,"result":{"wiadomosci":[{"id_wiadomosc":6,"id_projekt":0,"id_nadawca":3,"id_odbiorca":3,"tytul":"asd","tresc":"asdas","data":"2015-05-12 02:24:53"},{"id_wiadomosc":7,"id_projekt":0,"id_nadawca":3,"id_odbiorca":3,"tytul":"asd","tresc":"asdas","data":"2015-05-12 02:24:54"},{"id_wiadomosc":8,"id_projekt":0,"id_nadawca":3,"id_odbiorca":2,"tytul":"asd","tresc":"asdas","data":"2015-05-12 02:24:56"},{"id_wiadomosc":9,"id_projekt":0,"id_nadawca":3,"id_odbiorca":2,"tytul":"asd","tresc":"asdas","data":"2015-05-12 02:24:57"},{"id_wiadomosc":10,"id_projekt":0,"id_nadawca":3,"id_odbiorca":3,"tytul":"asd","tresc":"asdas","data":"2015-05-12 02:24:58"},{"id_wiadomosc":11,"id_projekt":0,"id_nadawca":3,"id_odbiorca":3,"tytul":"asd","tresc":"asdas","data":"2015-05-12 02:24:58"},{"id_wiadomosc":12,"id_projekt":0,"id_nadawca":3,"id_odbiorca":2,"tytul":"asd","tresc":"asdas","data":"2015-05-12 02:24:59"},{"id_wiadomosc":13,"id_projekt":0,"id_nadawca":3,"id_odbiorca":2,"tytul":"asd","tresc":"asdas","data":"2015-05-12 02:24:59"}]}}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty bledow</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>
+
+<!-- GETSENDED_MESSAGES -->
+<tr>
+    <td rowspan="6" class="method-name">getSendedMessages</td>
+    <td colspan="2" class="method-description">pobiera wyslane wiadomosci uzytkownika</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejsciowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/getSendedMessages</br></br>
+                    <b>id_uzytkownik</b> - id uzytkownika </br>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">id_uzytkownik=2</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":200,"result":{"wiadomosci":[{"id_wiadomosc":6,"id_projekt":0,"id_nadawca":3,"id_odbiorca":3,"tytul":"asd","tresc":"asdas","data":"2015-05-12 02:24:53"},{"id_wiadomosc":7,"id_projekt":0,"id_nadawca":3,"id_odbiorca":3,"tytul":"asd","tresc":"asdas","data":"2015-05-12 02:24:54"},{"id_wiadomosc":8,"id_projekt":0,"id_nadawca":3,"id_odbiorca":2,"tytul":"asd","tresc":"asdas","data":"2015-05-12 02:24:56"},{"id_wiadomosc":9,"id_projekt":0,"id_nadawca":3,"id_odbiorca":2,"tytul":"asd","tresc":"asdas","data":"2015-05-12 02:24:57"},{"id_wiadomosc":10,"id_projekt":0,"id_nadawca":3,"id_odbiorca":3,"tytul":"asd","tresc":"asdas","data":"2015-05-12 02:24:58"},{"id_wiadomosc":11,"id_projekt":0,"id_nadawca":3,"id_odbiorca":3,"tytul":"asd","tresc":"asdas","data":"2015-05-12 02:24:58"},{"id_wiadomosc":12,"id_projekt":0,"id_nadawca":3,"id_odbiorca":2,"tytul":"asd","tresc":"asdas","data":"2015-05-12 02:24:59"},{"id_wiadomosc":13,"id_projekt":0,"id_nadawca":3,"id_odbiorca":2,"tytul":"asd","tresc":"asdas","data":"2015-05-12 02:24:59"}]}}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty bledow</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>
+
+<!-- SEND_MESSAG -->
+<tr>
+    <td rowspan="6" class="method-name">sendMessage</td>
+    <td colspan="2" class="method-description">wysyla wiadomosc</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejsciowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/sendMessage</br></br>
+                    <b>id_nadawca</b> - id nadawcy </br>
+                    <b>id_odbiorca</b> - id nadawcy </br>
+                    <b>tytul</b> - tytul </br>
+                    <b>tresc</b> - tresc
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (201 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">id_nadawca=1&amp;id_odbiorca=4&amp;tytul=jakistytul&amp;tresc=tresc</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":201,"result":"Message sended"}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty bledow</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>

@@ -82,7 +82,7 @@
 <!-- IS_USER_EXIST -->
 <tr>
     <td rowspan="6" class="method-name">isUserExist</td>
-    <td colspan="2" class="method-description">(NIE DZIALA)sprawdzanie czy uzytkownik istnieje</td>
+    <td colspan="2" class="method-description">)sprawdzanie czy uzytkownik istnieje</td>
 </tr>
 <tr>
     <td class="method-using-key">Parametry wejsciowe</td>
@@ -108,6 +108,46 @@
 <tr>
     <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
     <td class="method-using-val">{"status":200,"result":{"id_uzytkownik":3,"login":"kierownik","haslo":"7815696ecbf1c96e6894b779456d330e","poziom":2,"imie":"","nazwisko":"","email":"a@s.d","telefon":"","id_wydzial":0,"kierunek":"","rok":0,"id_specjalizacja":0,"przedmioty":"","projekty":"","id_katedra":0,"stanowisko":"","tytul":"","id_sieciowy":"","studenci":""}}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty bledow</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>
+
+<!-- IS_USER_ACTIVE -->
+<tr>
+    <td rowspan="6" class="method-name">isUserActive</td>
+    <td colspan="2" class="method-description">sprawdzanie czy uzytkownik jest aktywny</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejsciowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/isUserExist</br></br>
+                    <b>login</b> - login użytkownika </br>
+                    lub</br>
+                    <b>id_uzytkownika</b> - id uzytkownika </br>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">login=test</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":200,"result":{"id_uzytkownik":3,"login":"kierownik","haslo":"7815696ecbf1c96e6894b779456d330e","poziom":2,"imie":"","nazwisko":"","email":"a@s.d","telefon":"","id_wydzial":0,"kierunek":"","rok":0,"id_specjalizacja":0,"przedmioty":"","projekty":"","id_katedra":0,"stanowisko":"","tytul":"","id_sieciowy":"","studenci":"", "aktywny"=1}}</td>
 </tr>
 <tr>
     <td class="method-using-key">Komunikaty bledow</td>
@@ -204,6 +244,83 @@
 <tr>
     <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
     <td class="method-using-val">{"status":200,"result":"Change password successful"}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty bledow</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>
+
+<!-- CHANGE_ACTIVITY -->
+<tr>
+    <td rowspan="6" class="method-name">changeActivity</td>
+    <td colspan="2" class="method-description">zmienia aktywnosc</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejsciowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/changePass</br></br>
+                    <b>id_uzytkownik</b> - id uzytkownika</br>
+                    <b>aktywnosc</b> -  aktywnosc (0 - nieaktywny, 1 - aktywny)
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">id_uzytkownik=28&amp;aktywnosc=1</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":200,"result":"Change activity successful"}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty bledow</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>
+
+<!-- SHOW_ALL_USERS -->
+<tr>
+    <td rowspan="6" class="method-name">showAllUsers</td>
+    <td colspan="2" class="method-description">pokazuje wszystkich uzytkownikow</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejsciowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/showAllUsers</br></br>
+                    <b>id_uzytkownik</b> - id uzytkownika wywolujacego (musi byc adminem)</br>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">id_uzytkownik=6</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":200,"result":[{"id_uzytkownik":2,"login":"test","haslo":"098f6bcd4621d373cade4e832627b4f6","poziom":1,"imie":"","nazwisko":"","email":"test@test.com","telefon":"","id_wydzial":0,"kierunek":"","rok":0,"id_specjalizacja":0,"przedmioty":null,"projekty":null,"id_katedra":0,"stanowisko":"","tytul":"","id_sieciowy":"","studenci":"","aktywny":1},{"id_uzytkownik":3,"login":"kierownik","haslo":"7815696ecbf1c96e6894b779456d330e","poziom":2,"imie":"","nazwisko":"","email":"a@s.d","telefon":"","id_wydzial":0,"kierunek":"","rok":0,"id_specjalizacja":0,"przedmioty":"","projekty":"","id_katedra":0,"stanowisko":"","tytul":"","id_sieciowy":"","studenci":"","aktywny":1},{"id_uzytkownik":4,"login":"kp","haslo":"7815696ecbf1c96e6894b779456d330e","poziom":1,"imie":"Konrad","nazwisko":"Piekos","email":"testowy@mai.l","telefon":"0700","id_wydzial":0,"kierunek":"","rok":0,"id_specjalizacja":0,"przedmioty":"","projekty":"","id_katedra":0,"stanowisko":"","tytul":"","id_sieciowy":"","studenci":"","aktywny":1},{"id_uzytkownik":6,"login":"konr_rad","haslo":"7815696ecbf1c96e6894b779456d330e","poziom":3,"imie":"Jasiek","nazwisko":"Kowalski","email":"testowymail@mail.com","telefon":"","id_wydzial":0,"kierunek":"","rok":0,"id_specjalizacja":0,"przedmioty":"","projekty":"","id_katedra":0,"stanowisko":"","tytul":"","id_sieciowy":"","studenci":"","aktywny":0}]}</td>
 </tr>
 <tr>
     <td class="method-using-key">Komunikaty bledow</td>

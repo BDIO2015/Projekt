@@ -6,6 +6,21 @@ class userController{
 		$this->conn = $conn;
 	}
 
+    public function isUserActive() {
+        if(isset($_POST['login']) || isset($_POST['id_uzytkownik']))
+        {
+            $login = isset($_POST['login'])? $_POST['login']:"";
+            $id = isset($_POST['id_uzytkownik'])? $_POST['id_uzytkownik']: -1;
+            $stmt = $this->conn->prepare("SELECT * FROM `uzytkownicy` WHERE (`login` = ? or `id_uzytkownik` = ?) and `aktywny` = 1");
+            $stmt->bind_param("ss", $login, $id);
+            $result = $stmt->execute();
+            $user = $stmt->get_result()->fetch_assoc();
+            $stmt->close();
+            if ($user) return "{\"status\":200,\"result\":".json_encode($user)."}";
+            else return "{\"status\": 400, \"result\":\"User don't active\"}";
+       } else return "{\"status\": 400, \"result\":\"Bad params\"}";
+    }
+
 	public function isUserExist() {
         if(isset($_POST['login']) || isset($_POST['id_uzytkownik']))
         {
@@ -21,11 +36,12 @@ class userController{
        } else return "{\"status\": 400, \"result\":\"Bad params\"}";
     }
 
-    public function login() {
+     public function login() {
        if(isset($_POST['login']) && isset($_POST['haslo']))
        {
             $stmt = $this->conn->prepare("SELECT * FROM `uzytkownicy` WHERE `login` = ? and `haslo` = ?");
-            $stmt->bind_param("ss", $_POST['login'], md5($_POST['haslo']));
+            $pass = md5($_POST['haslo']);
+            $stmt->bind_param("ss", $_POST['login'], $pass);
             $result = $stmt->execute();
             $user = $stmt->get_result()->fetch_assoc();
             $stmt->close();
@@ -35,7 +51,6 @@ class userController{
     }
 
     public function createUser() {
-
         if(isset($_POST['email']) && isset($_POST['login']) && isset($_POST['haslo']) && isset($_POST['poziom'])&& isset($_POST['imie']) && isset($_POST['nazwisko']))
         {
             $stmt = $this->conn->prepare("INSERT INTO `uzytkownicy` (`id_uzytkownik`, `login`, `haslo`, `poziom`, `imie`, `nazwisko`, `email`, `telefon`, `id_wydzial`, `kierunek`, `rok`, `id_specjalizacja`, `przedmioty`, `projekty`, `id_katedra`, `stanowisko`, `tytul`, `id_sieciowy`, `studenci`) 
@@ -109,4 +124,39 @@ class userController{
             } else return "{\"status\": 400,\"result\":\"".$error."\"}";
         } else return "{\"status\": 400,\"result\":\"Bad params\"}";
     }
+
+    public function changeActivity() {
+        if(isset($_POST['id_uzytkownik']) && isset($_POST['aktywnosc']))
+        {
+            if($_POST['aktywnosc'] == 0) $aktywny = 0;
+            else $aktywny = 1;
+            $query = "UPDATE `uzytkownicy` SET `aktywny` = ".$aktywny." WHERE `id_uzytkownik` = ".$_POST['id_uzytkownik'];
+            $stmt = $this->conn->prepare($query);
+            $result = $stmt->execute();
+            $error = $stmt->error;
+            if ($result) return "{\"status\":200,\"result\":\"Change activity successful\"}";
+             else return "{\"status\": 400,\"result\":\"".$error."\"}";
+       } else return "{\"status\": 400, \"result\":\"Bad params\"}";
+    }
+
+    public function showAllUsers() {
+        if(isset($_POST['id_uzytkownik']))
+        {
+            $json = json_decode($this->isUserExist());
+            if(!($json->status == 200)) return "{\"status\": 400, \"result\":\"User with id ".$_POST['id_uzytkownik']." doesn't exist \"}";
+            if($json->result->poziom != 3) return "{\"status\": 400, \"result\":\"Only admin can execute this method \"}";
+
+            $stmt = $this->conn->prepare("SELECT * FROM `uzytkownicy`");
+            $result = $stmt->execute();
+            $users = $stmt->get_result();
+            $error = $stmt->error;
+            if($result)
+            {
+                $data = array();
+                foreach ($users as $user) $data[] = $user;
+
+                return "{\"status\":200,\"result\":".json_encode($data)."}";
+            }else return "{\"status\": 400, \"result\":\"Users don't exist\"}";
+       } else return "{\"status\": 400, \"result\":\"Bad params\"}";
+   }
 }

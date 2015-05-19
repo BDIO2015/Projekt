@@ -136,6 +136,40 @@ class projectController{
 		} else return "{\"status\": 400, \"result\":\"Bad params\"}";
 	}
 
+	public function evaluateProject()
+	{
+		if(isset($_POST['id_koordynator']) && isset($_POST['id_projekt']) && isset($_POST['ocena']) && isset($_POST['komentarz']))
+		{
+			$stmt = $this->conn->prepare("SELECT * FROM `projekty` WHERE `id_koordynator` = ? AND `id_projekt` = ? AND id_ocena IS NULL");
+			$stmt->bind_param("ii", $_POST['id_koordynator'], $_POST['id_projekt']);
+			$stmt->execute();
+			$stmt->store_result(); 
+			$result = $stmt->num_rows();
+			$stmt->close();
+
+			if ($result == 1) 
+			{
+				$stmt = $this->conn->prepare("INSERT INTO `oceny` (`ocena`, `data`, `komentarz`) VALUES (?,NOW(),?)");
+				$stmt->bind_param("ss", $_POST['ocena'], $_POST['komentarz']);
+				$result_oceny = $stmt->execute();
+				$error_oceny = $stmt->error;
+				$stmt->close();
+
+				$stmt = $this->conn->prepare("UPDATE `projekty` SET `id_ocena` = ? WHERE `id_projekt` = ?");
+				$last = $this->conn->insert_id;
+				$stmt->bind_param("ii", $last, $_POST['id_projekt']);
+				$result_projekty = $stmt->execute();
+				$error_projekty = $stmt->error;
+				echo $error_projekty;
+				$stmt->close();
+
+				if ($result_oceny AND $result_projekty) return "{\"status\":200,\"result\":\"Evaluation grade of the project has been added\"}";
+				else return "{\"status\": 400, \"result\":\"Bad params\"}";
+			}
+			else return "{\"status\": 400, \"result\":\"No such project\"}";
+		} else return "{\"status\": 400, \"result\":\"Bad params\"}";
+	}
+
 	public function getProjects()
 	{
         $stmt = $this->conn->prepare("SELECT `id_projekt`, `nazwa` FROM `projekty`");

@@ -212,3 +212,42 @@
             400 - zle parametry
     </td>
 </tr>
+
+<!-- RESET_PASS -->
+<tr>
+    <td rowspan="6" class="method-name">resetPass</td>
+    <td colspan="2" class="method-description">resetuje haso</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejsciowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/resetPass</br></br>
+                    <b>login</b> - login uzytkownika</br>
+                    <b>email</b> - email uzytkownika</br>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">login=test&amp;email=test@gmail.com</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":200,"result":"Password successfully changed"}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty bledow</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>

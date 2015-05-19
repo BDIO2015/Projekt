@@ -241,6 +241,45 @@
     </td>
 </tr>
 
+<!-- ACTIVATE_USER -->
+<tr>
+    <td rowspan="6" class="method-name">activateUser</td>
+    <td colspan="2" class="method-description">funkcja dla prowadzacego projekt, aktywuje uzytkownika do uczestnictwa w projekcie</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejściowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/activateUser</br></br>
+                    <b>id_projekt</b> - id projektu </br>
+                    <b>id_uzytkownik</b> - id usuwanego uzytkownika
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">id_projekt=2&amp;id_uzytkownik=3</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":200,"result":"User has been activated in project"}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty blędów</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>
+
 <!-- GET_PROJECT -->
 <tr>
     <td rowspan="6" class="method-name">getProject</td>

@@ -63,6 +63,7 @@ switch($method)
 	case "deleteProject": $result = $db->getProjectController()->deleteProject(); break;
 	case "addUser": $result = $db->getProjectController()->addUser(); break;
 	case "removeUser": $result = $db->getProjectController()->removeUser(); break;
+	case "activateUser": $result = $db->getProjectController()->activateUser(); break;
 	case "updateProject": $result = $db->getProjectController()->updateProject(); break;
 	case "getProject": $result = $db->getProjectController()->isProjectExist(); break;
 	case "getProjects": $result = $db->getProjectController()->getProjects(); break;

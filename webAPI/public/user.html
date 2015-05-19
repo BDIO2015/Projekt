@@ -251,3 +251,42 @@
             400 - zle parametry
     </td>
 </tr>
+
+<!-- CHANGE_ACTIVITY -->
+<tr>
+    <td rowspan="6" class="method-name">changeActivity</td>
+    <td colspan="2" class="method-description">zmienia aktywnosc</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejsciowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/changePass</br></br>
+                    <b>id_uzytkownik</b> - id uzytkownika</br>
+                    <b>aktywnosc</b> -  aktywnosc (0 - nieaktywny, 1 - aktywny)
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">id_uzytkownik=28&amp;aktywnosc=1</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":200,"result":"Change activity successful"}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty bledow</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>

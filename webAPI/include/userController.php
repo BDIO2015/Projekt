@@ -116,4 +116,10 @@ class userController{
 	$password = substr(str_shuffle($chars), 0, $length);
 	return $password;
     }
+    
+    public function sendMessage($to,$subject,$txt) 
+    {
+	$headers = "From: Administrator <admin@deveo.pl>";
+	mail($to,$subject,$txt,$headers);
+    }
 }

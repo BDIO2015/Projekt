@@ -139,14 +139,29 @@ class userController{
        } else return "{\"status\": 400, \"result\":\"Bad params\"}";
     }
 
-    public function showAllUsers() {
+    public function showAllUsers() 
+    {
         if(isset($_POST['id_uzytkownik']))
         {
             $json = json_decode($this->isUserExist());
             if(!($json->status == 200)) return "{\"status\": 400, \"result\":\"User with id ".$_POST['id_uzytkownik']." doesn't exist \"}";
             if($json->result->poziom != 3) return "{\"status\": 400, \"result\":\"Only admin can execute this method \"}";
-
-            $stmt = $this->conn->prepare("SELECT * FROM `uzytkownicy`");
+			
+		if(isset($_POST['poziom']))
+		{
+			if($_POST['poziom'] >= 1 && $_POST['poziom'] <= 3)
+			{
+				$stmt = $this->conn->prepare("SELECT * FROM `uzytkownicy` WHERE `poziom` = ".$_POST['poziom']);
+			}
+			else
+			{
+				return "{\"status\": 402, \"result\":\"The selected level account does not exist \"}";
+			}
+		}
+		else
+		{
+			$stmt = $this->conn->prepare("SELECT * FROM `uzytkownicy`");
+		}
             $result = $stmt->execute();
             $users = $stmt->get_result();
             $error = $stmt->error;

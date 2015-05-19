@@ -48,6 +48,7 @@ switch($method)
 	case "isUserExist": $result = $db->getUserController()->isUserExist(); break;
 	case "updateUser": $result = $db->getUserController()->updateUser(); break;
 	case "changePass": $result = $db->getUserController()->changePass(); break;
+	case "resetPass": $result = $db->getUserController()->resetPass(); break;
 
 	//projektController
 	case "isProjectExist": $result = $db->getProjectController()->isProjectExist(); break;

@@ -122,4 +122,22 @@ class userController{
 	$headers = "From: Administrator <admin@deveo.pl>";
 	mail($to,$subject,$txt,$headers);
     }
+    
+    public function resetPass() 
+    {
+	if(isset($_POST['login']) && isset($_POST['email']))
+	{
+		$password = $this->randomPassword(8);
+		$query = "UPDATE `uzytkownicy` SET `haslo` = \"".md5($password)."\" WHERE `login` = \"".$_POST['login']."\" AND `email` = \"".$_POST['email']."\"";
+		$stmt = $this->conn->prepare($query); 
+		$result = $stmt->execute();
+		$error = $stmt->error;
+		if ($result) 
+		{
+			$this->sendMessage($_POST['email'],"Zmiana hasla w systemie zarzadzania projektami studenckimi","Witaj ".$_POST['login']."\r\n"."Haslo dostepu do Twojego konta w systemie zarzadzania projektami studenckimi zostalo zmienione."."\r\n"."Twoje nowe haslo: ".$password); 
+			return "{\"status\":200,\"result\":\"Password successfully changed\"}";
+		}
+		 else return "{\"status\": 400,\"result\":\"".$error."\"}";
+	} else return "{\"status\": 400,\"result\":\"Bad params\"}";
+    }
 }

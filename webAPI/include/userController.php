@@ -124,7 +124,6 @@ class userController{
             } else return "{\"status\": 400,\"result\":\"".$error."\"}";
         } else return "{\"status\": 400,\"result\":\"Bad params\"}";
     }
-<<<<<<< HEAD
 
     public function changeActivity() {
         if(isset($_POST['id_uzytkownik']) && isset($_POST['aktywnosc']))
@@ -160,8 +159,6 @@ class userController{
             }else return "{\"status\": 400, \"result\":\"Users don't exist\"}";
        } else return "{\"status\": 400, \"result\":\"Bad params\"}";
    }
-}
-=======
     
     public function randomPassword($length = 8) 
     {
@@ -178,20 +175,19 @@ class userController{
     
     public function resetPass() 
     {
-	if(isset($_POST['login']) && isset($_POST['email']))
-	{
-		$password = $this->randomPassword(8);
-		$query = "UPDATE `uzytkownicy` SET `haslo` = \"".md5($password)."\" WHERE `login` = \"".$_POST['login']."\" AND `email` = \"".$_POST['email']."\"";
-		$stmt = $this->conn->prepare($query); 
-		$result = $stmt->execute();
-		$error = $stmt->error;
-		if ($result) 
-		{
-			$this->sendMessage($_POST['email'],"Zmiana hasla w systemie zarzadzania projektami studenckimi","Witaj ".$_POST['login']."\r\n"."Haslo dostepu do Twojego konta w systemie zarzadzania projektami studenckimi zostalo zmienione."."\r\n"."Twoje nowe haslo: ".$password); 
-			return "{\"status\":200,\"result\":\"Password successfully changed\"}";
-		}
-		 else return "{\"status\": 400,\"result\":\"".$error."\"}";
-	} else return "{\"status\": 400,\"result\":\"Bad params\"}";
+    	if(isset($_POST['login']) && isset($_POST['email']))
+    	{
+    		$password = $this->randomPassword(8);
+    		$query = "UPDATE `uzytkownicy` SET `haslo` = \"".md5($password)."\" WHERE `login` = \"".$_POST['login']."\" AND `email` = \"".$_POST['email']."\"";
+    		$stmt = $this->conn->prepare($query); 
+    		$result = $stmt->execute();
+    		$error = $stmt->error;
+    		if ($result) 
+    		{
+    			$this->sendMessage($_POST['email'],"Zmiana hasla w systemie zarzadzania projektami studenckimi","Witaj ".$_POST['login']."\r\n"."Haslo dostepu do Twojego konta w systemie zarzadzania projektami studenckimi zostalo zmienione."."\r\n"."Twoje nowe haslo: ".$password); 
+    			return "{\"status\":200,\"result\":\"Password successfully changed\"}";
+    		}
+    		 else return "{\"status\": 400,\"result\":\"".$error."\"}";
+    	} else return "{\"status\": 400,\"result\":\"Bad params\"}";
     }
 }
->>>>>>> 8d54b6d7e53ec1ee7d6488030e4df4428bed6382

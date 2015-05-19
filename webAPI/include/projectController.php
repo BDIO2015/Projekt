@@ -103,44 +103,18 @@ class projectController{
 	public function removeUser()
 	{
 		if(isset($_POST['id_projekt']) && isset($_POST['id_uzytkownik']))
-		{
+		{	
 			if(!(json_decode($GLOBALS['db']->getUserController()->isUserExist())->status == 200)) return "{\"status\": 400, \"result\":\"User with id ".$_POST['id_uzytkownik']." doesn't exist \"}";
+			
+			$stmt = $this->conn->prepare("DELETE FROM `uzytkownicy_projekty` WHERE (`id_uzytkownik` = ? AND `id_projekt` = ?)");
+			$stmt->bind_param("ii", $_POST['id_uzytkownik'], $_POST['id_projekt']);
 
-			$stmt = $this->conn->prepare("SELECT studenci FROM `projekty` WHERE id_projekt = ?");
-            $stmt->bind_param("s", $_POST['id_projekt']);
             $result = $stmt->execute();
             $error = $stmt->error;
-            $field = $stmt->get_result();
             $stmt->close();
-            if ($result) 
-            {
-            	$user = $_POST['id_uzytkownik'];
-	            $studenci = $field->fetch_assoc()['studenci'];
-
-	            $removed = false;
-	            $data = array();
-            	if ($studenci != "")
-            	{
-	            	$studenci = json_decode($studenci);
-	            	foreach ($studenci as $student) {
-	            		$id = $student->id_student;
-	            		if($id != $user) $data[] = json_decode("{\"id_student\":".$id."}");
-	            		else $removed = true;
-	            		
-	            	}
-	            }
-
-	            if($removed == false) return "{\"status\": 400,\"result\":\"User doesn't belong to the project\"}";
-
-	            $query = "UPDATE `projekty` SET `studenci` = '".json_encode($data)."' WHERE `id_projekt` = ".$_POST['id_projekt'];  
-                $stmt = $this->conn->prepare($query);
-                $stmt->execute();
-                $result = $stmt->execute();
-                $error = $stmt->error;
-                $stmt->close();
-	            if ($result) return "{\"status\":200,\"result\":\"User has been deleted from project\"}";
-            	 else return "{\"status\": 400,\"result\":\"".$error."\"}";
-            }else return "{\"status\": 400,\"result\":\"".$error."\"}";
+       
+	        if ($result) return "{\"status\":200,\"result\":\"User has been deleted from project\"}";
+			else return "{\"status\": 400,\"result\":\"".$error."\"}";
 		} else return "{\"status\": 400, \"result\":\"Bad params\"}";
 	}
 

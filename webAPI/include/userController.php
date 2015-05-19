@@ -109,4 +109,11 @@ class userController{
             } else return "{\"status\": 400,\"result\":\"".$error."\"}";
         } else return "{\"status\": 400,\"result\":\"Bad params\"}";
     }
+    
+    public function randomPassword($length = 8) 
+    {
+	$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()";
+	$password = substr(str_shuffle($chars), 0, $length);
+	return $password;
+    }
 }

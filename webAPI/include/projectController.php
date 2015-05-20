@@ -135,6 +135,40 @@ class projectController{
 			else return "{\"status\": 400,\"result\":\"".$error."\"}";
 		} else return "{\"status\": 400, \"result\":\"Bad params\"}";
 	}
+	
+	public function getUsers()
+	{
+		if(isset($_POST['id_projekt']))
+		{
+			if(isset($_POST['zatwierdzony']))
+			{
+				if($_POST['zatwierdzony'] == 0 || $_POST['zatwierdzony'] == 1)
+				{
+					$stmt = $this->conn->prepare("SELECT * FROM `uzytkownicy_projekty` WHERE (`id_projekt` = ? AND `zatwierdzony` = ?)");
+					$stmt->bind_param("ii", $_POST['id_projekt'], $_POST['zatwierdzony']);
+				}
+				else return "{\"status\": 400, \"result\":\"Bad params\"}";
+			}
+			else 
+			{
+				$stmt = $this->conn->prepare("SELECT * FROM `uzytkownicy_projekty` WHERE (`id_projekt` = ?)");
+				$stmt->bind_param("i", $_POST['id_projekt']);
+			}
+			$result = $stmt->execute();
+            		$users = $stmt->get_result();
+        	 	$error = $stmt->error;
+
+	        	 if($result)
+	        	 {
+	        		 $data = array();
+	                	 foreach ($users as $user) $data[] = $user;
+	
+	                	return "{\"status\":200,\"result\":".json_encode($data)."}";
+	            	}
+	            	else return "{\"status\": 400, \"result\":\"Users don't exist\"}";
+		}
+		else return "{\"status\": 400, \"result\":\"Bad params\"}";
+	}
 
 	public function evaluateProject()
 	{

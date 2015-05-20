@@ -169,6 +169,24 @@ class projectController{
 		}
 		else return "{\"status\": 400, \"result\":\"Bad params\"}";
 	}
+	
+	public function setManager()
+	{
+		if(isset($_POST['id_projekt']) && isset($_POST['id_uzytkownik']))
+		{	
+			if(!(json_decode($GLOBALS['db']->getUserController()->isUserExist())->status == 200)) return "{\"status\": 400, \"result\":\"User with id ".$_POST['id_uzytkownik']." doesn't exist \"}";
+			
+			$stmt = $this->conn->prepare("UPDATE `projekty` SET `id_kierownik` = ? WHERE (`id_projekt` = ?)");
+			$stmt->bind_param("ii", $_POST['id_uzytkownik'], $_POST['id_projekt']);
+
+        		$result = $stmt->execute();
+        		$error = $stmt->error;
+            		$stmt->close();
+       
+			if ($result) return "{\"status\":200,\"result\":\"User has been set as manager in project\"}";
+			else return "{\"status\": 400,\"result\":\"".$error."\"}";
+		} else return "{\"status\": 400, \"result\":\"Bad params\"}";
+	}
 
 	public function evaluateProject()
 	{

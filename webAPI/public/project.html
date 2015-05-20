@@ -280,6 +280,48 @@
     </td>
 </tr>
 
+<!-- GET_USERS -->
+<tr>
+    <td rowspan="6" class="method-name">getUsers</td>
+    <td colspan="2" class="method-description">funkcja zwraca dane studentów powiązanych z projektem</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejściowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/getUsers</br></br>
+                    <b>id_projekt</b> - id projektu </br>
+                    opcjonalnie: </br>
+                    <div style="margin-left:20px"> 
+                        <b><i>zatwierdzony</i></b> - czy student zatwierdzony do uczestnictwa (1 - tak, 0 - nie)
+					</div>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">id_projekt=1&amp;zatwierdzony=1</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":200,"result":[{"id_uzytkownik":1,"id_projekt":1,"zatwierdzony":1}]}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty blędów</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>
+
 <!-- EVALUATE_PROJECT -->
 <tr>
     <td rowspan="6" class="method-name">evaluateUser</td>

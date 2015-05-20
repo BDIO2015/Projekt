@@ -322,6 +322,45 @@
     </td>
 </tr>
 
+<!-- SET_MANAGER -->
+<tr>
+    <td rowspan="6" class="method-name">setManager</td>
+    <td colspan="2" class="method-description">funkcja ustanawia studenta kierownikiem projektu</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejściowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/setManager</br></br>
+                    <b>id_projekt</b> - id projektu </br>
+                    <br>id_uzytkownik</b> - id uzytkownika ktory ma zostac kierownikiem
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">id_projekt=1&amp;id_uzytkownik=1</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":200,"result":"User has been set as manager in project"}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty blędów</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>
+
 <!-- EVALUATE_PROJECT -->
 <tr>
     <td rowspan="6" class="method-name">evaluateUser</td>

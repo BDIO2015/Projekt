@@ -26,5 +26,7 @@
     "getCathedral": "http://deveo.pl/efdi/webAPI/getCathedral",
 	"getReceivedMessages": "http://deveo.pl/efdi/webAPI/getReceivedMessages",
 	"getSendedMessages": "http://deveo.pl/efdi/webAPI/getSendedMessages",
-	"sendMessage": "http://deveo.pl/efdi/webAPI/sendMessage"
+	"sendMessage": "http://deveo.pl/efdi/webAPI/sendMessage",
+	"showAllUsers": "http://deveo.pl/efdi/webAPI/showAllUsers",
+	"changeActivity": "http://deveo.pl/efdi/webAPI/changeActivity"
 }

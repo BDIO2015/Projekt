@@ -241,6 +241,54 @@ function sprawdz(adresat){
 		var idsiec=$("#idsiec").val();
 		edytujKontoStudenta(imie,nazwisko,nrtel,idwydz,kierunek,idspec,idkat,idsiec);
 	});
+	
+	$("input#wprowadzZmiany").click(function(){
+		var imie=$("#imie").val();
+		var nazwisko=$("#nazwisko").val();
+		var nrtel=$("#nrtel").val();
+		var idwydz=$("#idwydz").val();
+		var kierunek=$("#kierunek").val();
+		var idspec=$("#idspec").val();
+		var idkat=$("#idkat").val();
+		var idsiec=$("#idsiec").val();
+		edytujKontoUsera(imie,nazwisko,nrtel,idwydz,kierunek,idspec,idkat,idsiec);
+	});
+	
+	function edytujKontoUsera(imie2,nazwisko2,nrtel2,idwydz2,kierunek2,idspec2,idkat2,idsiec2){
+			$.ajax({
+				url:'ajaxController.php',
+				dataType:'json',
+				type:'POST',
+				data:{
+					"przyciskAdmin":"wprowadzZmiany",
+					"imie":imie2,
+					"nazwisko":nazwisko2,
+					"nrtel":nrtel2,
+					"idwydz":idwydz2,
+					"kierunek":kierunek2,
+					"idspec":idspec2,
+					"idkat":idkat2,
+					"idsiec":idsiec2
+					},
+					success:function(json){
+						if(json["status"]==200)
+						{
+							alert("Zaktualizowano pomyślnie");
+							window.open('index.php','_self');
+						}
+						else
+						{
+							alert("Nie udało się");
+							window.open('index.php','_self');
+						}
+					},
+					error:function(err){
+						alert("Błąd");
+					}
+			});
+			}
+			
+	
 		function edytujKontoStudenta(imie2,nazwisko2,nrtel2,idwydz2,kierunek2,idspec2,idkat2,idsiec2){
 			$.ajax({
 				url:'ajaxController.php',

@@ -48,8 +48,10 @@ class prowadzacyController{
 																			<br /><input type="submit" name="przyciskProwadzacy" id="nowyWatek" value="Nowy Wątek" />
 																			</form>';
 					$wynik2=$this->prowadzacy->pobierzWatki($_GET['idProjekt']);
+					$wynik3=$this->prowadzacy->wyswietlStudentow($_GET['idProjekt'],1);
+					$wynik4=$this->prowadzacy->wyswietlStudentow($_GET['idProjekt'],0);
 					
-					$wynik=$wynik.'<br />'.$wynik2;
+					$wynik=$wynik.'<br />Uczestnicy projektu:<br />'.$wynik3.'<br />Oczekujący na zatwierdzenie:<br />'.$wynik4.'<br />'.$wynik2;
 					$this->gui->setContainer($wynik);
 				break;
 				case "stworz":

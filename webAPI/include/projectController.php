@@ -144,14 +144,18 @@ class projectController{
 			{
 				if($_POST['zatwierdzony'] == 0 || $_POST['zatwierdzony'] == 1)
 				{
-					$stmt = $this->conn->prepare("SELECT * FROM `uzytkownicy_projekty` WHERE (`id_projekt` = ? AND `zatwierdzony` = ?)");
+					$stmt = $this->conn->prepare("SELECT u_p.id_uzytkownik, u.login, u_p.id_projekt, u_p.zatwierdzony FROM uzytkownicy_projekty u_p 
+								      JOIN uzytkownicy u ON u_p.id_uzytkownik = u.id_uzytkownik
+								      WHERE (u_p.id_projekt = ?) AND (u_p.zatwierdzony = ?)");
 					$stmt->bind_param("ii", $_POST['id_projekt'], $_POST['zatwierdzony']);
 				}
 				else return "{\"status\": 400, \"result\":\"Bad params\"}";
 			}
 			else 
 			{
-				$stmt = $this->conn->prepare("SELECT * FROM `uzytkownicy_projekty` WHERE (`id_projekt` = ?)");
+				$stmt = $this->conn->prepare("SELECT u_p.id_uzytkownik, u.login, u_p.id_projekt, u_p.zatwierdzony FROM uzytkownicy_projekty u_p 
+							      JOIN uzytkownicy u ON u_p.id_uzytkownik = u.id_uzytkownik
+							      WHERE (u_p.id_projekt = ?)");
 				$stmt->bind_param("i", $_POST['id_projekt']);
 			}
 			$result = $stmt->execute();

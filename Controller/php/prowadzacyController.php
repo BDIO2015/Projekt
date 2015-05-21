@@ -43,15 +43,17 @@ class prowadzacyController{
 				case "pobierzProjekt":
 					$_SESSION['idProjektu']=$_GET['idProjekt'];
 					$wynik=$this->prowadzacy->pokazProjekt($_GET['idProjekt']);
-					$wynik=$wynik.'<br /><br /><form method="get" id="obslugaProjektu"><input type="submit" name="przyciskProwadzacy" id="archiwizuj" value="Archiwizuj" />
-																			<input type="submit" name="przyciskProwadzacy" id="usunProjekt" value="Usuń projekt" /><br />
-																			<br /><input type="submit" name="przyciskProwadzacy" id="nowyWatek" value="Nowy Wątek" />
-																			</form>';
 					$wynik2=$this->prowadzacy->pobierzWatki($_GET['idProjekt']);
 					$wynik3=$this->prowadzacy->wyswietlStudentow($_GET['idProjekt'],1);
 					$wynik4=$this->prowadzacy->wyswietlStudentow($_GET['idProjekt'],0);
 					
-					$wynik=$wynik.'<br />Uczestnicy projektu:<br />'.$wynik3.'<br />Oczekujący na zatwierdzenie:<br />'.$wynik4.'<br />'.$wynik2;
+					$wynik=$wynik.'<br /><br /><form method="get" id="obslugaProjektu"><input type="submit" name="przyciskProwadzacy" id="archiwizuj" value="Archiwizuj" />
+																			<input type="submit" name="przyciskProwadzacy" id="usunProjekt" value="Usuń projekt" /><br />
+																			<br />Uczestnicy projektu:<br />'.$wynik3.'<br />Oczekujący na zatwierdzenie:<br />'.$wynik4.
+																			'<br /><input type="submit" name="przyciskProwadzacy" id="nowyWatek" value="Nowy Wątek" />
+																			</form>';
+					
+					$wynik=$wynik.'<br />'.$wynik2;
 					$this->gui->setContainer($wynik);
 				break;
 				case "stworz":

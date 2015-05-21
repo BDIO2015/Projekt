@@ -89,14 +89,13 @@ class Prowadzacy extends Student{
 			$lista="";
 			foreach($wynik->result as $odbior)
 			{
-				$lista=$lista.'<tr><td>'.$odbior->id_uzytkownik.'</tr></td>';
+				$lista=$lista.'<tr><td>'.$odbior->login.'</tr></td>';
 			}
 			$lista='<table>'.$lista.'</table>';
 			$_SESSION['result']=$wynik->result;
 			return $lista;
 		}
 	}
-
 	
 }
 ?>

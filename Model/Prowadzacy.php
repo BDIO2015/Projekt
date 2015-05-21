@@ -18,37 +18,6 @@ class Prowadzacy extends Student{
 		return $wynik;
 	}
 	
-	public function pobierzListeProjektow()
-	{
-		$adres=$this->api->getProjects;
-		$wynik=$this->requestApi("",$adres);
-		$wynik=json_decode($wynik);
-		if($wynik->status=200)
-		{
-			$lista="";
-			foreach($wynik->result as $odbior)
-			{
-				$lista='<tr><td><a href="?przyciskProwadzacy=pobierzProjekt&idProjekt='.$odbior->id_projekt.'">'.$odbior->nazwa.'</a></td></tr>'.$lista;
-			}
-			$lista='<table>'.$lista.'</table>';
-			$_SESSION['result']=$wynik->result;
-			return $lista;
-		}
-	}
-	
-	public function pokazProjekt($idProjektu)
-	{				
-				$wiadomosc='id_projekt='.$idProjektu;
-				$adres=$this->api->getProject;
-				$wynik=$this->requestApi($wiadomosc,$adres);
-				$wynik=json_decode($wynik);
-				if($wynik->status=200)
-				{
-					$_SESSION['nazwaProjektu']=$wynik->result->nazwa;
-					return $wynik='ID projektu='.$idProjektu.'<br \>Nazwa='.$wynik->result->nazwa.'<br \>Opis='.$wynik->result->opis.'<br \>Termin='.$wynik->result->termin.'<br \>Miejsce='.$wynik->result->miejsce.'<br \>Wytyczne'.$wynik->result->wytyczne.'<br \>Id koordynatora='.$wynik->result->id_koordynator.'<br \>Id grupy='.$wynik->result->id_grupy.'<br \>Id oceny='.$wynik->result->id_ocena;
-				}
-		return 0;
-	}
 	
 	public function pokazPrzypisanychStudentow()
 	{
@@ -72,13 +41,22 @@ class Prowadzacy extends Student{
 		return $wynik;
 	}
 	
-	public function nowyWatek($idProjektu)
+		public function pobierzListeProjektow()
 	{
-		$tresc=$_POST['tresc'];
-		$adres=$this->api->addThread;
-		$wiadomosc='id_projekt='.$idProjektu.'&text='.$tresc;
-		$wynik=$this->requestApi($wiadomosc,$adres);
-		return $wynik;
+		$adres=$this->api->getProjects;
+		$wynik=$this->requestApi("",$adres);
+		$wynik=json_decode($wynik);
+		if($wynik->status=200)
+		{
+			$lista="";
+			foreach($wynik->result as $odbior)
+			{
+				$lista='<tr><td><a href="?przyciskProwadzacy=pobierzProjekt&idProjekt='.$odbior->id_projekt.'">'.$odbior->nazwa.'</a></td></tr>'.$lista;
+			}
+			$lista='<table>'.$lista.'</table>';
+			$_SESSION['result']=$wynik->result;
+			return $lista;
+		}
 	}
 	
 	public function pobierzWatki($idProjektu)

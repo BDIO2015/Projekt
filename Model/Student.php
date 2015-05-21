@@ -142,6 +142,81 @@ class Student extends Gosc{
 		}
 		return 0;
 	}
+	
+	public function pobierzListeProjektow()
+	{
+		$adres=$this->api->getProjects;
+		$wynik=$this->requestApi("",$adres);
+		$wynik=json_decode($wynik);
+		if($wynik->status=200)
+		{
+			$lista="";
+			foreach($wynik->result as $odbior)
+			{
+				$lista='<tr><td><a href="?przyciskStudent=pobierzProjekt&idProjekt='.$odbior->id_projekt.'">'.$odbior->nazwa.'</a></td></tr>'.$lista;
+			}
+			$lista='<table>'.$lista.'</table>';
+			$_SESSION['result']=$wynik->result;
+			return $lista;
+		}
+	}
+	
+	public function pokazProjekt($idProjektu)
+	{				
+				$wiadomosc='id_projekt='.$idProjektu;
+				$adres=$this->api->getProject;
+				$wynik=$this->requestApi($wiadomosc,$adres);
+				$wynik=json_decode($wynik);
+				if($wynik->status=200)
+				{
+					$_SESSION['nazwaProjektu']=$wynik->result->nazwa;
+					return $wynik='<br \>Nazwa='.$wynik->result->nazwa.'<br \>Opis='.$wynik->result->opis.'<br \>Termin='.$wynik->result->termin.'<br \>Miejsce='.$wynik->result->miejsce.'<br \>Wytyczne='.$wynik->result->wytyczne.'<br \>Id oceny='.$wynik->result->id_ocena;
+				}
+		return 0;
+	}
+	
+	public function nowyWatek($idProjektu)
+	{
+		$tresc=$_POST['tresc'];
+		$adres=$this->api->addThread;
+		$wiadomosc='id_projekt='.$idProjektu.'&text='.$tresc;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+		return $wynik;
+	}
+	
+	public function pobierzWatki($idProjektu)
+	{
+		$wiadomosc='id_projekt='.$idProjektu;
+		$adres=$this->api->getThreads;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+		$wynik=json_decode($wynik);
+		if($wynik->status=200)
+		{
+			$lista="";
+			foreach($wynik->result->watki as $odbierz)
+			{
+				$lista='<tr><td><a href="?przyciskStudent=pobierzKomentarz&idWatek='.$odbierz->id_watek.'">'.$odbierz->text.' </a>'.$odbierz->date.'</a></td></tr>'.$lista;
+			}
+			$lista='<table>'.$lista.'</table>';
+			$_SESSION['result']=$wynik->result;
+			return $lista;
+		}
+	}
+	
+	public function dolaczenieDoProjektu($idProjektu)
+	{
+		$idUz=$_SESSION['userId'];
+		$wiadomosc='id_uzytkownik='.$idUz.'id_projekt='.$idProjektu;
+		$adres=$this->api->addUser;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+		$wynik=json_decode($wynik);
+		if($wynik->status=200)
+		{
+			
+			$wynik=json_encode($wynik);
+			return $wynik;
+		}
+	}
 
 }
 ?>

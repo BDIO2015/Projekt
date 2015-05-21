@@ -374,5 +374,40 @@ $("input#stworzWatek").click(function(){ //zdarzenie obslugujące przycisk archi
 					}
 					});
 					}
+					
+	$("input#dodajDoProjektu").click(function(){
+	
+		dolaczenieDoProjektu();
+	});
+		function dolaczenieDoProjektu(){
+			$.ajax({
+				url:'ajaxController.php',
+				dataType:'json',
+				type:'POST',
+				data:{
+					"przyciskStudent":"Dodaj mnie do projektu"
+					},
+					success:function(json){
+						if(json["status"]==200)
+						{
+							alert("Poczekaj na zatwierdzenie");
+							window.open('index.php','_self');
+						}
+						else if(json["status"]==400)
+						{
+							alert("zle param");
+							window.open('index.php','_self');
+						}
+						else
+						{
+							alert("Nie udało się");
+							window.open('index.php','_self');
+						}
+					},
+					error:function(err){
+						alert("Blad");
+					}
+			});
+			}	
 });
 

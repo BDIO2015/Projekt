@@ -71,6 +71,11 @@ class prowadzacyController{
 				case "Stwórz Wątek":
 					return $this->prowadzacy->nowyWatek($_SESSION['idProjektu']);
 				break;
+				
+				case "akceptujStudentaPrzycisk":
+					$_SESSION['idStudent']=$_GET['idStudenta'];
+				    $this->prowadzacy->akceptujStudenta($_SESSION['idProjektu'],$_SESSION['idStudent']);
+				break;
 			}
 		}
 		$this->gui->showGui();

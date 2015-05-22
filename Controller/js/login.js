@@ -457,5 +457,40 @@ $("input#stworzWatek").click(function(){ //zdarzenie obslugujące przycisk archi
 					}
 			});
 			}	
+			
+			$("input#akceptujStudentaPrzycisk").click(function(){
+	
+		akceptujStudenta();
+	});
+		function akceptujStudenta(){
+			$.ajax({
+				url:'ajaxController.php',
+				dataType:'json',
+				type:'POST',
+				data:{
+					"przyciskProwadzacy":"akceptujStudentaPrzycisk"
+					},
+					success:function(json){
+						if(json["status"]==200)
+						{
+							alert("Student zostal dolaczony");
+							window.open('index.php','_self');
+						}
+						else if(json["status"]==400)
+						{
+							alert("zle param");
+							window.open('index.php','_self');
+						}
+						else
+						{
+							alert("Nie udało się");
+							window.open('index.php','_self');
+						}
+					},
+					error:function(err){
+						alert("Blad");
+					}
+			});
+			}	
 });
 

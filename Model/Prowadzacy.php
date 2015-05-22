@@ -89,7 +89,14 @@ class Prowadzacy extends Student{
 			$lista="";
 			foreach($wynik->result as $odbior)
 			{
-				$lista=$lista.'<tr><td>'.$odbior->login.'</tr></td>';
+				if($zatwierdzony==0)
+				{
+					$lista=$lista.'<tr><td>'.$odbior->login.'<a href="?przyciskProwadzacy=akceptujStudentaPrzycisk&idStudenta='.$odbior->id_uzytkownik.'"> Akceptuj</tr></td>';
+				}
+				else
+				{
+					$lista=$lista.'<tr><td>'.$odbior->login.'</tr></td>';
+				}
 			}
 			$lista='<table>'.$lista.'</table>';
 			$_SESSION['result']=$wynik->result;
@@ -97,5 +104,18 @@ class Prowadzacy extends Student{
 		}
 	}
 	
+	public function akceptujStudenta($idProjektu,$idStudent)
+	{
+		$wiadomosc='id_projekt='.$idProjektu.'&id_uzytkownik='.$idStudent;
+		$adres=$this->api->activateUser;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+		$wynik=json_decode($wynik);
+		if($wynik->status=200)
+		{
+			
+			$wynik=json_encode($wynik);
+			return $wynik;
+		}
+	}
 }
 ?>

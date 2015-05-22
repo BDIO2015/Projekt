@@ -122,6 +122,7 @@ function wyslij(adresat,temat,wiadomosc){
 					 }
 			 });
 }
+
 function sprawdz(adresat){
 			return $.ajax({
 				url:'ajaxController.php',
@@ -139,6 +140,10 @@ function sprawdz(adresat){
 		if(nazwaProjektu.length!=0 && opisProjektu.length!=0)
 		{
 			stworzProjektProwadzacy(nazwaProjektu,opisProjektu);
+		}
+		else
+		{
+			alert("Uzupełnij wszystkie dane!");
 		}
 	});
 	
@@ -181,4 +186,276 @@ function sprawdz(adresat){
 					},
 			});
 	}
+	//------------------------------------------------
+	$("input#zmien").click(function(){
+		var username=$("#username").val();
+		var password=$("#password").val();
+		var newpassword=$("#newpassword").val();
+		
+		zmienHaslo(username,password,newpassword);
+	});
+	
+	function zmienHaslo(username2,password2,newpassword2){
+			$.ajax({
+				url:'ajaxController.php',
+				dataType:'json',
+				type:'POST',
+				data:{
+					"przyciskStudent":"zmien",
+					"username":username2,
+					"password":password2,
+					"newpassword":newpassword2,
+					},
+					success:function(json){
+						if(json["status"]==200)
+						{
+							alert("Pomyslna zmiana hasla");
+							window.open('index.php','_self');
+						}
+						else if(json["status"]==400)
+						{
+							alert("zle param");
+							window.open('index.php','_self');
+						}
+						else
+						{
+							alert("Nie udało się");
+							window.open('index.php','_self');
+						}
+					},
+					error:function(err){
+						alert("Blad");
+					}
+			});
+			}
+	
+	//------------------------------------------------
+	$("input#przeslijZmiany").click(function(){
+		var imie=$("#imie").val();
+		var nazwisko=$("#nazwisko").val();
+		var nrtel=$("#nrtel").val();
+		var idwydz=$("#idwydz").val();
+		var kierunek=$("#kierunek").val();
+		var idspec=$("#idspec").val();
+		var idkat=$("#idkat").val();
+		var idsiec=$("#idsiec").val();
+		edytujKontoStudenta(imie,nazwisko,nrtel,idwydz,kierunek,idspec,idkat,idsiec);
+	});
+	
+	$("input#wprowadzZmiany").click(function(){
+		var imie=$("#imie").val();
+		var nazwisko=$("#nazwisko").val();
+		var nrtel=$("#nrtel").val();
+		var idwydz=$("#idwydz").val();
+		var kierunek=$("#kierunek").val();
+		var idspec=$("#idspec").val();
+		var idkat=$("#idkat").val();
+		var idsiec=$("#idsiec").val();
+		edytujKontoUsera(imie,nazwisko,nrtel,idwydz,kierunek,idspec,idkat,idsiec);
+	});
+	
+	function edytujKontoUsera(imie2,nazwisko2,nrtel2,idwydz2,kierunek2,idspec2,idkat2,idsiec2){
+			$.ajax({
+				url:'ajaxController.php',
+				dataType:'json',
+				type:'POST',
+				data:{
+					"przyciskAdmin":"wprowadzZmiany",
+					"imie":imie2,
+					"nazwisko":nazwisko2,
+					"nrtel":nrtel2,
+					"idwydz":idwydz2,
+					"kierunek":kierunek2,
+					"idspec":idspec2,
+					"idkat":idkat2,
+					"idsiec":idsiec2
+					},
+					success:function(json){
+						if(json["status"]==200)
+						{
+							alert("Zaktualizowano pomyślnie");
+							window.open('index.php','_self');
+						}
+						else
+						{
+							alert("Nie udało się");
+							window.open('index.php','_self');
+						}
+					},
+					error:function(err){
+						alert("Błąd");
+					}
+			});
+			}
+			
+	
+		function edytujKontoStudenta(imie2,nazwisko2,nrtel2,idwydz2,kierunek2,idspec2,idkat2,idsiec2){
+			$.ajax({
+				url:'ajaxController.php',
+				dataType:'json',
+				type:'POST',
+				data:{
+					"przyciskStudent":"przeslijZmiany",
+					"imie":imie2,
+					"nazwisko":nazwisko2,
+					"nrtel":nrtel2,
+					"idwydz":idwydz2,
+					"kierunek":kierunek2,
+					"idspec":idspec2,
+					"idkat":idkat2,
+					"idsiec":idsiec2
+					},
+					success:function(json){
+						if(json["status"]==200)
+						{
+							alert("Zaktualizowano pomyślnie");
+							window.open('index.php','_self');
+						}
+						else if(json["status"]==400)
+						{
+							alert("zle param");
+							window.open('index.php','_self');
+						}
+						else
+						{
+							alert("Nie udało się");
+							window.open('index.php','_self');
+						}
+					},
+					error:function(err){
+						alert("Blad");
+					}
+			});
+			}	
+			
+			
+			$("input#archiwizuj").click(function(){ //zdarzenie obslugujące przycisk archiwizuj
+		archiwizuj();
+	});
+	
+function archiwizuj(){
+		$.ajax({
+				url:'ajaxController.php',
+				dataType:'json',
+				type:'POST',
+				data:{
+					"przyciskProwadzacy":"Archiwizuj"
+					},
+				success : function(json) {
+           				 if(json["status"]==201)
+						 {
+							alert("Projekt zarchiwizowano pomyślnie");
+							window.open('index.php','_self');
+						 }
+						 else
+						 {
+							 $(".input_form").css({ border:"#FF0033 solid 2px"});
+							 alert("Nie udalo sie :(");
+						 }
+				},
+				error : function(err) {
+					alert("Blad");
+					}	
+			});
+	}
+$("input#usunProjekt").click(function(){ //zdarzenie obslugujące przycisk archiwizuj
+	usunProjekt();
+	});
+	
+function usunProjekt(){
+		$.ajax({
+				url:'ajaxController.php',
+				dataType:'json',
+				type:'POST',
+				data:{
+					"przyciskProwadzacy":"Usuń projekt"
+					},
+				success : function(json) {
+           				 if(json["status"]==200)
+						 {
+							alert("Projekt usunięty pomyślnie");
+							window.open('index.php','_self');
+						 }
+						 else
+						 {
+							 $(".input_form").css({ border:"#FF0033 solid 2px"});
+							 alert("Nie udalo sie :(");
+						 }
+				},
+				error : function(err) {
+					alert("Blad");
+					}
+});					
+			
+}
+
+$("input#stworzWatek").click(function(){ //zdarzenie obslugujące przycisk archiwizuj
+	var tresc=$("#trescWatku").val();;
+	if(tresc.length!=0)
+	{
+		nowyWatek(tresc);
+	}
+	});
+	function nowyWatek(trescWatku){
+		$.ajax({
+				url:'ajaxController.php',
+				dataType:'json',
+				type:'POST',
+				data:{
+					"przyciskProwadzacy":"Stwórz Wątek",
+					"tresc":trescWatku
+					},
+				success : function(json) {
+           				 if(json["status"]==201)
+						 {
+							alert("Wątek został dodany");
+							window.open('index.php','_self');
+						 }
+						 else
+						 {
+							 $(".input_form").css({ border:"#FF0033 solid 2px"});
+							 alert("Nie udalo sie :(");
+						 }
+				},
+				error : function(err) {
+					alert("Blad");
+					}
+					});
+					}
+					
+	$("input#dodajDoProjektu").click(function(){
+	
+		dolaczenieDoProjektu();
+	});
+		function dolaczenieDoProjektu(){
+			$.ajax({
+				url:'ajaxController.php',
+				dataType:'json',
+				type:'POST',
+				data:{
+					"przyciskStudent":"Dodaj mnie do projektu"
+					},
+					success:function(json){
+						if(json["status"]==200)
+						{
+							alert("Poczekaj na zatwierdzenie");
+							window.open('index.php','_self');
+						}
+						else if(json["status"]==400)
+						{
+							alert("zle param");
+							window.open('index.php','_self');
+						}
+						else
+						{
+							alert("Nie udało się");
+							window.open('index.php','_self');
+						}
+					},
+					error:function(err){
+						alert("Blad");
+					}
+			});
+			}	
 });
+

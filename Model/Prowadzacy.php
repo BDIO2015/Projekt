@@ -18,7 +18,30 @@ class Prowadzacy extends Student{
 		return $wynik;
 	}
 	
-	public function pobierzListeProjektow()
+	
+	public function pokazPrzypisanychStudentow()
+	{
+		$adres=$this->api->getProject;
+	}
+	
+	public function archiwizujProjekt($idProjektu, $nazwaProjektu)
+	{	
+				$nazwaProjektu=$nazwaProjektu.'_zarchiwizowany';
+				$adres=$this->api->archiveProject;
+				$wiadomosc='id_projekt='.$idProjektu.'&nazwa='.$nazwaProjektu;
+				$wynik=$this->requestApi($wiadomosc,$adres);
+				return $wynik;
+	}
+	
+	public function usunProjekt($idProjektu)
+	{	
+		$adres=$this->api->deleteProject;
+		$wiadomosc='id_projekt='.$idProjektu;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+		return $wynik;
+	}
+	
+		public function pobierzListeProjektow()
 	{
 		$adres=$this->api->getProjects;
 		$wynik=$this->requestApi("",$adres);
@@ -31,28 +54,30 @@ class Prowadzacy extends Student{
 				$lista='<tr><td><a href="?przyciskProwadzacy=pobierzProjekt&idProjekt='.$odbior->id_projekt.'">'.$odbior->nazwa.'</a></td></tr>'.$lista;
 			}
 			$lista='<table>'.$lista.'</table>';
+			$_SESSION['result']=$wynik->result;
 			return $lista;
 		}
 	}
 	
-	public function pokazProjekt($idProjektu)
+	public function pobierzWatki($idProjektu)
 	{
-
 		$wiadomosc='id_projekt='.$idProjektu;
-		$adres=$this->api->getProject;
+		$adres=$this->api->getThreads;
 		$wynik=$this->requestApi($wiadomosc,$adres);
 		$wynik=json_decode($wynik);
 		if($wynik->status=200)
 		{
-			return $wynik='ID projektu='.$idProjektu.'<br \>Nazwa='.$wynik->result->nazwa.'<br \>Opis='.$wynik->result->opis.'<br \>Termin='.$wynik->result->termin.'<br \>Miejsce='.$wynik->result->miejsce.'<br \>Wytyczne'.$wynik->result->wytyczne.'<br \>Id koordynatora='.$wynik->result->id_koordynator.'<br \>Id grupy='.$wynik->result->id_grupy.'<br \>Id oceny='.$wynik->result->id_ocena;
+			$lista="";
+			foreach($wynik->result->watki as $odbierz)
+			{
+				$lista='<tr><td><a href="?przyciskProwadzacy=pobierzKomentarz&idWatek='.$odbierz->id_watek.'">'.$odbierz->text.' </a>'.$odbierz->date.'</a></td></tr>'.$lista;
+			}
+			$lista='<table>'.$lista.'</table>';
+			$_SESSION['result']=$wynik->result;
+			return $lista;
 		}
-		return 0;
 	}
+
 	
-	public function pokazPrzypisanychStudentow()
-	{
-			
-		$adres=$this->api->getProject;
-	}
 }
 ?>

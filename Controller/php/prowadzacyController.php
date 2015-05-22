@@ -41,11 +41,31 @@ class prowadzacyController{
 					}
 				break;
 				case "pobierzProjekt":
+					$_SESSION['idProjektu']=$_GET['idProjekt'];
 					$wynik=$this->prowadzacy->pokazProjekt($_GET['idProjekt']);
+					$wynik=$wynik.'<br /><br /><form method="get" id="obslugaProjektu"><input type="submit" name="przyciskProwadzacy" id="archiwizuj" value="Archiwizuj" />
+																			<input type="submit" name="przyciskProwadzacy" id="usunProjekt" value="Usuń projekt" /><br />
+																			<br /><input type="submit" name="przyciskProwadzacy" id="nowyWatek" value="Nowy Wątek" />
+																			</form>';
+					$wynik2=$this->prowadzacy->pobierzWatki($_GET['idProjekt']);
+					
+					$wynik=$wynik.'<br />'.$wynik2;
 					$this->gui->setContainer($wynik);
 				break;
 				case "stworz":
                   return $this->prowadzacy->stworzNowyProjekt();
+				break;
+				case "Archiwizuj":
+					return $this->prowadzacy->archiwizujProjekt($_SESSION['idProjektu'],$_SESSION['nazwaProjektu']);
+				break;
+				case "Usuń projekt":
+					return $this->prowadzacy->usunProjekt($_SESSION['idProjektu']);
+				break;
+				case "Nowy Wątek":
+					$this->gui->setContainer("View/prowadzacy/container/containerNowyWatek.html");										
+				break;
+				case "Stwórz Wątek":
+					return $this->prowadzacy->nowyWatek($_SESSION['idProjektu']);
 				break;
 			}
 		}

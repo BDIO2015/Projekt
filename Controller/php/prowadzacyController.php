@@ -67,6 +67,11 @@ class prowadzacyController{
 				case "Stwórz Wątek":
 					return $this->prowadzacy->nowyWatek($_SESSION['idProjektu']);
 				break;
+				case "pobierzKomentarz":
+					$_SESSION['idWatek']=$_GET['idWatek'];
+					$wynik=$this->prowadzacy->pobierzWatek($_SESSION['idWatek']);
+					$this->gui->setContainer($wynik);
+				break;
 			}
 		}
 		$this->gui->showGui();

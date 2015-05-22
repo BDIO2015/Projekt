@@ -77,6 +77,26 @@ class Prowadzacy extends Student{
 			return $lista;
 		}
 	}
+	public function pobierzWatek($idWatku)
+	{
+		$wiadomosc='id_watek='.$idWatku;
+		$adres=$this->api->getThread;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+		$wynik=json_decode($wynik);
+		if($wynik->status=200)
+		{
+			$lista='<tr><td>'.$wynik->result->text.'</td></tr>';
+			foreach($wynik->result->komentarze as $odbierz)
+			{
+				$lista=$lista.'<tr><td>'.$odbierz.'</td></tr><tr><td>'.$odbierz.'</td></tr>';
+
+			}
+			
+			$lista='<table>'.$lista.'</table>';
+			$_SESSION['result']=$wynik->result;
+			return $lista;
+		}
+	}
 
 	
 }

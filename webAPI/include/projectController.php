@@ -174,6 +174,38 @@ class projectController{
 		else return "{\"status\": 400, \"result\":\"Bad params\"}";
 	}
 	
+	public function getGrade()
+	{
+		if(isset($_POST['id_projekt']))
+		{
+			if(!(json_decode($GLOBALS['db']->getProjectController()->isProjectExist())->status == 200)) return "{\"status\": 400, \"result\":\"Project with id ".$_POST['id_projekt']." doesn't exist \"}";
+
+			$stmt = $this->conn->prepare("SELECT o.ocena, o.data, o.komentarz FROM oceny o 
+						      JOIN projekty p ON o.id_ocena = p.id_ocena
+						      WHERE p.id_projekt = ?");
+			$stmt->bind_param("i", $_POST['id_projekt']);
+			$result = $stmt->execute();
+            		$grades = $stmt->get_result();
+			$rows = $grades->num_rows;
+			$error = $stmt->error;
+        		 $stmt->close();
+
+			if($rows === 0)
+			{
+				return "{\"status\": 400, \"result\":\"Project exists but has not been rated yet.\"}";
+			}
+			
+		        if($result)
+	            	{
+	        		$data = array();
+	                	foreach ($grades as $grade) $data[] = $grade;
+	
+	                	return "{\"status\":200,\"result\":".json_encode($data)."}";
+			}
+			else return "{\"status\": 400,\"result\":\"".$error."\"}";
+		} else return "{\"status\": 400, \"result\":\"Bad params\"}";
+	}
+	
 	public function setManager()
 	{
 		if(isset($_POST['id_projekt']) && isset($_POST['id_uzytkownik']))

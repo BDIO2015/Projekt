@@ -44,6 +44,11 @@ $(document).ready(function(e) {
 		}
 		
 	});
+	$("input#zapiszOcena").click(function(){
+		var ocena=$("#ocena").val();
+		var uwagi=$("#uwagiOcena").val();
+		wstawOcena(ocena,uwagi);
+	})
 function rejestruj(username,pass,mail,level,name,surname){
 	$.ajax({
 		url:'ajaxController.php',
@@ -483,6 +488,40 @@ $("input#stworzWatek").click(function(){ //zdarzenie obslugujące przycisk archi
 						{
 							alert("Nie udało się");
 							window.open('index.php','_self');
+						}
+					},
+					error:function(err){
+						alert("Blad");
+					}
+			});
+			}
+	function wstawOcena(ocena,uwagiOcena){
+			$.ajax({
+				url:'ajaxController.php',
+				dataType:'json',
+				type:'POST',
+				data:{
+					"przyciskProwadzacy":"wstawOcena",
+					"ocena":ocena,
+					"komentarz":uwagiOcena					
+					},
+					success:function(json){
+						if(json["status"]==200)
+						{
+							alert("Ocena dodana");
+							window.open('index.php','_self');
+						}
+						else if(json["status"]==400)
+						{
+							alert("Złe dane");
+						}
+						else if(json.status==401)
+						{
+							alert("Nie masz dostępu do tego projektu");
+						}
+						else
+						{
+							alert("Nie udało się");
 						}
 					},
 					error:function(err){

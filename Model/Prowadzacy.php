@@ -117,5 +117,22 @@ class Prowadzacy extends Student{
 			return $wynik;
 		}
 	}
+	public function wstawOcene()
+	{
+		$idProjektu=$_SESSION['idProjektu'];
+		$idKoordynator=$_SESSION['userId'];
+		$ocena=$_POST['ocena'];
+		$komentarz=$_POST['komentarz'];
+		$wiadomosc='id_projekt='.$idProjektu.'&id_koordynator='.$idKoordynator.'&ocena'.$ocena.'&komentarz'.$komentarz;
+		$adres=$this->api->evaluateProject;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+		$wynik=json_decode($wynik);
+		if($wynik->status=200)
+		{
+			
+			$wynik=json_encode($wynik);
+			return $wynik;
+		}
+	}
 }
 ?>

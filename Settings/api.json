@@ -30,5 +30,6 @@
 	"showAllUsers": "http://deveo.pl/efdi/webAPI/showAllUsers",
 	"changeActivity": "http://deveo.pl/efdi/webAPI/changeActivity",
 	"getUsers": "http://deveo.pl/efdi/webAPI/getUsers",
-	"activateUser": "http://deveo.pl/efdi/webAPI/activateUser"
+	"activateUser": "http://deveo.pl/efdi/webAPI/activateUser",
+	"evaluateProject": "http://deveo.pl/efdi/webAPI/evaluateProject"
 }

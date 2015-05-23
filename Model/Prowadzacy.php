@@ -104,16 +104,15 @@ class Prowadzacy extends Student{
 		$wynik=json_decode($wynik);
 		if($wynik->status=200)
 		{
-			$lista='<tr><td style="width: 10%;">'.$wynik->result->date.'</td><td>'.$wynik->result->text.'</td></tr>';
+			$lista='<tr><td style="width: 10%;">'.$wynik->result->date.'</td><td colspan="2">'.$wynik->result->text.'</td></tr>';
 			foreach($wynik->result->komentarze as $odbierz)
 			{
-				$lista=$lista.'<tr><td>'.$odbierz->date.'</td><td>'.$odbierz->text.'</td></tr>';
+				$lista=$lista.'<tr><td>'.$odbierz->date.'</td><td>'.$odbierz->text.'</td><td style="width: 18px;"><a href=?przyciskProwadzacy=usunKomentarz&idKomentarz='.$odbierz->id_watek.'">X</a></td></tr>';
 
 			}
-			
 			$lista='<table border="1" cellspacing="0" style="width:100%;">'.$lista.'</table><br />
 							<form method="get" id="obslugaProjektu">
-							<input type="submit" name="przyciskProwadzacy" id="nowyKomentarz?idWatek='.$idWatku.'" value="Nowy Komentarz">
+							<input type="submit" name="przyciskProwadzacy" id="nowyKomentarz" value="Nowy Komentarz">
 							</form>';
 			$_SESSION['result']=$wynik->result;
 			return $lista;
@@ -125,7 +124,12 @@ class Prowadzacy extends Student{
 		$adres=$this->api->addComment;
 		$wynik=$this->requestApi($wiadomosc,$adres);
 	}
-
+	public function usunKomentarz(){
+		$idKomentarza=$_GET['idKomentarz'];
+		$wiadomosc='id_watek='.$idKomentarza;
+		$adres=$this->api->deleteComment;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+	}
 	
 }
 ?>

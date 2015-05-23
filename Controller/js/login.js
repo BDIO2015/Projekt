@@ -457,7 +457,7 @@ $("input#stworzWatek").click(function(){ //zdarzenie obslugujące przycisk archi
 					}
 			});
 			}
-	$("input#dodajKomentarz").click(function(){ //zdarzenie obslugujące przycisk wyslijWiadomosc
+	$("input#dodajKomentarz").click(function(){ //zdarzenie obslugujące przycisk dodajKomentarz
 		
 		var tresc=$("#trescKomentarza").val();
 		if(tresc.length!=0)
@@ -476,7 +476,7 @@ $("input#stworzWatek").click(function(){ //zdarzenie obslugujące przycisk archi
 					"trescKomentarza":tresc
 					},
 					success:function(json){
-						if(json["status"]==200)
+						if(json["status"]==201)
 						{
 							alert("Dodano komentarz");
 							window.open('index.php','_self');
@@ -490,6 +490,39 @@ $("input#stworzWatek").click(function(){ //zdarzenie obslugujące przycisk archi
 						{
 							alert("Nie udało się");
 							window.open('index.php','_self');
+						}
+					},
+					error:function(err){
+						alert("Blad");
+					}
+			});
+	}
+	$("input#usunKomentarz").click(function(){ //zdarzenie obslugujące przycisk usunKomentarz
+		usunKomentarz();
+	})
+	function usunKomentarz(){
+		$.ajax({
+				url:'ajaxController.php',
+				dataType:'json',
+				type:'POST',
+				data:{
+					"przyciskProwadzacy":"usunKomentarz"
+					},
+					success:function(json){
+						if(json["status"]==200)
+						{
+							alert("Usunięto komentarz");
+							
+						}
+						else if(json["status"]==400)
+						{
+							alert("zle param");
+						
+						}
+						else
+						{
+							alert("Nie udało się");
+						
 						}
 					},
 					error:function(err){

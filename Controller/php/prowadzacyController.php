@@ -82,6 +82,11 @@ class prowadzacyController{
 				case "Dodaj komentarz":
 					$this->prowadzacy->nowyKomentarz($_SESSION['idProjektu'],$_SESSION['idWatek']);
 				break;
+				case "usunKomentarz":
+					$this->prowadzacy->usunKomentarz();
+					$wynik=$this->prowadzacy->pobierzWatek($_SESSION['idWatek']);
+					$this->gui->setContainer($wynik);
+				break;
 			}
 		}
 		$this->gui->showGui();

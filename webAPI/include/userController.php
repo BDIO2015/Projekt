@@ -143,7 +143,7 @@ class userController{
         {
             $json = json_decode($this->isUserExist());
             if(!($json->status == 200)) return "{\"status\": 400, \"result\":\"User with id ".$_POST['id_uzytkownik']." doesn't exist \"}";
-            if(($json->result->poziom != 3) || ($json->result->poziom != 2)) return "{\"status\": 400, \"result\":\"Only admin or group leader can execute this method \"}";
+            if(($json->result->poziom != 3) && ($json->result->poziom != 2)) return "{\"status\": 400, \"result\":\"Only admin or group leader can execute this method \"}";
 			
 		if(isset($_POST['poziom']))
 		{

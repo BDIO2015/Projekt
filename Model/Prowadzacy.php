@@ -113,6 +113,7 @@ class Prowadzacy extends Student{
 			$lista='<table border="1" cellspacing="0" style="width:100%;">'.$lista.'</table><br />
 							<form method="get" id="obslugaProjektu">
 							<input type="submit" name="przyciskProwadzacy" id="nowyKomentarz" value="Nowy Komentarz">
+							<input type="submit" name="przyciskProwadzacy" id="usunWatek" value="Usuń Wątek">
 							</form>';
 			$_SESSION['result']=$wynik->result;
 			return $lista;
@@ -130,6 +131,10 @@ class Prowadzacy extends Student{
 		$adres=$this->api->deleteComment;
 		$wynik=$this->requestApi($wiadomosc,$adres);
 	}
-	
+	public function usunWatek($idWatku){
+		$wiadomosc='id_watek='.$idWatku;
+		$adres=$this->api->deleteThread;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+	}
 }
 ?>

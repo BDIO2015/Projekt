@@ -87,6 +87,9 @@ class prowadzacyController{
 					$wynik=$this->prowadzacy->pobierzWatek($_SESSION['idWatek']);
 					$this->gui->setContainer($wynik);
 				break;
+				case "Usuń Wątek":
+					$this->prowadzacy->usunWatek($_SESSION['idWatek']);
+				break;
 			}
 		}
 		$this->gui->showGui();

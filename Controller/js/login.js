@@ -530,5 +530,38 @@ $("input#stworzWatek").click(function(){ //zdarzenie obslugujące przycisk archi
 					}
 			});
 	}
+	$("input#usunWatek").click(function(){ //zdarzenie obslugujące przycisk usunWatek
+		usunWatek();
+	})
+	function usunWatek(){
+		$.ajax({
+				url:'ajaxController.php',
+				dataType:'json',
+				type:'POST',
+				data:{
+					"przyciskProwadzacy":"Usuń Wątek"
+					},
+					success:function(json){
+						if(json["status"]==200)
+						{
+							alert("Usunięto wątek");
+							
+						}
+						else if(json["status"]==400)
+						{
+							alert("zle param");
+						
+						}
+						else
+						{
+							alert("Nie udało się");
+						
+						}
+					},
+					error:function(err){
+						alert("Blad");
+					}
+			});
+	}
 });
 

@@ -322,6 +322,44 @@
     </td>
 </tr>
 
+<!-- GET_GRADE -->
+<tr>
+    <td rowspan="6" class="method-name">getGrade</td>
+    <td colspan="2" class="method-description">funkcja zwraca ocenę przypisaną do projektu</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejściowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/getUsers</br></br>
+                    <b>id_projekt</b> - id projektu </br>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">id_projekt=1</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":200,"result":[{"ocena":"4-bardzo ladnie","data":"2015-05-19 23:26:35","komentarz":"blabla"}]}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty blędów</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>
+
 <!-- SET_MANAGER -->
 <tr>
     <td rowspan="6" class="method-name">setManager</td>

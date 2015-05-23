@@ -160,8 +160,7 @@ class Student extends Gosc{
 			return $lista;
 		}
 	}
-	
-	public function pokazProjekt($idProjektu)
+	public function pokazProjekt($idProjektu,$adresFormularza)
 	{				
 				$wiadomosc='id_projekt='.$idProjektu;
 				$adres=$this->api->getProject;
@@ -169,12 +168,16 @@ class Student extends Gosc{
 				$wynik=json_decode($wynik);
 				if($wynik->status=200)
 				{
-					$_SESSION['nazwaProjektu']=$wynik->result->nazwa;
-					return $wynik='<br \>Nazwa='.$wynik->result->nazwa.'<br \>Opis='.$wynik->result->opis.'<br \>Termin='.$wynik->result->termin.'<br \>Miejsce='.$wynik->result->miejsce.'<br \>Wytyczne='.$wynik->result->wytyczne.'<br \>Id oceny='.$wynik->result->id_ocena;
+					if(file_exists($adresFormularza)){
+						$html=file_get_contents($adresFormularza);
+						$_SESSION['nazwaProjektu']=$wynik->result->nazwa;
+						$wynik='<br \>Nazwa='.$wynik->result->nazwa.'<br \>Opis='.$wynik->result->opis.'<br \>Termin='.$wynik->result->termin.'<br \>Miejsce='.$wynik->result->miejsce.'<br \>Wytyczne='.$wynik->result->wytyczne.'<br \>Id oceny='.$wynik->result->id_ocena;
+						$html=str_replace('{wynik}',$wynik,$html);
+					}
+					return $html;
 				}
 		return 0;
 	}
-	
 	public function nowyWatek($idProjektu)
 	{
 		$tresc=$_POST['tresc'];
@@ -202,8 +205,7 @@ class Student extends Gosc{
 			return $lista;
 		}
 	}
-	
-public function dolaczenieDoProjektu($idProjektu)
+	public function dolaczenieDoProjektu($idProjektu)
 	{
 		$idUz=$_SESSION['userId'];
 		$wiadomosc='id_uzytkownik='.$idUz.'&id_projekt='.$idProjektu;

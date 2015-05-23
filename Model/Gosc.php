@@ -71,6 +71,9 @@
 			return str_replace($slowoKlucz,$tresc,$adres);
 		}
 		else
+		{
+			return str_replace($slowoKlucz,$tresc,$adres);
+		}
 		return "Blad";
 	}
  }

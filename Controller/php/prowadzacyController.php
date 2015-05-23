@@ -42,18 +42,10 @@ class prowadzacyController{
 				break;
 				case "pobierzProjekt":
 					$_SESSION['idProjektu']=$_GET['idProjekt'];
-					$wynik=$this->prowadzacy->pokazProjekt($_GET['idProjekt']);
-					$wynik2=$this->prowadzacy->pobierzWatki($_GET['idProjekt']);
-					$wynik3=$this->prowadzacy->wyswietlStudentow($_GET['idProjekt'],1);
-					$wynik4=$this->prowadzacy->wyswietlStudentow($_GET['idProjekt'],0);
-					
-					$wynik=$wynik.'<br /><br /><form method="get" id="obslugaProjektu"><input type="submit" name="przyciskProwadzacy" id="archiwizuj" value="Archiwizuj" />
-																			<input type="submit" name="przyciskProwadzacy" id="usunProjekt" value="Usuń projekt" /><br />
-																			<br />Uczestnicy projektu:<br />'.$wynik3.'<br />Oczekujący na zatwierdzenie:<br />'.$wynik4.
-																			'<br /><input type="submit" name="przyciskProwadzacy" id="nowyWatek" value="Nowy Wątek" />
-																			</form>';
-					
-					$wynik=$wynik.'<br />'.$wynik2;
+					$wynik=$this->prowadzacy->pokazProjekt($_GET['idProjekt'],"View/prowadzacy/container/containerProjektProwadzacy.html");
+					$wynik=$wynik.$this->prowadzacy->pobierzWatki($_GET['idProjekt']);
+					$wynik=$this->prowadzacy->podmien($wynik,$this->prowadzacy->wyswietlStudentow($_GET['idProjekt'],1),'{uczestnicy}');
+					$wynik=$this->prowadzacy->podmien($wynik,$this->prowadzacy->wyswietlStudentow($_GET['idProjekt'],0),'{oczekujacy}');
 					$this->gui->setContainer($wynik);
 				break;
 				case "stworz":

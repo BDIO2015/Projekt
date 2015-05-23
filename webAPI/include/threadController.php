@@ -118,7 +118,7 @@ class threadController{
 
                   if ($thread) 
                   {
-                  	$stmt = $this->conn->prepare( "SELECT * FROM `watek` WHERE `id_nadrzedny` = ?" );
+                  	$stmt = $this->conn->prepare( "SELECT * FROM `watek` WHERE `id_nadrzedny` = ? ORDER BY `date` ASC" );
                   	$stmt->bind_param("s", $_POST['id_watek']);
                   	$result = $stmt->execute();
                   	$error = $stmt->error;

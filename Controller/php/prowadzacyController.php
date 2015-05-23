@@ -46,6 +46,7 @@ class prowadzacyController{
 					$wynik=$wynik.$this->prowadzacy->pobierzWatki($_GET['idProjekt']);
 					$wynik=$this->prowadzacy->podmien($wynik,$this->prowadzacy->wyswietlStudentow($_GET['idProjekt'],1),'{uczestnicy}');
 					$wynik=$this->prowadzacy->podmien($wynik,$this->prowadzacy->wyswietlStudentow($_GET['idProjekt'],0),'{oczekujacy}');
+					$wynik=$this->prowadzacy->podmien($wynik,$this->prowadzacy->wyswietlWszystkichStudentow(),'{wszyscy}');
 					$this->gui->setContainer($wynik);
 				break;
 				case "stworz":
@@ -65,8 +66,9 @@ class prowadzacyController{
 				break;
 				
 				case "akceptujStudentaPrzycisk":
-					$_SESSION['idStudent']=$_GET['idStudenta'];
-				    $this->prowadzacy->akceptujStudenta($_SESSION['idProjektu'],$_SESSION['idStudent']);
+					 $_SESSION['idStudent']=$_GET['idStudenta'];
+					 $this->prowadzacy->dolaczenieStudentaDoProjektu($_SESSION['idProjektu'],$_SESSION['idStudent']);
+				   	 $this->prowadzacy->akceptujStudenta($_SESSION['idProjektu'],$_SESSION['idStudent']);
 				break;
 				case "Ocena":
 					$this->gui->setContainer("View/prowadzacy/container/containerOcenaProwadzacy.html");	

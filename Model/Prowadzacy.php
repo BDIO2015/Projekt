@@ -134,5 +134,36 @@ class Prowadzacy extends Student{
 			return $wynik;
 		}
 	}
+	
+	public function wyswietlWszystkichStudentow()
+	{
+		
+		$idKoordynator=$_SESSION['userId'];
+		$poz=1;
+		$wiadomosc='id_uzytkownik='.$idKoordynator.'&poziom='.$poz;
+		$adres=$this->api->showAllUsers;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+		$wynik=json_decode($wynik);
+		if($wynik->status=200)
+		{
+			$lista="";
+			foreach($wynik->result as $odbior)
+			{
+					$lista=$lista.'<tr><td>'.$odbior->login.'<a href="?przyciskProwadzacy=akceptujStudentaPrzycisk&idStudenta='.$odbior->id_uzytkownik.'"> Dodaj</tr></td>';
+			}
+			$lista='<table>'.$lista.'</table>';
+			$_SESSION['result']=$wynik->result;
+			return $lista;
+		}
+	}
+	
+public function dolaczenieStudentaDoProjektu($idProjektu,$idStudent)
+	{
+		$wiadomosc='id_uzytkownik='.$idStudent.'&id_projekt='.$idProjektu;
+		$adres=$this->api->addUser;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+		$wynik=json_decode($wynik);
+		return $wynik;
+	}
 }
 ?>

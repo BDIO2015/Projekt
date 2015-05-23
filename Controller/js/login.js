@@ -461,6 +461,8 @@ $("input#stworzWatek").click(function(){ //zdarzenie obslugujące przycisk archi
 			});
 			}	
 			
+			
+			
 			$("input#akceptujStudentaPrzycisk").click(function(){
 	
 		akceptujStudenta();

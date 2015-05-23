@@ -24,10 +24,8 @@ class userController{
 	public function isUserExist() {
         if(isset($_POST['login']) || isset($_POST['id_uzytkownik']))
         {
-            $login = isset($_POST['login'])? $_POST['login']:"";
-            $id = isset($_POST['id_uzytkownik'])? $_POST['id_uzytkownik']: -1;
             $stmt = $this->conn->prepare("SELECT * FROM `uzytkownicy` WHERE `login` = ? or `id_uzytkownik` = ?");
-            $stmt->bind_param("ss", $login, $id);
+            $stmt->bind_param("si", $_POST['login'], $_POST['id_uzytkownik']);
             $result = $stmt->execute();
             $user = $stmt->get_result()->fetch_assoc();
             $stmt->close();

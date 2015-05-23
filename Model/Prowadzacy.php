@@ -77,6 +77,25 @@ class Prowadzacy extends Student{
 			return $lista;
 		}
 	}
+	
+	public function wyswietlStudentow($idProjektu,$zatwierdzony)
+	{
+		$wiadomosc='id_projekt='.$idProjektu.'&zatwierdzony='.$zatwierdzony;
+		$adres=$this->api->getUsers;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+		$wynik=json_decode($wynik);
+		if($wynik->status=200)
+		{
+			$lista="";
+			foreach($wynik->result as $odbior)
+			{
+				$lista=$lista.'<tr><td>'.$odbior->login.'</tr></td>';
+			}
+			$lista='<table>'.$lista.'</table>';
+			$_SESSION['result']=$wynik->result;
+			return $lista;
+		}
+	}
 	public function pobierzWatek($idWatku)
 	{
 		$wiadomosc='id_watek='.$idWatku;
@@ -85,17 +104,26 @@ class Prowadzacy extends Student{
 		$wynik=json_decode($wynik);
 		if($wynik->status=200)
 		{
-			$lista='<tr><td>'.$wynik->result->text.'</td></tr>';
+			$lista='<tr><td style="width: 10%;">'.$wynik->result->date.'</td><td>'.$wynik->result->text.'</td></tr>';
 			foreach($wynik->result->komentarze as $odbierz)
 			{
-				$lista=$lista.'<tr><td>'.$odbierz.'</td></tr><tr><td>'.$odbierz.'</td></tr>';
+				$lista=$lista.'<tr><td>'.$odbierz->date.'</td><td>'.$odbierz->text.'</td></tr>';
 
 			}
 			
-			$lista='<table>'.$lista.'</table>';
+			$lista='<table border="1" cellspacing="0" style="width:100%;">'.$lista.'</table><br />
+							<form method="get" id="obslugaProjektu">
+							<input type="submit" name="przyciskProwadzacy" id="nowyKomentarz?idWatek='.$idWatku.'" value="Nowy Komentarz">
+							</form>';
 			$_SESSION['result']=$wynik->result;
 			return $lista;
 		}
+	}
+	public function nowyKomentarz($idProjektu,$idWatku){
+		$trescKomentarza=$_POST['trescKomentarza'];
+		$wiadomosc='id_projekt='.$idProjektu.'&id_nadrzedny='.$idWatku.'&text='.$trescKomentarza;
+		$adres=$this->api->addComment;
+		$wynik=$this->requestApi($wiadomosc,$adres);
 	}
 
 	

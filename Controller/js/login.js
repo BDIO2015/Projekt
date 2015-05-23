@@ -456,6 +456,46 @@ $("input#stworzWatek").click(function(){ //zdarzenie obslugujące przycisk archi
 						alert("Blad");
 					}
 			});
-			}	
+			}
+	$("input#dodajKomentarz").click(function(){ //zdarzenie obslugujące przycisk wyslijWiadomosc
+		
+		var tresc=$("#trescKomentarza").val();
+		if(tresc.length!=0)
+		{
+			nowyKomentarz(tresc);
+		}
+		
+	});
+	function nowyKomentarz(tresc){
+		$.ajax({
+				url:'ajaxController.php',
+				dataType:'json',
+				type:'POST',
+				data:{
+					"przyciskProwadzacy":"Dodaj komentarz",
+					"trescKomentarza":tresc
+					},
+					success:function(json){
+						if(json["status"]==200)
+						{
+							alert("Dodano komentarz");
+							window.open('index.php','_self');
+						}
+						else if(json["status"]==400)
+						{
+							alert("zle param");
+							window.open('index.php','_self');
+						}
+						else
+						{
+							alert("Nie udało się");
+							window.open('index.php','_self');
+						}
+					},
+					error:function(err){
+						alert("Blad");
+					}
+			});
+	}
 });
 

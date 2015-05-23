@@ -203,7 +203,7 @@ class Student extends Gosc{
 		}
 	}
 	
-		public function dolaczenieDoProjektu($idProjektu)
+public function dolaczenieDoProjektu($idProjektu)
 	{
 		$idUz=$_SESSION['userId'];
 		$wiadomosc='id_uzytkownik='.$idUz.'&id_projekt='.$idProjektu;

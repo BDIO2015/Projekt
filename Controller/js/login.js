@@ -9,7 +9,6 @@ $(document).ready(function(e) {
 		}
 	});
 	$("input#zarejestruj").click(function(){ //zdarzenie obslugujące przycisk ZAREJESTRUJ
-	if($("#poziom").prop('checked'))
 		var login=$("#username").val();
 		var password=$("#password").val();
 		var email=$("#email").val();
@@ -24,7 +23,7 @@ $(document).ready(function(e) {
 		rejestruj(login,password,email,poziom,name,surname);
 		}
 	});
-$("input#wyslijWiadomosc").click(function(){ //zdarzenie obslugujące przycisk wyslijWiadomosc
+	$("input#wyslijWiadomosc").click(function(){ //zdarzenie obslugujące przycisk wyslijWiadomosc
 		var odbiorca=$("#nazwaUzytkownika").val();
 		var tytul=$("#tytul").val();
 		var tresc=$("#trescWiadomosci").val();
@@ -52,8 +51,8 @@ function rejestruj(username,pass,mail,level,name,surname){
 		type:'POST',
 		data:{
 			"przyciskGosc":"register",
-			"username":username,
 			"password":pass,
+			"username":username,
 			"email":mail,
 			"imie":name,
 			"nazwisko":surname,
@@ -62,7 +61,7 @@ function rejestruj(username,pass,mail,level,name,surname){
 		success : function(json) {
 		if(json["status"]==201)
 		{
-			alert("Udalo sie");
+			alert("Udalo sie, możesz się teraz zalogować");
 			window.open('index.php','_self');
 		}
 		else
@@ -122,7 +121,6 @@ function wyslij(adresat,temat,wiadomosc){
 					 }
 			 });
 }
-
 function sprawdz(adresat){
 			return $.ajax({
 				url:'ajaxController.php',

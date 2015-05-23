@@ -41,8 +41,7 @@ class studentController{
 				case "pobierzProjekt":
 					$_SESSION['idProjektu']=$_GET['idProjekt'];
 					$wynik=$this->student->pokazProjekt($_GET['idProjekt']);
-					$wynik=$wynik.'<br /><br /><form method="get" id="obslugaProjektu"><input type="submit" name="przyciskStudent" id="dodajDoProjektu" value="Dodaj mnie do projektu" />																	
-																			<br /><input type="submit" name="przyciskStudent" id="nowyWatek" value="Nowy Wątek" />
+					$wynik=$wynik.'<br /><br /><form method="get" id="obslugaProjektu"><input type="submit" name="przyciskStudent" id="dodajDoProjektu" value="Dodaj mnie do projektu" /><br /><input type="submit" name="przyciskStudent" id="nowyWatek" value="Nowy Wątek" />
 																			</form>';
 					$wynik2=$this->student->pobierzWatki($_GET['idProjekt']);
 					

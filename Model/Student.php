@@ -203,19 +203,14 @@ class Student extends Gosc{
 		}
 	}
 	
-	public function dolaczenieDoProjektu($idProjektu)
+		public function dolaczenieDoProjektu($idProjektu)
 	{
 		$idUz=$_SESSION['userId'];
-		$wiadomosc='id_uzytkownik='.$idUz.'id_projekt='.$idProjektu;
+		$wiadomosc='id_uzytkownik='.$idUz.'&id_projekt='.$idProjektu;
 		$adres=$this->api->addUser;
 		$wynik=$this->requestApi($wiadomosc,$adres);
 		$wynik=json_decode($wynik);
-		if($wynik->status=200)
-		{
-			
-			$wynik=json_encode($wynik);
-			return $wynik;
-		}
+		return $wynik;
 	}
 
 }

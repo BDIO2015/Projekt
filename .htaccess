@@ -1,6 +1,0 @@
-DirectoryIndex index.php
-
-RewriteEngine on
-
-RewriteRule ^([^-]+).html$  index.php?przyciskGosc=$1 [L]
-

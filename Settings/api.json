@@ -28,5 +28,7 @@
 	"getSendedMessages": "http://deveo.pl/efdi/webAPI/getSendedMessages",
 	"sendMessage": "http://deveo.pl/efdi/webAPI/sendMessage",
 	"showAllUsers": "http://deveo.pl/efdi/webAPI/showAllUsers",
-	"changeActivity": "http://deveo.pl/efdi/webAPI/changeActivity"
+	"changeActivity": "http://deveo.pl/efdi/webAPI/changeActivity",
+	"getUsers": "http://deveo.pl/efdi/webAPI/getUsers",
+	"activateUser": "http://deveo.pl/efdi/webAPI/activateUser"
 }

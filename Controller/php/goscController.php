@@ -26,9 +26,15 @@ class goscController{
 				break;
 				case "register":												
 						return $this->gosc->register();
+				break;
 				case "Nowe konto":
 					$this->gui->setContainer("View/gosc/container/containerRejestracjiGosc.html");
 				break;
+				case "Zapomniałem hasła":
+					$this->gui->setContainer("View/gosc/container/containerResetHasla.html");
+				break;
+				case "Wyślij":
+						return $this->gosc->resetPass();		
 				break;
 			}
 		}

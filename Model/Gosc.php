@@ -76,5 +76,22 @@
 		}
 		return "Blad";
 	}
+	
+	public function resetPass()
+	{
+		$username=$_POST['username'];
+		$email=$_POST['email'];
+		
+		$wiadomosc='&login='.$username.'&email='.$email;
+		$adres=$this->api->resetPass;															
+		$wynik=$this->requestApi($wiadomosc,$adres);
+		$wynik=json_decode($wynik);
+		if($wynik->status==200)
+		{
+				return $wynik; 
+		}
+		
+	}
+	
  }
 ?>

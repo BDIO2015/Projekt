@@ -95,7 +95,7 @@ class Prowadzacy extends Student{
 				}
 				else
 				{
-					$lista=$lista.'<tr><td>'.$odbior->login.'</tr></td>';
+					$lista=$lista.'<tr><td>'.$odbior->login.'<a href="?przyciskProwadzacy=usunStudentaPrzycisk&idStudenta='.$odbior->id_uzytkownik.'"> Usuń</tr></td>';
 				}
 			}
 			$lista='<table>'.$lista.'</table>';
@@ -157,10 +157,19 @@ class Prowadzacy extends Student{
 		}
 	}
 	
-public function dolaczenieStudentaDoProjektu($idProjektu,$idStudent)
+	public function dolaczenieStudentaDoProjektu($idProjektu,$idStudent)
 	{
 		$wiadomosc='id_uzytkownik='.$idStudent.'&id_projekt='.$idProjektu;
 		$adres=$this->api->addUser;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+		$wynik=json_decode($wynik);
+		return $wynik;
+	}
+	
+	public function usuniecieStudentaZProjektu($idProjektu,$idStudent)
+	{
+		$wiadomosc='id_projekt='.$idProjektu.'&id_uzytkownik='.$idStudent;
+		$adres=$this->api->removeUser;
 		$wynik=$this->requestApi($wiadomosc,$adres);
 		$wynik=json_decode($wynik);
 		return $wynik;

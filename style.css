@@ -42,7 +42,6 @@ body {
 #container{
 	margin-left: 0.5%;
 	float: left;
-	width: 88.5%;
 	width: 85.5%;
 	height: 73%;
 }
@@ -57,7 +56,6 @@ body {
 	display: ddblock;
 	height: 41px;
 	text-align: center;
-	
 	color: black;
 	width: 100%;
 }

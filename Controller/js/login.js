@@ -531,3 +531,24 @@ $("input#stworzWatek").click(function(){ //zdarzenie obslugujące przycisk archi
 			}	
 });
 
+		function sortUnicode(a,b){return a[0].toLowerCase().localeCompare(b[0].toLowerCase());} //funkcje do sortowania tabel
+		
+		function sortIt(o,s,r,n,t,i) {
+		o.ord=!o.ord;
+		n=o.parentNode.cellIndex;
+		r=o.offsetParent.offsetParent.rows;
+		var rows=[],cols=[];s=s||1;
+		for(i=0;t=r[s+i];i++){
+			rows.push(t.cloneNode(true));
+			cols.push([t.cells[n].firstChild.nodeValue,i]);
+		}
+		cols.sort(sortUnicode);
+		if(o.ord)cols.reverse()
+		for(i=0;t=r[s+i];i++){
+			var j = rows[cols[i][1]];
+			t.parentNode.replaceChild(j,t);
+			j.className=i%2?'odd':'even';
+		}
+	}
+
+

@@ -10,9 +10,10 @@ class Admin extends Student{
 	
 	public function pobierzUzytkownikow()
 	{
+		$userId=$_SESSION['userId'];
+		$temp='id_uzytkownik='.$userId;
 		$adres=$this->api->showAllUsers;
-		
-		$wynik=$this->requestApi('id_uzytkownik=3',$adres);
+		$wynik=$this->requestApi($temp,$adres);
 	
 		$wynik=json_decode($wynik);
 		$lista="";
@@ -25,9 +26,53 @@ class Admin extends Student{
 			return $lista;
 	}
 	
+public function wyswietlStudentow()
 	
-	
+	{
+		$userId=$_SESSION['userId'];
+		$temp='id_uzytkownik='.$userId.'&poziom=1';
 		
+		$adres=$this->api->showAllUsers;
+		$wynik=$this->requestApi($temp,$adres);
+		$wynik=json_decode($wynik);
+		
+		$lista="";
+			$x="'";
+			foreach($wynik->result as $odbior)
+			{
+				$lista='<tr onmouseover="toggleClass(this,'.$x.'trOver'.$x.')"<th></th><td>&nbsp;'.$odbior->imie.'</td><td>&nbsp;'.$odbior->nazwisko.'</td><td>&nbsp;'.$odbior->telefon.'</td><td>&nbsp;'.$odbior->id_wydzial.
+				'</td><td>&nbsp;'.$odbior->kierunek.'</td><td>&nbsp;'.$odbior->rok.'</td></tr>'.$lista;
+			
+			}
+			
+			return $lista;
+		
+	}
+	
+	
+	public function wyswietlProwadzacych()
+	
+	{
+		$userId=$_SESSION['userId'];
+		$temp='id_uzytkownik='.$userId.'&poziom=2';
+		
+		$adres=$this->api->showAllUsers;
+		$wynik=$this->requestApi($temp,$adres);
+		$wynik=json_decode($wynik);
+		
+		$lista="";
+		$x="'";
+		
+			foreach($wynik->result as $odbior)
+			{
+				$lista='<tr onmouseover="toggleClass(this,'.$x.'trOver'.$x.')"<th></th><td>&nbsp;'.$odbior->imie.'</td><td>'.$odbior->nazwisko.'</td><td>'.$odbior->telefon.'</td><td>'.$odbior->id_wydzial.
+				'</td><td>'.$odbior->id_katedra.'</td><td>'.$odbior->stanowisko.'</td><td>'.$odbior->tytul.'</td></tr>'.$lista;
+			
+			}
+			return $lista;
+	}
+		
+	
 		public function dezaktywuj()
 		{	
 			
@@ -55,9 +100,10 @@ public function uzupelnienieFormularza()
 		$a=strpos($id_uzytkownik, 'login') ;
 		$id_uzytkownik=substr($id_uzytkownik, 0, $a);
 		$id_uzytkownik=substr($id_uzytkownik,14);
-			
 		$adres=$this->api->showAllUsers;
-		$wynik=$this->requestApi('id_uzytkownik=3',$adres);
+		$userId=$_SESSION['userId'];
+		$temp='id_uzytkownik='.$userId;
+		$wynik=$this->requestApi($temp,$adres);
 		$wynik=json_decode($wynik);
 		$lista="";
 		

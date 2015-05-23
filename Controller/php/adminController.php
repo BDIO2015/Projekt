@@ -58,9 +58,21 @@ class adminController{
 				$this->admin->edytujKontoUsera();
 				break;
 				
+				case "Studenci":
 				
-			
-			}		
+				$wynik=$this->admin->wyswietlStudentow();
+				$wynik=$this->admin->podmien("View/admin/container/containerStudenci.html",$wynik,"{studenci}");
+				$this->gui->setContainer($wynik);
+				break;		
+
+				case "Prowadzący":
+				
+				$wynik=$this->admin->wyswietlProwadzacych();
+				$wynik=$this->admin->podmien("View/admin/container/containerProwadzacy.html",$wynik,"{prowadzacy}");
+				$this->gui->setContainer($wynik);
+				break;	
+				
+				}		
 				
 		}
 			$this->gui->showGui();

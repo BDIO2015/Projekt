@@ -48,7 +48,45 @@ $(document).ready(function(e) {
 		var ocena=$("#ocena").val();
 		var uwagi=$("#uwagiOcena").val();
 		wstawOcena(ocena,uwagi);
-	})
+	});
+	$("#resetPass").submit(function(e) {
+		var username = $("input[name='username']").val();
+		var email = $('input[name="email"]').val();
+		
+		e.preventDefault();
+		resetujHaslo(username, email);
+	});
+	
+function resetujHaslo(username, email)
+{
+	if (!username.length && !email.length) {
+		alert('Wypełnij wszystkie pola');
+		return;
+	}
+	
+	$.ajax('ajaxController.php', {
+		dataType: 'json',
+		method: 'POST',
+		data: {
+			przyciskGosc: "resetPass",
+			username: username,
+			email: email
+		}
+	}).done(function(json) {
+		console.log(json);
+		switch (json.status) {
+			case 200:
+				window.location = 'index.php';
+				alert('Nowe hasło zostało wysłane na emaila');
+			break;
+			case 400:
+			case 404:
+				alert(json.result);
+			break;
+		}
+	});
+}
+
 function rejestruj(username,pass,mail,level,name,surname){
 	$.ajax({
 		url:'ajaxController.php',

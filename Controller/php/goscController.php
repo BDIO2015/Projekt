@@ -18,7 +18,7 @@ class goscController{
 	{
 		if(isset($_POST['przyciskGosc']) || isset($_GET['przyciskGosc']))
 		{
-			isset($_POST['przyciskGosc'])?$method=$_POST['przyciskGosc']:$method=$_GET['przyciskGosc'];
+			$method= isset($_POST['przyciskGosc'])? $_POST['przyciskGosc']: $_GET['przyciskGosc'];
 			switch($method)
 			{
 				case "login":													
@@ -33,7 +33,7 @@ class goscController{
 				case "Zapomniałem hasła":
 					$this->gui->setContainer("View/gosc/container/containerResetHasla.html");
 				break;
-				case "Wyślij":
+				case "resetPass":
 						return $this->gosc->resetPass();		
 				break;
 			}

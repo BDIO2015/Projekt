@@ -160,6 +160,25 @@ class Student extends Gosc{
 			return $lista;
 		}
 	}
+	
+	public function pobierzMojaListeProjektow($idUzytkownik)
+	{
+		$adres=$this->api->getProjectsWithUser;
+		$wynik=$this->requestApi("id_uzytkownik=$idUzytkownik",$adres);
+		$wynik=json_decode($wynik);
+		if($wynik->status=200)
+		{
+			$lista="";
+			foreach($wynik->result as $odbior)
+			{
+				$lista='<tr><td><a href="?przyciskStudent=pobierzProjekt&idProjekt='.$odbior->id_projekt.'">'.$odbior->nazwa.'</a></td></tr>'.$lista;
+			}
+			$lista='<table>'.$lista.'</table>';
+			$_SESSION['result']=$wynik->result;
+			return $lista;
+		}
+	}
+	
 	public function wyswietlStudentow($idProjektu,$zatwierdzony)
 	{
 		$wiadomosc='id_projekt='.$idProjektu.'&zatwierdzony='.$zatwierdzony;

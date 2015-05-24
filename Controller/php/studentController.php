@@ -31,7 +31,10 @@ class studentController{
 							$this->gui->setContainer($wynik);
 							break;
 						case "moje":
-							$this->gui->setContainer("View/student/container/containerNowyProjektStudent.html");										
+							$wynik=$this->student->pobierzMojaListeProjektow($_SESSION['userId']);
+							$wynik=$this->student->podmien("View/student/container/containerProjekty.html",$wynik,"{projekty}");
+							$this->gui->setContainer($wynik);
+							break;								
 						break;
 						case "zakonczone":
 							$this->gui->setContainer("View/student/container/containerZakonczoneProjektyStudent.html");										

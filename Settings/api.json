@@ -13,6 +13,8 @@
     "getProject": "http://deveo.pl/efdi/webAPI/getProject",
     "getProjects": "http://deveo.pl/efdi/webAPI/getProjects",
 	"getProjectsWithUser": "http://deveo.pl/efdi/webAPI/getProjectsWithUser",
+	"addRaport": "http://deveo.pl/efdi/webAPI/addRaport",
+	"getRaports": "http://deveo.pl/efdi/webAPI/getRaports",
     "archiveProject": "http://deveo.pl/efdi/webAPI/archiveProject",
     "getFromArchiv": "http://deveo.pl/efdi/webAPI/getFromArchiv",
     "addThread": "http://deveo.pl/efdi/webAPI/addThread",

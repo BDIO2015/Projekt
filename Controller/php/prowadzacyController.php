@@ -43,7 +43,7 @@ class prowadzacyController{
 				case "pobierzProjekt":
 					$_SESSION['idProjektu']=$_GET['idProjekt'];
 					$wynik=$this->prowadzacy->pokazProjekt($_GET['idProjekt'],"View/prowadzacy/container/containerProjektProwadzacy.html");
-					$wynik=$wynik.$this->prowadzacy->pobierzWatki($_GET['idProjekt']);
+					$wynik=$wynik.$this->prowadzacy->pobierzRaporty($_GET['idProjekt']).$this->prowadzacy->pobierzWatki($_GET['idProjekt']);
 					$wynik=$this->prowadzacy->podmien($wynik,$this->prowadzacy->wyswietlStudentow($_GET['idProjekt'],1),'{uczestnicy}');
 					$wynik=$this->prowadzacy->podmien($wynik,$this->prowadzacy->wyswietlStudentow($_GET['idProjekt'],0),'{oczekujacy}');
 					$this->gui->setContainer($wynik);

@@ -222,13 +222,34 @@ class Student extends Gosc{
 				}
 		return 0;
 	}
-	public function nowyWatek($idProjektu)
+	
+	public function nowyRaport($idProjektu)
 	{
 		$tresc=$_POST['tresc'];
-		$adres=$this->api->addThread;
+		$adres=$this->api->addRaport;
 		$wiadomosc='id_projekt='.$idProjektu.'&text='.$tresc;
 		$wynik=$this->requestApi($wiadomosc,$adres);
 		return $wynik;
+	}
+	
+	public function pobierzRaporty($idProjektu)
+	{
+		$wiadomosc='id_projekt='.$idProjektu;
+		$adres=$this->api->getRaports;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+		$wynik=json_decode($wynik);
+		$lista="";
+		if($wynik->status=200)
+		{
+			foreach($wynik->result as $odbierz)
+			{
+				$lista .='<div>'.$odbierz->date.'<br />'.$odbierz->text.'</div>';
+			}
+			$lista='<div id="raports">'.$lista.'</div>';
+			$_SESSION['result']=$wynik->result;
+		}
+		
+		return $lista;
 	}
 	
 	public function pobierzWatki($idProjektu)

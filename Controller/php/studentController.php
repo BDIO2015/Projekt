@@ -45,13 +45,21 @@ class studentController{
 					$_SESSION['idProjektu']=$_GET['idProjekt'];
 					$wynik=$this->student->pokazProjekt($_GET['idProjekt'],"View/student/container/containerProjektStudent.html");
 					$wynik=$this->student->podmien($wynik,$this->student->wyswietlStudentow($_GET['idProjekt'],1),'{uczestnicy}');
-					$wynik=$wynik.$this->student->pobierzWatki($_GET['idProjekt']);
+					$wynik=$wynik.$this->student->pobierzRaporty($_GET['idProjekt']).$this->student->pobierzWatki($_GET['idProjekt']);
 					$this->gui->setContainer($wynik);
 				break;
 				
 				case "Dodaj mnie do projektu":
 					$wynik=$this->student->dolaczenieDoProjektu($_SESSION['idProjektu']);
 				
+				break;
+				
+				case "Nowy raport":
+					$this->gui->setContainer("View/student/container/containerNowyRaport.html");
+				break;
+				
+				case "Stwórz raport":
+					return $this->student->nowyRaport($_SESSION['idProjektu']);
 				break;
 				
 				case "Wyloguj":															

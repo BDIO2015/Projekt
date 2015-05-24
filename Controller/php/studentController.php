@@ -41,6 +41,7 @@ class studentController{
 				case "pobierzProjekt":
 					$_SESSION['idProjektu']=$_GET['idProjekt'];
 					$wynik=$this->student->pokazProjekt($_GET['idProjekt'],"View/student/container/containerProjektStudent.html");
+					$wynik=$this->student->podmien($wynik,$this->student->wyswietlStudentow($_GET['idProjekt'],1),'{uczestnicy}');
 					$wynik=$wynik.$this->student->pobierzWatki($_GET['idProjekt']);
 					$this->gui->setContainer($wynik);
 				break;

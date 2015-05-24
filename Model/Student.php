@@ -160,6 +160,31 @@ class Student extends Gosc{
 			return $lista;
 		}
 	}
+	public function wyswietlStudentow($idProjektu,$zatwierdzony)
+	{
+		$wiadomosc='id_projekt='.$idProjektu.'&zatwierdzony='.$zatwierdzony;
+		$adres=$this->api->getUsers;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+		$wynik=json_decode($wynik);
+		if($wynik->status=200)
+		{
+			$lista="";
+			foreach($wynik->result as $odbior)
+			{
+				if($zatwierdzony==0)
+				{
+					$lista=$lista.'<tr><td>'.$odbior->login.'</td></tr>';
+				}
+				else
+				{
+					$lista=$lista.'<tr><td>'.$odbior->login.'</td></tr>';
+				}
+			}
+			$lista='<table>'.$lista.'</table>';
+			$_SESSION['result']=$wynik->result;
+			return $lista;
+		}
+	}
 	public function pokazProjekt($idProjektu,$adresFormularza)
 	{				
 				$wiadomosc='id_projekt='.$idProjektu;

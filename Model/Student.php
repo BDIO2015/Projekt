@@ -148,7 +148,7 @@ class Student extends Gosc{
 		$adres=$this->api->getProjects;
 		$wynik=$this->requestApi("",$adres);
 		$wynik=json_decode($wynik);
-		if($wynik->status=200)
+		if($wynik->status==200)
 		{
 			$lista="";
 			foreach($wynik->result as $odbior)
@@ -166,7 +166,7 @@ class Student extends Gosc{
 		$adres=$this->api->getProjectsWithUser;
 		$wynik=$this->requestApi("id_uzytkownik=$idUzytkownik",$adres);
 		$wynik=json_decode($wynik);
-		if($wynik->status=200)
+		if($wynik->status==200)
 		{
 			$lista="";
 			foreach($wynik->result as $odbior)
@@ -185,7 +185,7 @@ class Student extends Gosc{
 		$adres=$this->api->getUsers;
 		$wynik=$this->requestApi($wiadomosc,$adres);
 		$wynik=json_decode($wynik);
-		if($wynik->status=200)
+		if($wynik->status==200)
 		{
 			$lista="";
 			foreach($wynik->result as $odbior)
@@ -208,15 +208,32 @@ class Student extends Gosc{
 	{				
 				$wiadomosc='id_projekt='.$idProjektu;
 				$adres=$this->api->getProject;
-				$wynik=$this->requestApi($wiadomosc,$adres);
-				$wynik=json_decode($wynik);
-				if($wynik->status=200)
+				$wynikProjekt=$this->requestApi($wiadomosc,$adres);
+				$adres=$this->api->getGrade;
+				$wynikOcena=$this->requestApi($wiadomosc,$adres);
+				$wynikProjekt=json_decode($wynikProjekt);
+				$wynikOcena=json_decode($wynikOcena);
+				if($wynikProjekt->status==200)
 				{
 					if(file_exists($adresFormularza)){
 						$html=file_get_contents($adresFormularza);
-						$_SESSION['nazwaProjektu']=$wynik->result->nazwa;
-						$wynik='<br \>Nazwa='.$wynik->result->nazwa.'<br \>Opis='.$wynik->result->opis.'<br \>Termin='.$wynik->result->termin.'<br \>Miejsce='.$wynik->result->miejsce.'<br \>Wytyczne='.$wynik->result->wytyczne.'<br \>Id oceny='.$wynik->result->id_ocena;
-						$html=str_replace('{wynik}',$wynik,$html);
+						$_SESSION['nazwaProjektu']=$wynikProjekt->result->nazwa;
+						$replace='<p>Nazwa='.$wynikProjekt->result->nazwa.'</p>';
+						$replace=$replace.'<p>Opis='.$wynikProjekt->result->opis.'</p>';
+						$replace=$replace.'<p>Termin='.$wynikProjekt->result->termin.'</p>';
+						$replace=$replace.'<p>Miejsce='.$wynikProjekt->result->miejsce.'</p>';
+						$replace=$replace.'<p>Wytyczne='.$wynikProjekt->result->wytyczne.'</p>';
+						if($wynikOcena->status==200)
+						{
+							$replace=$replace.'<p>Ocena='.$wynikOcena->result[0]->ocena.'</p>';
+							$replace=$replace.'<p>Komentarz do oceny='.$wynikOcena->result[0]->komentarz.'</p>';
+						}
+						else
+						{
+							$replace=$replace.'<p>Ocena= Brak</p>';
+							$replace=$replace.'<p>Komentarz do oceny= Brak</p>';
+						}
+						$html=str_replace('{wynik}',$replace,$html);
 					}
 					return $html;
 				}
@@ -239,7 +256,7 @@ class Student extends Gosc{
 		$wynik=$this->requestApi($wiadomosc,$adres);
 		$wynik=json_decode($wynik);
 		$lista="";
-		if($wynik->status=200)
+		if($wynik->status==200)
 		{
 			foreach($wynik->result as $odbierz)
 			{
@@ -258,7 +275,7 @@ class Student extends Gosc{
 		$adres=$this->api->getThreads;
 		$wynik=$this->requestApi($wiadomosc,$adres);
 		$wynik=json_decode($wynik);
-		if($wynik->status=200)
+		if($wynik->status==200)
 		{
 			$lista="";
 			foreach($wynik->result->watki as $odbierz)

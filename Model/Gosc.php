@@ -54,13 +54,6 @@
 		$wiadomosc='email='.$email.'&login='.$username.'&haslo='.$password.'&poziom='.$poziom.'&imie='.$name.'&nazwisko='.$surname;
 		$adres=$this->api->createUser;															
 		$wynik=$this->requestApi($wiadomosc,$adres);
-		$wynik=json_decode($wynik);
-		if($wynik->status==201)
-		{
-			$_SESSION['userProjekt']=$username;
-			$_SESSION['poziom']=$poziom;
-		}
-		$wynik=json_encode($wynik);
 		return $wynik;
 	}
 	public function podmien($adres,$tresc,$slowoKlucz)

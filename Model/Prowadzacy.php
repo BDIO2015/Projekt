@@ -46,7 +46,7 @@ class Prowadzacy extends Student{
 		$adres=$this->api->getProjects;
 		$wynik=$this->requestApi("",$adres);
 		$wynik=json_decode($wynik);
-		if($wynik->status=200)
+		if($wynik->status==200)
 		{
 			
 			$lista="";
@@ -66,7 +66,7 @@ class Prowadzacy extends Student{
 		$adres=$this->api->getThreads;
 		$wynik=$this->requestApi($wiadomosc,$adres);
 		$wynik=json_decode($wynik);
-		if($wynik->status=200)
+		if($wynik->status==200)
 		{
 			$lista="";
 			foreach($wynik->result->watki as $odbierz)
@@ -85,7 +85,7 @@ class Prowadzacy extends Student{
 		$adres=$this->api->getUsers;
 		$wynik=$this->requestApi($wiadomosc,$adres);
 		$wynik=json_decode($wynik);
-		if($wynik->status=200)
+		if($wynik->status==200)
 		{
 			$lista="";
 			foreach($wynik->result as $odbior)
@@ -111,7 +111,7 @@ class Prowadzacy extends Student{
 		$adres=$this->api->activateUser;
 		$wynik=$this->requestApi($wiadomosc,$adres);
 		$wynik=json_decode($wynik);
-		if($wynik->status=200)
+		if($wynik->status==200)
 		{
 			$wynik=json_encode($wynik);
 			return $wynik;
@@ -123,16 +123,10 @@ class Prowadzacy extends Student{
 		$idKoordynator=$_SESSION['userId'];
 		$ocena=$_POST['ocena'];
 		$komentarz=$_POST['komentarz'];
-		$wiadomosc='id_projekt='.$idProjektu.'&id_koordynator='.$idKoordynator.'&ocena'.$ocena.'&komentarz'.$komentarz;
+		$wiadomosc='id_projekt='.$idProjektu.'&id_koordynator='.$idKoordynator.'&ocena='.$ocena.'&komentarz='.$komentarz;
 		$adres=$this->api->evaluateProject;
 		$wynik=$this->requestApi($wiadomosc,$adres);
-		$wynik=json_decode($wynik);
-		if($wynik->status=200)
-		{
-			
-			$wynik=json_encode($wynik);
-			return $wynik;
-		}
+		return $wynik;
 	}
 	public function pobierzWatek($idWatku)
 	{
@@ -140,7 +134,7 @@ class Prowadzacy extends Student{
 		$adres=$this->api->getThread;
 		$wynik=$this->requestApi($wiadomosc,$adres);
 		$wynik=json_decode($wynik);
-		if($wynik->status=200)
+		if($wynik->status==200)
 		{
 			$lista='<tr><td style="width: 10%;">'.$wynik->result->date.'</td><td colspan="2">'.$wynik->result->text.'</td></tr>';
 			foreach($wynik->result->komentarze as $odbierz)
@@ -194,7 +188,7 @@ class Prowadzacy extends Student{
 		$adres=$this->api->showAllUsers;
 		$wynik=$this->requestApi($wiadomosc,$adres);
 		$wynik=json_decode($wynik);
-		if($wynik->status=200)
+		if($wynik->status==200)
 		{
 			$lista="";
 			foreach($wynik->result as $odbior)

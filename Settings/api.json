@@ -35,6 +35,6 @@
 	"getUsers": "http://deveo.pl/efdi/webAPI/getUsers",
 	"activateUser": "http://deveo.pl/efdi/webAPI/activateUser",
 	"evaluateProject": "http://deveo.pl/efdi/webAPI/evaluateProject",
-	"resetPass": "http://deveo.pl/efdi/webAPI/resetPass"
-	
+	"resetPass": "http://deveo.pl/efdi/webAPI/resetPass",
+	"getGrade": "http://deveo.pl/efdi/webAPI/getGrade"
 }

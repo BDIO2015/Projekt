@@ -33,7 +33,6 @@ class Controller{
 	}
 	public function load()
 	{
-		
 		$user=$this->user();
 		switch($user)
 		{
@@ -54,8 +53,6 @@ class Controller{
 				$adminController->adminLoad();
 			break;
 		}
-		
-		
 	}
 }
 ?>

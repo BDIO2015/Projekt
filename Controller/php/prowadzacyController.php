@@ -43,9 +43,10 @@ class prowadzacyController{
 				case "pobierzProjekt":
 					$_SESSION['idProjektu']=$_GET['idProjekt'];
 					$wynik=$this->prowadzacy->pokazProjekt($_GET['idProjekt'],"View/prowadzacy/container/containerProjektProwadzacy.html");
-					$wynik=$wynik.$this->prowadzacy->pobierzRaporty($_GET['idProjekt']).$this->prowadzacy->pobierzWatki($_GET['idProjekt']);
+					$wynik=$wynik.$this->prowadzacy->pobierzWatki($_GET['idProjekt']);
 					$wynik=$this->prowadzacy->podmien($wynik,$this->prowadzacy->wyswietlStudentow($_GET['idProjekt'],1),'{uczestnicy}');
 					$wynik=$this->prowadzacy->podmien($wynik,$this->prowadzacy->wyswietlStudentow($_GET['idProjekt'],0),'{oczekujacy}');
+					$wynik=$this->prowadzacy->podmien($wynik,$this->prowadzacy->wyswietlWszystkichStudentow(),'{wszyscy}');
 					$this->gui->setContainer($wynik);
 				break;
 				case "stworz":
@@ -65,14 +66,39 @@ class prowadzacyController{
 				break;
 				
 				case "akceptujStudentaPrzycisk":
-					$_SESSION['idStudent']=$_GET['idStudenta'];
-				    $this->prowadzacy->akceptujStudenta($_SESSION['idProjektu'],$_SESSION['idStudent']);
+					 $_SESSION['idStudent']=$_GET['idStudenta'];
+					 $this->prowadzacy->dolaczenieStudentaDoProjektu($_SESSION['idProjektu'],$_SESSION['idStudent']);
+				   	return $this->prowadzacy->akceptujStudenta($_SESSION['idProjektu'],$_SESSION['idStudent']);
+				break;
+				
+				case "usunStudentaPrzycisk":
+					 $_SESSION['idStudent']=$_GET['idStudenta'];
+					 $this->prowadzacy->usuniecieStudentaZProjektu($_SESSION['idProjektu'],$_SESSION['idStudent']);
 				break;
 				case "Ocena":
 					$this->gui->setContainer("View/prowadzacy/container/containerOcenaProwadzacy.html");	
 				break;
 				case "wstawOcena":
 					return $this->prowadzacy->wstawOcene();
+				break;
+				case "pobierzKomentarz":
+					$_SESSION['idWatek']=$_GET['idWatek'];
+					$wynik=$this->prowadzacy->pobierzWatek($_SESSION['idWatek']);
+					$this->gui->setContainer($wynik);
+				break;
+				case "Nowy Komentarz":
+					$this->gui->setContainer("View/prowadzacy/container/containerNowyKomentarz.html");
+				break;
+				case "Dodaj komentarz":
+					$this->prowadzacy->nowyKomentarz($_SESSION['idProjektu'],$_SESSION['idWatek']);
+				break;
+				case "usunKomentarz":
+					$this->prowadzacy->usunKomentarz();
+					$wynik=$this->prowadzacy->pobierzWatek($_SESSION['idWatek']);
+					$this->gui->setContainer($wynik);
+				break;
+				case "Usuń Wątek":
+					$this->prowadzacy->usunWatek($_SESSION['idWatek']);
 				break;
 			}
 		}

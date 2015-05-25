@@ -389,39 +389,7 @@ function usunProjekt(){
 			
 }
 
-$("input#stworzWatek").click(function(){ //zdarzenie obslugujące przycisk archiwizuj
-	var tresc=$("#trescWatku").val();;
-	if(tresc.length!=0)
-	{
-		nowyWatek(tresc);
-	}
-	});
-	function nowyWatek(trescWatku){
-		$.ajax({
-				url:'ajaxController.php',
-				dataType:'json',
-				type:'POST',
-				data:{
-					"przyciskProwadzacy":"Stwórz Wątek",
-					"tresc":trescWatku
-					},
-				success : function(json) {
-           				 if(json["status"]==201)
-						 {
-							alert("Wątek został dodany");
-							window.open('index.php','_self');
-						 }
-						 else
-						 {
-							 $(".input_form").css({ border:"#FF0033 solid 2px"});
-							 alert("Nie udalo sie :(");
-						 }
-				},
-				error : function(err) {
-					alert("Blad");
-					}
-					});
-					}
+
 					
 	$("input#dodajDoProjektu").click(function(){
 	
@@ -457,6 +425,218 @@ $("input#stworzWatek").click(function(){ //zdarzenie obslugujące przycisk archi
 					}
 			});
 			}
+			
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	$("input#stworzWatek").click(function(){ //zdarzenie obslugujące przycisk archiwizuj
+	var tresc=$("#trescWatku").val();;
+	if(tresc.length!=0)
+	{
+		nowyWatek(tresc);
+	}
+	});
+	function nowyWatek(trescWatku){
+		$.ajax({
+				url:'ajaxController.php',
+				dataType:'json',
+				type:'POST',
+				data:{
+					"przyciskProwadzacy":"Stwórz Wątek",
+					"tresc":trescWatku
+					},
+				success : function(json) {
+           				 if(json["status"]==201)
+						 {
+							alert("Wątek został dodany");
+							window.open('index.php','_self');
+						 }
+						 else
+						 {
+							 $(".input_form").css({ border:"#FF0033 solid 2px"});
+							 alert("Nie udalo sie :(");
+						 }
+				},
+				error : function(err) {
+					alert("Blad");
+					}
+					});
+					}
 	$("input#dodajKomentarz").click(function(){ //zdarzenie obslugujące przycisk dodajKomentarz
 		
 		var tresc=$("#trescKomentarza").val();

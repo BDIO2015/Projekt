@@ -119,6 +119,29 @@ class Prowadzacy extends Student{
 			return $lista;
 		}
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public function nowyKomentarz($idProjektu,$idWatku){
 		$trescKomentarza=$_POST['trescKomentarza'];
 		$wiadomosc='id_projekt='.$idProjektu.'&id_nadrzedny='.$idWatku.'&text='.$trescKomentarza;

@@ -65,6 +65,15 @@ class prowadzacyController{
 				case "Usuń projekt":
 					return $this->prowadzacy->usunProjekt($_SESSION['idProjektu']);
 				break;
+				
+				
+				
+				
+				
+				
+				
+				
+				
 				case "Nowy Wątek":
 					$this->gui->setContainer("View/prowadzacy/container/containerNowyWatek.html");										
 				break;

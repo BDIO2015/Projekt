@@ -60,7 +60,7 @@ class adminController{
 				
 				case "Studenci":
 				
-				$wynik=$this->admin->wyswietlStud();
+				$wynik=$this->admin->wyswietlStudentow();
 				$wynik=$this->admin->podmien("View/admin/container/containerStudenci.html",$wynik,"{studenci}");
 				$this->gui->setContainer($wynik);
 				break;		
@@ -72,22 +72,7 @@ class adminController{
 				$this->gui->setContainer($wynik);
 				break;	
 				
-				case "Resetuj Hasło":
-				$this->admin->passReset();
-				$wynik=$this->admin->pobierzUzytkownikow();
-				$wynik=$this->admin->podmien("View/admin/container/containerAdministracji.html",$wynik,"{opc}");
-				$this->gui->setContainer($wynik);
-				break;
-				
-				case "Projekty":
-				$wynik=$this->admin->wyswietlProjekty();
-				$wynik=$this->admin->podmien("View/admin/container/containerProjekty.html",$wynik,"{projekty}");
-				$this->gui->setContainer($wynik);
-				break;	
-				
-				
-			
-			}		
+				}		
 				
 		}
 			$this->gui->showGui();

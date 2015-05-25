@@ -105,7 +105,7 @@ class Prowadzacy extends Student{
 				}
 				else
 				{
-					$lista=$lista.'<tr><td>'.$odbior->login.'</tr></td>';
+					$lista=$lista.'<tr><td>'.$odbior->login.'<a href="?przyciskProwadzacy=usunStudentaPrzycisk&idStudenta='.$odbior->id_uzytkownik.'"> Usuń</tr></td>';
 				}
 =======
 				$lista=$lista.'<tr><td>'.$odbior->login.'</tr></td>';
@@ -187,6 +187,46 @@ class Prowadzacy extends Student{
 		$adres=$this->api->deleteThread;
 		$wynik=$this->requestApi($wiadomosc,$adres);
 >>>>>>> 35a4478e278ee7afb6d0cfe5670a30ee6c714053
+	}
+	
+	public function wyswietlWszystkichStudentow()
+	{
+		
+		$idKoordynator=$_SESSION['userId'];
+		$poz=1;
+		$wiadomosc='id_uzytkownik='.$idKoordynator.'&poziom='.$poz;
+		$adres=$this->api->showAllUsers;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+		$wynik=json_decode($wynik);
+		if($wynik->status=200)
+		{
+			$lista="";
+			foreach($wynik->result as $odbior)
+			{
+					$lista=$lista.'<tr><td>'.$odbior->login.'<a href="?przyciskProwadzacy=akceptujStudentaPrzycisk&idStudenta='.$odbior->id_uzytkownik.'"> Dodaj</tr></td>';
+			}
+			$lista='<table>'.$lista.'</table>';
+			$_SESSION['result']=$wynik->result;
+			return $lista;
+		}
+	}
+	
+	public function dolaczenieStudentaDoProjektu($idProjektu,$idStudent)
+	{
+		$wiadomosc='id_uzytkownik='.$idStudent.'&id_projekt='.$idProjektu;
+		$adres=$this->api->addUser;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+		$wynik=json_decode($wynik);
+		return $wynik;
+	}
+	
+	public function usuniecieStudentaZProjektu($idProjektu,$idStudent)
+	{
+		$wiadomosc='id_projekt='.$idProjektu.'&id_uzytkownik='.$idStudent;
+		$adres=$this->api->removeUser;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+		$wynik=json_decode($wynik);
+		return $wynik;
 	}
 }
 ?>

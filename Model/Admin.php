@@ -149,7 +149,7 @@ public function uzupelnienieFormularza()
 				$id_sieciowy=$odbior->id_sieciowy;
 				}
 			}
-			
+	}
 		public function passReset()
 		{
 			$id_uzytkownik=$_POST['uzytkownicy'];
@@ -177,11 +177,8 @@ public function uzupelnienieFormularza()
 			$wynik=json_decode($wynik);
 			
 			if($wynik->status==200) echo("<SCRIPT LANGUAGE='JavaScript'>window.alert('Hasło zostało zresetowane pomyslnie')</SCRIPT>"); 
-		}
-		
 		return $wynik='Edycja danych osobowych:
-		<form id="edytujUser">
-		
+		<form id="edytujUser">		
 		Imię: <input type="text" name="imie"id="imie" value="'.$imie.'" /><br />
 		Nazwisko: <input type="text" name="nazwisko"id="nazwisko" value="'.$nazwisko.'"/><br />
 		Nr telefonu: <input type="text" name="nrtel"id="nrtel" value="'.$telefon.'"/><br />
@@ -190,7 +187,6 @@ public function uzupelnienieFormularza()
 		ID specjalizacji: <input type="text" name="idspec"id="idspec" value="'.$id_specjalizacja.'"/><br />
 		ID katedry: <input type="text" name="idkat"id="idkat" value="'.$id_katedra.'"/><br />
 		ID sieciowe: <input type="text" name="idsiec"id="idsiec"value="'.$id_sieciowy.'" /><br />
-		
 		<input type="submit" value="Wprowadź zmiany" name="przyciskAdmin" id="wprowadzZmiany" /><br />
 		</form>';
 		
@@ -213,20 +209,6 @@ public function uzupelnienieFormularza()
 		$adres=$this->api->updateUser;
 		$wynik=$this->requestApi($wiadomosc,$adres);
 		
-	}
-			
-		
-		
-		
-	public function podmien($adres,$tresc,$slowoKlucz)
-	{
-		if(file_exists($adres))
-		{
-			$adres=file_get_contents($adres);
-			return str_replace($slowoKlucz,$tresc,$adres);
-		}
-		else
-		return "Blad";
 	}
 }
 ?>

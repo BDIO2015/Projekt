@@ -534,6 +534,7 @@ $("input#stworzWatek").click(function(){ //zdarzenie obslugujące przycisk archi
 						alert("Blad");
 					}
 			});
+<<<<<<< HEAD
 			}	
 			
 			$("input#akceptujStudentaPrzycisk").click(function(){
@@ -542,16 +543,40 @@ $("input#stworzWatek").click(function(){ //zdarzenie obslugujące przycisk archi
 	});
 		function akceptujStudenta(){
 			$.ajax({
+=======
+			}
+	$("input#dodajKomentarz").click(function(){ //zdarzenie obslugujące przycisk dodajKomentarz
+		
+		var tresc=$("#trescKomentarza").val();
+		if(tresc.length!=0)
+		{
+			nowyKomentarz(tresc);
+		}
+		
+	});
+	function nowyKomentarz(tresc){
+		$.ajax({
+>>>>>>> 35a4478e278ee7afb6d0cfe5670a30ee6c714053
 				url:'ajaxController.php',
 				dataType:'json',
 				type:'POST',
 				data:{
+<<<<<<< HEAD
 					"przyciskProwadzacy":"akceptujStudentaPrzycisk"
 					},
 					success:function(json){
 						if(json["status"]==200)
 						{
 							alert("Student zostal dolaczony");
+=======
+					"przyciskProwadzacy":"Dodaj komentarz",
+					"trescKomentarza":tresc
+					},
+					success:function(json){
+						if(json["status"]==201)
+						{
+							alert("Dodano komentarz");
+>>>>>>> 35a4478e278ee7afb6d0cfe5670a30ee6c714053
 							window.open('index.php','_self');
 						}
 						else if(json["status"]==400)
@@ -569,20 +594,34 @@ $("input#stworzWatek").click(function(){ //zdarzenie obslugujące przycisk archi
 						alert("Blad");
 					}
 			});
+<<<<<<< HEAD
 			}
 	function wstawOcena(ocena,uwagiOcena){
 			$.ajax({
+=======
+	}
+	$("input#usunKomentarz").click(function(){ //zdarzenie obslugujące przycisk usunKomentarz
+		usunKomentarz();
+	})
+	function usunKomentarz(){
+		$.ajax({
+>>>>>>> 35a4478e278ee7afb6d0cfe5670a30ee6c714053
 				url:'ajaxController.php',
 				dataType:'json',
 				type:'POST',
 				data:{
+<<<<<<< HEAD
 					"przyciskProwadzacy":"wstawOcena",
 					"ocena":ocena,
 					"komentarz":uwagiOcena					
+=======
+					"przyciskProwadzacy":"usunKomentarz"
+>>>>>>> 35a4478e278ee7afb6d0cfe5670a30ee6c714053
 					},
 					success:function(json){
 						if(json["status"]==200)
 						{
+<<<<<<< HEAD
 							alert("Ocena dodana");
 							window.open('index.php','_self');
 						}
@@ -593,17 +632,67 @@ $("input#stworzWatek").click(function(){ //zdarzenie obslugujące przycisk archi
 						else if(json.status==401)
 						{
 							alert("Nie masz dostępu do tego projektu");
+=======
+							alert("Usunięto komentarz");
+							
+						}
+						else if(json["status"]==400)
+						{
+							alert("zle param");
+						
 						}
 						else
 						{
 							alert("Nie udało się");
+						
 						}
 					},
 					error:function(err){
 						alert("Blad");
 					}
 			});
+	}
+	$("input#usunWatek").click(function(){ //zdarzenie obslugujące przycisk usunWatek
+		usunWatek();
+	})
+	function usunWatek(){
+		$.ajax({
+				url:'ajaxController.php',
+				dataType:'json',
+				type:'POST',
+				data:{
+					"przyciskProwadzacy":"Usuń Wątek"
+					},
+					success:function(json){
+						if(json["status"]==200)
+						{
+							alert("Usunięto wątek");
+							
+						}
+						else if(json["status"]==400)
+						{
+							alert("zle param");
+						
+>>>>>>> 35a4478e278ee7afb6d0cfe5670a30ee6c714053
+						}
+						else
+						{
+							alert("Nie udało się");
+<<<<<<< HEAD
+=======
+						
+>>>>>>> 35a4478e278ee7afb6d0cfe5670a30ee6c714053
+						}
+					},
+					error:function(err){
+						alert("Blad");
+					}
+			});
+<<<<<<< HEAD
 			}	
+=======
+	}
+>>>>>>> 35a4478e278ee7afb6d0cfe5670a30ee6c714053
 });
 
 		function sortUnicode(a,b){return a[0].toLowerCase().localeCompare(b[0].toLowerCase());} //funkcje do sortowania tabel

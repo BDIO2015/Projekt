@@ -98,6 +98,7 @@ class Prowadzacy extends Student{
 			$lista="";
 			foreach($wynik->result as $odbior)
 			{
+<<<<<<< HEAD
 				if($zatwierdzony==0)
 				{
 					$lista=$lista.'<tr><td>'.$odbior->login.'<a href="?przyciskProwadzacy=akceptujStudentaPrzycisk&idStudenta='.$odbior->id_uzytkownik.'"> Akceptuj</tr></td>';
@@ -106,21 +107,32 @@ class Prowadzacy extends Student{
 				{
 					$lista=$lista.'<tr><td>'.$odbior->login.'</tr></td>';
 				}
+=======
+				$lista=$lista.'<tr><td>'.$odbior->login.'</tr></td>';
+>>>>>>> 35a4478e278ee7afb6d0cfe5670a30ee6c714053
 			}
 			$lista='<table>'.$lista.'</table>';
 			$_SESSION['result']=$wynik->result;
 			return $lista;
 		}
 	}
+<<<<<<< HEAD
 	
 	public function akceptujStudenta($idProjektu,$idStudent)
 	{
 		$wiadomosc='id_projekt='.$idProjektu.'&id_uzytkownik='.$idStudent;
 		$adres=$this->api->activateUser;
+=======
+	public function pobierzWatek($idWatku)
+	{
+		$wiadomosc='id_watek='.$idWatku;
+		$adres=$this->api->getThread;
+>>>>>>> 35a4478e278ee7afb6d0cfe5670a30ee6c714053
 		$wynik=$this->requestApi($wiadomosc,$adres);
 		$wynik=json_decode($wynik);
 		if($wynik->status=200)
 		{
+<<<<<<< HEAD
 			
 			$wynik=json_encode($wynik);
 			return $wynik;
@@ -142,6 +154,39 @@ class Prowadzacy extends Student{
 			$wynik=json_encode($wynik);
 			return $wynik;
 		}
+=======
+			$lista='<tr><td style="width: 10%;">'.$wynik->result->date.'</td><td colspan="2">'.$wynik->result->text.'</td></tr>';
+			foreach($wynik->result->komentarze as $odbierz)
+			{
+				$lista=$lista.'<tr><td>'.$odbierz->date.'</td><td>'.$odbierz->text.'</td><td style="width: 18px;"><a href=?przyciskProwadzacy=usunKomentarz&idKomentarz='.$odbierz->id_watek.'">X</a></td></tr>';
+
+			}
+			$lista='<table border="1" cellspacing="0" style="width:100%;">'.$lista.'</table><br />
+							<form method="get" id="obslugaProjektu">
+							<input type="submit" name="przyciskProwadzacy" id="nowyKomentarz" value="Nowy Komentarz">
+							<input type="submit" name="przyciskProwadzacy" id="usunWatek" value="Usuń Wątek">
+							</form>';
+			$_SESSION['result']=$wynik->result;
+			return $lista;
+		}
+	}
+	public function nowyKomentarz($idProjektu,$idWatku){
+		$trescKomentarza=$_POST['trescKomentarza'];
+		$wiadomosc='id_projekt='.$idProjektu.'&id_nadrzedny='.$idWatku.'&text='.$trescKomentarza;
+		$adres=$this->api->addComment;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+	}
+	public function usunKomentarz(){
+		$idKomentarza=$_GET['idKomentarz'];
+		$wiadomosc='id_watek='.$idKomentarza;
+		$adres=$this->api->deleteComment;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+	}
+	public function usunWatek($idWatku){
+		$wiadomosc='id_watek='.$idWatku;
+		$adres=$this->api->deleteThread;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+>>>>>>> 35a4478e278ee7afb6d0cfe5670a30ee6c714053
 	}
 }
 ?>

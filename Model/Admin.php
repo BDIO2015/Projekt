@@ -26,7 +26,7 @@ class Admin extends Student{
 			return $lista;
 	}
 	
-public function wyswietlStudentow()
+public function wyswietlStud()
 	
 	{
 		$userId=$_SESSION['userId'];
@@ -49,6 +49,33 @@ public function wyswietlStudentow()
 		
 	}
 	
+	public function wyswietlProjekty()
+	{
+		$adres=$this->api->getProjects;
+		$wynik=$this->requestApi("",$adres);
+		$wynik=json_decode($wynik);
+		$lista="";
+		$x="'";
+		
+		
+		foreach($wynik->result as $odbior)
+			{
+			$tab[]=$odbior->id_projekt.$lista;
+			}
+			
+			for( $x = 0, $cnt = count($tab); $x < $cnt; $x++ )
+			{
+				$adres=$this->api->getProject;
+				$wiadomosc='id_projekt='.$tab[$x];
+				$wynik=$this->requestApi($wiadomosc,$adres);
+				$wynik=json_decode($wynik);
+				$lista='<tr onmouseover="toggleClass(this,'.$x.'trOver'.$x.')"<th></th><td>&nbsp;'.$wynik->result->id_projekt.'</td><td>&nbsp;'.$wynik->result->nazwa.'</td>
+						<td>&nbsp;'.$wynik->result->opis.'</td><td>&nbsp;'.$wynik->result->termin.'</td><td>&nbsp;'.$wynik->result->miejsce.'</td><td>&nbsp;'.$wynik->result->wytyczne.'</td>
+						<td>&nbsp;'.$wynik->result->id_koordynator.'</td><td>&nbsp;'.$wynik->result->id_kierownik.'</td><td>&nbsp;'.$wynik->result->id_ocena.'</td></tr>'.$lista;
+			}
+		
+			return $lista;	
+	}
 	
 	public function wyswietlProwadzacych()
 	
@@ -123,6 +150,34 @@ public function uzupelnienieFormularza()
 				}
 			}
 			
+		public function passReset()
+		{
+			$id_uzytkownik=$_POST['uzytkownicy'];
+			$d=substr($id_uzytkownik,-1,1);
+			$a=strpos($id_uzytkownik, 'login') ;
+			$id_uzytkownik=substr($id_uzytkownik, 0, $a);
+			$id_uzytkownik=substr($id_uzytkownik,14);
+			$userId=$_SESSION['userId'];
+			$temp='id_uzytkownik='.$userId;
+			$adres=$this->api->showAllUsers;
+			$wynik=$this->requestApi($temp,$adres);
+			$wynik=json_decode($wynik);
+				foreach($wynik->result as $odbior)
+				{
+						if($id_uzytkownik==$odbior->id_uzytkownik)
+						{
+							$email=$odbior->email;
+							$login=$odbior->login;
+						}
+				}
+				
+			$temp='login='.$login.'&email='.$email;
+			$adres=$this->api->resetPass;
+			$wynik=$this->requestApi($temp,$adres);
+			$wynik=json_decode($wynik);
+			
+			if($wynik->status==200) echo("<SCRIPT LANGUAGE='JavaScript'>window.alert('Hasło zostało zresetowane pomyslnie')</SCRIPT>"); 
+		}
 		
 		return $wynik='Edycja danych osobowych:
 		<form id="edytujUser">

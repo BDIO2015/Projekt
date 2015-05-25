@@ -42,29 +42,11 @@ class prowadzacyController{
 				break;
 				case "pobierzProjekt":
 					$_SESSION['idProjektu']=$_GET['idProjekt'];
-<<<<<<< HEAD
 					$wynik=$this->prowadzacy->pokazProjekt($_GET['idProjekt'],"View/prowadzacy/container/containerProjektProwadzacy.html");
-					$wynik=$wynik.$this->prowadzacy->pobierzRaporty($_GET['idProjekt']).$this->prowadzacy->pobierzWatki($_GET['idProjekt']);
+					$wynik=$wynik.$this->prowadzacy->pobierzWatki($_GET['idProjekt']);
 					$wynik=$this->prowadzacy->podmien($wynik,$this->prowadzacy->wyswietlStudentow($_GET['idProjekt'],1),'{uczestnicy}');
 					$wynik=$this->prowadzacy->podmien($wynik,$this->prowadzacy->wyswietlStudentow($_GET['idProjekt'],0),'{oczekujacy}');
-<<<<<<< HEAD
-=======
-					$wynik=$this->prowadzacy->pokazProjekt($_GET['idProjekt']);
-					$wynik2=$this->prowadzacy->pobierzWatki($_GET['idProjekt']);
-					$wynik3=$this->prowadzacy->wyswietlStudentow($_GET['idProjekt'],1);
-					$wynik4=$this->prowadzacy->wyswietlStudentow($_GET['idProjekt'],0);
-					
-					$wynik=$wynik.'<br /><br /><form method="get" id="obslugaProjektu"><input type="submit" name="przyciskProwadzacy" id="archiwizuj" value="Archiwizuj" />
-																			<input type="submit" name="przyciskProwadzacy" id="usunProjekt" value="Usuń projekt" /><br />
-																			<br />Uczestnicy projektu:<br />'.$wynik3.'<br />Oczekujący na zatwierdzenie:<br />'.$wynik4.
-																			'<br /><input type="submit" name="przyciskProwadzacy" id="nowyWatek" value="Nowy Wątek" />
-																			</form>';
-					
-					$wynik=$wynik.'<br />'.$wynik2;
->>>>>>> 35a4478e278ee7afb6d0cfe5670a30ee6c714053
-=======
 					$wynik=$this->prowadzacy->podmien($wynik,$this->prowadzacy->wyswietlWszystkichStudentow(),'{wszyscy}');
->>>>>>> DodawanieIUsuwanieStudDoProjektu
 					$this->gui->setContainer($wynik);
 				break;
 				case "stworz":
@@ -82,25 +64,23 @@ class prowadzacyController{
 				case "Stwórz Wątek":
 					return $this->prowadzacy->nowyWatek($_SESSION['idProjektu']);
 				break;
-<<<<<<< HEAD
 				
 				case "akceptujStudentaPrzycisk":
 					 $_SESSION['idStudent']=$_GET['idStudenta'];
 					 $this->prowadzacy->dolaczenieStudentaDoProjektu($_SESSION['idProjektu'],$_SESSION['idStudent']);
-				   	 $this->prowadzacy->akceptujStudenta($_SESSION['idProjektu'],$_SESSION['idStudent']);
+				   	return $this->prowadzacy->akceptujStudenta($_SESSION['idProjektu'],$_SESSION['idStudent']);
 				break;
 				
 				case "usunStudentaPrzycisk":
 					 $_SESSION['idStudent']=$_GET['idStudenta'];
 					 $this->prowadzacy->usuniecieStudentaZProjektu($_SESSION['idProjektu'],$_SESSION['idStudent']);
 				break;
-				
 				case "Ocena":
 					$this->gui->setContainer("View/prowadzacy/container/containerOcenaProwadzacy.html");	
 				break;
 				case "wstawOcena":
 					return $this->prowadzacy->wstawOcene();
-=======
+				break;
 				case "pobierzKomentarz":
 					$_SESSION['idWatek']=$_GET['idWatek'];
 					$wynik=$this->prowadzacy->pobierzWatek($_SESSION['idWatek']);
@@ -119,7 +99,6 @@ class prowadzacyController{
 				break;
 				case "Usuń Wątek":
 					$this->prowadzacy->usunWatek($_SESSION['idWatek']);
->>>>>>> 35a4478e278ee7afb6d0cfe5670a30ee6c714053
 				break;
 			}
 		}

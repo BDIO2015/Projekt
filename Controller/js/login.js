@@ -48,45 +48,7 @@ $(document).ready(function(e) {
 		var ocena=$("#ocena").val();
 		var uwagi=$("#uwagiOcena").val();
 		wstawOcena(ocena,uwagi);
-	});
-	$("#resetPass").submit(function(e) {
-		var username = $(this).find("input[name='username']").val();
-		var email = $(this).find('input[name="email"]').val();
-		
-		e.preventDefault();
-		resetujHaslo(username, email);
-	});
-	
-function resetujHaslo(username, email)
-{
-	if (!username.length && !email.length) {
-		alert('Wypełnij wszystkie pola');
-		return;
-	}
-	
-	$.ajax('ajaxController.php', {
-		dataType: 'json',
-		method: 'POST',
-		data: {
-			przyciskGosc: "resetPass",
-			username: username,
-			email: email
-		}
-	}).done(function(json) {
-		console.log(json);
-		switch (json.status) {
-			case 200:
-				window.location = 'index.php';
-				alert('Nowe hasło zostało wysłane na emaila');
-			break;
-			case 400:
-			case 404:
-				alert(json.result);
-			break;
-		}
-	});
-}
-
+	})
 function rejestruj(username,pass,mail,level,name,surname){
 	$.ajax({
 		url:'ajaxController.php',
@@ -430,43 +392,6 @@ function usunProjekt(){
 			
 }
 
-$("#stworzRaport").submit(function(e){ //zdarzenie obslugujące przycisk archiwizuj
-	var trescInput = $(this).find("textarea[name='tresc']");
-	var tresc=trescInput.val();
-	
-	e.preventDefault();
-	if(tresc.length)
-	{
-		nowyRaport(tresc);
-	}
-});
-	function nowyRaport(tresc){
-		$.ajax({
-			url:'ajaxController.php',
-			dataType:'json',
-			type:'POST',
-			data:{
-				"przyciskProwadzacy":"Stwórz raport",
-				"tresc":tresc
-				},
-			success : function(json) {
-					 if(json["status"]==201)
-					 {
-						alert("Raport został dodany");
-						window.open('index.php','_self');
-					 }
-					 else
-					 {
-						 trescInput.css({ border:"#FF0033 solid 2px"});
-						 alert("Nie udalo sie :(");
-					 }
-			},
-			error : function(err) {
-				alert("Blad");
-			}
-		});
-	}
-
 $("input#stworzWatek").click(function(){ //zdarzenie obslugujące przycisk archiwizuj
 	var tresc=$("#trescWatku").val();;
 	if(tresc.length!=0)
@@ -534,10 +459,7 @@ $("input#stworzWatek").click(function(){ //zdarzenie obslugujące przycisk archi
 						alert("Blad");
 					}
 			});
-<<<<<<< HEAD
 			}	
-			
-			
 			
 			$("input#akceptujStudentaPrzycisk").click(function(){
 	
@@ -545,40 +467,16 @@ $("input#stworzWatek").click(function(){ //zdarzenie obslugujące przycisk archi
 	});
 		function akceptujStudenta(){
 			$.ajax({
-=======
-			}
-	$("input#dodajKomentarz").click(function(){ //zdarzenie obslugujące przycisk dodajKomentarz
-		
-		var tresc=$("#trescKomentarza").val();
-		if(tresc.length!=0)
-		{
-			nowyKomentarz(tresc);
-		}
-		
-	});
-	function nowyKomentarz(tresc){
-		$.ajax({
->>>>>>> 35a4478e278ee7afb6d0cfe5670a30ee6c714053
 				url:'ajaxController.php',
 				dataType:'json',
 				type:'POST',
 				data:{
-<<<<<<< HEAD
 					"przyciskProwadzacy":"akceptujStudentaPrzycisk"
 					},
 					success:function(json){
 						if(json["status"]==200)
 						{
 							alert("Student zostal dolaczony");
-=======
-					"przyciskProwadzacy":"Dodaj komentarz",
-					"trescKomentarza":tresc
-					},
-					success:function(json){
-						if(json["status"]==201)
-						{
-							alert("Dodano komentarz");
->>>>>>> 35a4478e278ee7afb6d0cfe5670a30ee6c714053
 							window.open('index.php','_self');
 						}
 						else if(json["status"]==400)
@@ -596,34 +494,21 @@ $("input#stworzWatek").click(function(){ //zdarzenie obslugujące przycisk archi
 						alert("Blad");
 					}
 			});
-<<<<<<< HEAD
 			}
+		
 	function wstawOcena(ocena,uwagiOcena){
 			$.ajax({
-=======
-	}
-	$("input#usunKomentarz").click(function(){ //zdarzenie obslugujące przycisk usunKomentarz
-		usunKomentarz();
-	})
-	function usunKomentarz(){
-		$.ajax({
->>>>>>> 35a4478e278ee7afb6d0cfe5670a30ee6c714053
 				url:'ajaxController.php',
 				dataType:'json',
 				type:'POST',
 				data:{
-<<<<<<< HEAD
 					"przyciskProwadzacy":"wstawOcena",
 					"ocena":ocena,
 					"komentarz":uwagiOcena					
-=======
-					"przyciskProwadzacy":"usunKomentarz"
->>>>>>> 35a4478e278ee7afb6d0cfe5670a30ee6c714053
 					},
 					success:function(json){
 						if(json["status"]==200)
 						{
-<<<<<<< HEAD
 							alert("Ocena dodana");
 							window.open('index.php','_self');
 						}
@@ -634,7 +519,92 @@ $("input#stworzWatek").click(function(){ //zdarzenie obslugujące przycisk archi
 						else if(json.status==401)
 						{
 							alert("Nie masz dostępu do tego projektu");
-=======
+						}
+						else
+						{
+							alert("Nie udało się");
+						}
+					},
+					error:function(err){
+						alert("Blad");
+					}
+			});
+			}	
+		
+
+		function sortUnicode(a,b){return a[0].toLowerCase().localeCompare(b[0].toLowerCase());} //funkcje do sortowania tabel
+		
+		function sortIt(o,s,r,n,t,i) {
+		o.ord=!o.ord;
+		n=o.parentNode.cellIndex;
+		r=o.offsetParent.offsetParent.rows;
+		var rows=[],cols=[];s=s||1;
+		for(i=0;t=r[s+i];i++){
+			rows.push(t.cloneNode(true));
+			cols.push([t.cells[n].firstChild.nodeValue,i]);
+		}
+		cols.sort(sortUnicode);
+		if(o.ord)cols.reverse()
+		for(i=0;t=r[s+i];i++){
+			var j = rows[cols[i][1]];
+			t.parentNode.replaceChild(j,t);
+			j.className=i%2?'odd':'even';
+		}
+	}
+	$("input#dodajKomentarz").click(function(){ //zdarzenie obslugujące przycisk dodajKomentarz
+		
+		var tresc=$("#trescKomentarza").val();
+		if(tresc.length!=0)
+		{
+			nowyKomentarz(tresc);
+		}
+		
+	});
+	function nowyKomentarz(tresc){
+		$.ajax({
+				url:'ajaxController.php',
+				dataType:'json',
+				type:'POST',
+				data:{
+					"przyciskProwadzacy":"Dodaj komentarz",
+					"trescKomentarza":tresc
+					},
+					success:function(json){
+						if(json["status"]==201)
+						{
+							alert("Dodano komentarz");
+							window.open('index.php','_self');
+						}
+						else if(json["status"]==400)
+						{
+							alert("zle param");
+							window.open('index.php','_self');
+						}
+						else
+						{
+							alert("Nie udało się");
+							window.open('index.php','_self');
+						}
+					},
+					error:function(err){
+						alert("Blad");
+					}
+			});
+	}
+	$("input#usunKomentarz").click(function(){ //zdarzenie obslugujące przycisk usunKomentarz
+		usunKomentarz();
+	})
+	function usunKomentarz(){
+		$.ajax({
+				url:'ajaxController.php',
+				dataType:'json',
+				type:'POST',
+				data:{
+					"przyciskProwadzacy":"usunKomentarz"
+					},
+					success:function(json){
+						if(json["status"]==200)
+						{
 							alert("Usunięto komentarz");
 							
 						}
@@ -675,46 +645,18 @@ $("input#stworzWatek").click(function(){ //zdarzenie obslugujące przycisk archi
 						{
 							alert("zle param");
 						
->>>>>>> 35a4478e278ee7afb6d0cfe5670a30ee6c714053
 						}
 						else
 						{
 							alert("Nie udało się");
-<<<<<<< HEAD
-=======
 						
->>>>>>> 35a4478e278ee7afb6d0cfe5670a30ee6c714053
 						}
 					},
 					error:function(err){
 						alert("Blad");
 					}
 			});
-<<<<<<< HEAD
-			}	
-=======
 	}
->>>>>>> 35a4478e278ee7afb6d0cfe5670a30ee6c714053
+
+
 });
-
-		function sortUnicode(a,b){return a[0].toLowerCase().localeCompare(b[0].toLowerCase());} //funkcje do sortowania tabel
-		
-		function sortIt(o,s,r,n,t,i) {
-		o.ord=!o.ord;
-		n=o.parentNode.cellIndex;
-		r=o.offsetParent.offsetParent.rows;
-		var rows=[],cols=[];s=s||1;
-		for(i=0;t=r[s+i];i++){
-			rows.push(t.cloneNode(true));
-			cols.push([t.cells[n].firstChild.nodeValue,i]);
-		}
-		cols.sort(sortUnicode);
-		if(o.ord)cols.reverse()
-		for(i=0;t=r[s+i];i++){
-			var j = rows[cols[i][1]];
-			t.parentNode.replaceChild(j,t);
-			j.className=i%2?'odd':'even';
-		}
-	}
-
-

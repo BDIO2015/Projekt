@@ -48,6 +48,7 @@ class Prowadzacy extends Student{
 		$wynik=json_decode($wynik);
 		if($wynik->status=200)
 		{
+			
 			$lista="";
 			foreach($wynik->result as $odbior)
 			{
@@ -57,15 +58,6 @@ class Prowadzacy extends Student{
 			$_SESSION['result']=$wynik->result;
 			return $lista;
 		}
-	}
-	
-	public function nowyWatek($idProjektu)
-	{
-		$tresc=$_POST['tresc'];
-		$adres=$this->api->addThread;
-		$wiadomosc='id_projekt='.$idProjektu.'&text='.$tresc;
-		$wynik=$this->requestApi($wiadomosc,$adres);
-		return $wynik;
 	}
 	
 	public function pobierzWatki($idProjektu)
@@ -98,7 +90,6 @@ class Prowadzacy extends Student{
 			$lista="";
 			foreach($wynik->result as $odbior)
 			{
-<<<<<<< HEAD
 				if($zatwierdzony==0)
 				{
 					$lista=$lista.'<tr><td>'.$odbior->login.'<a href="?przyciskProwadzacy=akceptujStudentaPrzycisk&idStudenta='.$odbior->id_uzytkownik.'"> Akceptuj</tr></td>';
@@ -107,33 +98,21 @@ class Prowadzacy extends Student{
 				{
 					$lista=$lista.'<tr><td>'.$odbior->login.'<a href="?przyciskProwadzacy=usunStudentaPrzycisk&idStudenta='.$odbior->id_uzytkownik.'"> Usuń</tr></td>';
 				}
-=======
-				$lista=$lista.'<tr><td>'.$odbior->login.'</tr></td>';
->>>>>>> 35a4478e278ee7afb6d0cfe5670a30ee6c714053
 			}
 			$lista='<table>'.$lista.'</table>';
 			$_SESSION['result']=$wynik->result;
 			return $lista;
 		}
 	}
-<<<<<<< HEAD
 	
 	public function akceptujStudenta($idProjektu,$idStudent)
 	{
 		$wiadomosc='id_projekt='.$idProjektu.'&id_uzytkownik='.$idStudent;
 		$adres=$this->api->activateUser;
-=======
-	public function pobierzWatek($idWatku)
-	{
-		$wiadomosc='id_watek='.$idWatku;
-		$adres=$this->api->getThread;
->>>>>>> 35a4478e278ee7afb6d0cfe5670a30ee6c714053
 		$wynik=$this->requestApi($wiadomosc,$adres);
 		$wynik=json_decode($wynik);
 		if($wynik->status=200)
 		{
-<<<<<<< HEAD
-			
 			$wynik=json_encode($wynik);
 			return $wynik;
 		}
@@ -154,7 +133,15 @@ class Prowadzacy extends Student{
 			$wynik=json_encode($wynik);
 			return $wynik;
 		}
-=======
+	}
+	public function pobierzWatek($idWatku)
+	{
+		$wiadomosc='id_watek='.$idWatku;
+		$adres=$this->api->getThread;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+		$wynik=json_decode($wynik);
+		if($wynik->status=200)
+		{
 			$lista='<tr><td style="width: 10%;">'.$wynik->result->date.'</td><td colspan="2">'.$wynik->result->text.'</td></tr>';
 			foreach($wynik->result->komentarze as $odbierz)
 			{
@@ -169,6 +156,15 @@ class Prowadzacy extends Student{
 			$_SESSION['result']=$wynik->result;
 			return $lista;
 		}
+	}
+	
+	public function nowyWatek($idProjektu)
+	{
+		$tresc=$_POST['tresc'];
+		$adres=$this->api->addThread;
+		$wiadomosc='id_projekt='.$idProjektu.'&text='.$tresc;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+		return $wynik;
 	}
 	public function nowyKomentarz($idProjektu,$idWatku){
 		$trescKomentarza=$_POST['trescKomentarza'];
@@ -186,10 +182,10 @@ class Prowadzacy extends Student{
 		$wiadomosc='id_watek='.$idWatku;
 		$adres=$this->api->deleteThread;
 		$wynik=$this->requestApi($wiadomosc,$adres);
->>>>>>> 35a4478e278ee7afb6d0cfe5670a30ee6c714053
 	}
 	
-	public function wyswietlWszystkichStudentow()
+	
+		public function wyswietlWszystkichStudentow()
 	{
 		
 		$idKoordynator=$_SESSION['userId'];

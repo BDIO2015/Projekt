@@ -84,6 +84,7 @@ switch($method)
 	case "deleteComment": $result = $db->getThreadController()->deleteComment(); break;
 	case "getThread": $result = $db->getThreadController()->getThread(); break;
 	case "getThreads": $result = $db->getThreadController()->getThreads(); break;
+	case "addAttachment": $result = $db->getThreadController()->addAttachment(); break;
 
 	//otherController
 	case "getDepartments": $result = $db->getOtherController()->getDepartments(); break;

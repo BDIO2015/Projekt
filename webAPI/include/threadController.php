@@ -158,4 +158,21 @@ class threadController{
             	return "{\"status\":200,\"result\":".json_encode($threads)."}";
 		} else return "{\"status\": 400, \"result\":\"Bad params\"}";
 	}
+	
+	public function addAttachment()
+	{
+		if(isset($_POST['sciezka']) && isset($_POST['id_watek']))
+		{
+			$stmt = $this->conn->prepare("INSERT INTO `zalaczniki` (`id_zalacznik`, `id_watek`, `sciezka`, `data`)
+										  VALUES (NULL, ?, ?, NULL)");
+			$stmt->bind_param("is", $_POST['id_watek'], $_POST['sciezka']);
+			$result = $stmt->execute();
+			$error = $stmt->error;
+			$lastID = $this->conn->insert_id;
+			$stmt->close();
+			if ($result) return "{\"status\":200,\"result\":\"Attachment added\",\"sciezka\":\"".$lastID."\"}";
+			else return "{\"status\": 400,\"result\":\"".$error."\"}";
+		}
+		else return "{\"status\": 400, \"result\":\"Bad params\"}";
+	}
 }

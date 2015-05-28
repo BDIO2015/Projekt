@@ -19,9 +19,19 @@ class threadController{
       
                   if ($project) 
                   {
-		    		$stmt = $this->conn->prepare("INSERT INTO `watek` (`id_watek`, `id_projekt`, `text`, `id_nadrzedny`, `id_zalacznik`, `date`) 
-                                               	  VALUES (NULL,?, ?, NULL, NULL, NULL)");
-                  	$stmt->bind_param("ss", $_POST['id_projekt'], $_POST['text']);
+		    		if(isset($_POST['id_zalacznik']))
+					{
+						$stmt = $this->conn->prepare("INSERT INTO `watek` (`id_watek`, `id_projekt`, `text`, `id_nadrzedny`, `id_zalacznik`, `date`) 
+													  VALUES (NULL,?, ?, NULL, ?, NULL)");
+						$stmt->bind_param("isi", $_POST['id_projekt'], $_POST['text'], $_POST['id_zalacznik']);
+					}
+					else
+					{
+						$stmt = $this->conn->prepare("INSERT INTO `watek` (`id_watek`, `id_projekt`, `text`, `id_nadrzedny`, `id_zalacznik`, `date`) 
+													  VALUES (NULL,?, ?, NULL, NULL, NULL)");
+						$stmt->bind_param("isi", $_POST['id_projekt'], $_POST['text']);
+
+					}
                   	$result = $stmt->execute();
                   	$error = $stmt->error;
                   	$stmt->close();

@@ -209,4 +209,19 @@ class threadController{
                   else return "{\"status\": 400,\"result\":\"".$error."\"}";
 		} else return "{\"status\": 400, \"result\":\"Bad params\"}";
 	}
+	
+	public function getAttachment()
+	{
+		if(isset($_POST['id_zalacznik']))
+		{
+			$stmt = $this->conn->prepare( "SELECT sciezka FROM `zalaczniki` WHERE `id_zalacznik` = ?" );
+			$stmt->bind_param("i", $_POST['id_zalacznik']);
+			$result = $stmt->execute();
+			$error = $stmt->error;
+			$attachment = $stmt->get_result()->fetch_assoc();
+			$stmt->close();
+			if ($attachment) return "{\"status\":200,\"url\":\"http://deveo.pl/efdi/files/".$attachment['sciezka']."\"}";
+            else return "{\"status\": 400,\"result\":\"".$error."\"}";
+		} else return "{\"status\": 400, \"result\":\"Bad params\"}";
+	}
 }

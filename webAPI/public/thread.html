@@ -343,3 +343,41 @@
             400 - zle parametry
     </td>
 </tr>
+
+<!-- GET_ATTACHMENT -->
+<tr>
+    <td rowspan="6" class="method-name">getAttachment</td>
+    <td colspan="2" class="method-description">zwraca URL do zalacznika</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejsciowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/getAttachment</br></br>
+                    <b>id_zalacznik</b> - id zalacznika</br>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">id_zalacznik=3</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":200,"url":"http://deveo.pl/efdi/files/testowy2.jpg"}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty bledow</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>

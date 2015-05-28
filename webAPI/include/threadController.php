@@ -89,14 +89,23 @@ class threadController{
 	{
 		if(isset($_POST['id_nadrzedny']) && isset($_POST['id_projekt']) && isset($_POST['text']))
 		{
-			$stmt = $this->conn->prepare("INSERT INTO `watek` (`id_watek`, `id_projekt`, `text`, `id_nadrzedny`, `id_zalacznik`, `date`)
-										  VALUES (NULL,?, ?, ?, NULL, NULL)");
-                  $stmt->bind_param("sss", $_POST['id_projekt'], $_POST['text'], $_POST['id_nadrzedny']);
-                  $result = $stmt->execute();
-                  $error = $stmt->error;
-                  $stmt->close();
-                  if ($result) return "{\"status\":201,\"result\":\"Comment added\"}";
-                  else return "{\"status\": 400,\"result\":\"".$error."\"}";
+			if(isset($_POST['id_zalacznik']))
+			{
+				$stmt = $this->conn->prepare("INSERT INTO `watek` (`id_watek`, `id_projekt`, `text`, `id_nadrzedny`, `id_zalacznik`, `date`)
+											  VALUES (NULL,?, ?, ?, ?, NULL)");
+				$stmt->bind_param("isii", $_POST['id_projekt'], $_POST['text'], $_POST['id_nadrzedny'], $_POST['id_zalacznik']);
+			}
+			else
+			{
+				$stmt = $this->conn->prepare("INSERT INTO `watek` (`id_watek`, `id_projekt`, `text`, `id_nadrzedny`, `id_zalacznik`, `date`)
+											  VALUES (NULL,?, ?, ?, NULL, NULL)");
+				$stmt->bind_param("isi", $_POST['id_projekt'], $_POST['text'], $_POST['id_nadrzedny']);
+			}
+			$result = $stmt->execute();
+			$error = $stmt->error;
+			$stmt->close();
+			if ($result) return "{\"status\":201,\"result\":\"Comment added\"}";
+			else return "{\"status\": 400,\"result\":\"".$error."\"}";
 		} else return "{\"status\": 400, \"result\":\"Bad params\"}";
 	}
 

@@ -266,3 +266,42 @@
             400 - zle parametry
     </td>
 </tr>
+
+<!-- ADD_ATTACHMENT -->
+<tr>
+    <td rowspan="6" class="method-name">addAttachment</td>
+    <td colspan="2" class="method-description">dodaje nowy zalacznik do watku/komentarza</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejsciowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/addAttachment</br></br>
+                    <b>sciezka</b> - nazwa dodawanego pliku</br>
+                    <b>id_watek</b> - id watku lub komentarza
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedz, zwraca id_zalacznik)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val">sciezka=testowy.jpg&amp;id_watek=66</td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":200,"result":"Attachment added","sciezka":"3"}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty bledow</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>

@@ -175,4 +175,19 @@ class threadController{
 		}
 		else return "{\"status\": 400, \"result\":\"Bad params\"}";
 	}
+	
+	public function deleteAttachment()
+	{
+		if(isset($_POST['id_zalacznik']))
+		{
+			$stmt = $this->conn->prepare( "DELETE FROM `zalaczniki` WHERE `id_zalacznik` = ?");
+                  $stmt->bind_param("i", $_POST['id_zalacznik']);
+                  $result = $stmt->execute();
+                  $error = $stmt->error;
+                  $stmt->close();
+
+                  if ($result) return "{\"status\":200,\"result\":\"Attachment deleted\"}";
+                  else return "{\"status\": 400,\"result\":\"".$error."\"}";
+		} else return "{\"status\": 400, \"result\":\"Bad params\"}";
+	}
 }

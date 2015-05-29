@@ -248,5 +248,42 @@ class Prowadzacy extends Student{
 		$wynik=$this->requestApi($wiadomosc,$adres);	
 		return $wynik;
 	}
+	public function wyswietlZarchiwizowane()
+	{
+		$adres=$this->api->getArchivedProjects;
+		$wynik=$this->requestApi("",$adres);
+		$wynik=json_decode($wynik);
+		if($wynik->status==200)
+		{
+			
+			$lista="";
+			foreach($wynik->result as $odbior)
+			{
+				$lista='<tr><td><a href="?przyciskProwadzacy=pobierzZarchiwizowanyProjekt&idProjekt='.$odbior->id_projekt.'">'.$odbior->nazwa.'</a></td></tr>'.$lista;
+			}
+			$lista='<table>'.$lista.'</table>';
+			$_SESSION['result']=$wynik->result;
+			return $lista;
+		}
+	}
+	
+	public function wyswietlStudentowZarchiwizowanych($idProjektu,$zatwierdzony)
+	{
+		$wiadomosc='id_projekt='.$idProjektu.'&zatwierdzony='.$zatwierdzony;
+		$adres=$this->api->getUsers;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+		$wynik=json_decode($wynik);
+		if($wynik->status==200)
+		{
+			$lista="";
+			foreach($wynik->result as $odbior)
+			{
+					$lista=$lista.'<tr><td>'.$odbior->login.'</tr></td>';	
+			}
+			$lista='<table>'.$lista.'</table>';
+			$_SESSION['result']=$wynik->result;
+			return $lista;
+		}
+	}
 }
 ?>

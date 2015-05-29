@@ -37,7 +37,9 @@ class studentController{
 							break;								
 						break;
 						case "zakonczone":
-							$this->gui->setContainer("View/student/container/containerZakonczoneProjektyStudent.html");										
+							$wynik=$this->student->wyswietlZarchiwizowane();
+							$wynik=$this->student->podmien("View/prowadzacy/container/containerZakonczoneProjektyProwadzacy.html",$wynik,"{zarchiwizowane}");
+							$this->gui->setContainer($wynik);										
 						break;
 					}
 				break;
@@ -46,6 +48,13 @@ class studentController{
 					$wynik=$this->student->pokazProjekt($_GET['idProjekt'],"View/student/container/containerProjektStudent.html");
 					$wynik=$this->student->podmien($wynik,$this->student->wyswietlStudentow($_GET['idProjekt'],1),'{uczestnicy}');
 					$wynik=$wynik.$this->student->pobierzRaporty($_GET['idProjekt']).$this->student->pobierzWatki($_GET['idProjekt']);
+					$this->gui->setContainer($wynik);
+				break;
+				case "pobierzZarchiwizowanyProjekt":	
+					$_SESSION['idProjektu']=$_GET['idProjekt'];
+					$wynik=$this->student->pokazZarchiwizowanyProjekt($_GET['idProjekt'],"View/prowadzacy/container/containerProjektZarchiwizowanyProwadzacy.html");
+					$wynik=$wynik.$this->student->pobierzWatki($_GET['idProjekt']);
+					$wynik=$this->student->podmien($wynik,"Brak dostepu",'{uczestnicy}');
 					$this->gui->setContainer($wynik);
 				break;
 				

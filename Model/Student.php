@@ -340,6 +340,56 @@ class Student extends Gosc{
 		return 'Błąd przy przesyłaniu danych!';
 		}
 	}
+	
+	public function wyswietlZarchiwizowane()
+	{
+		$adres=$this->api->getArchivedProjects;
+		$wynik=$this->requestApi("",$adres);
+		$wynik=json_decode($wynik);
+		if($wynik->status==200)
+		{
+			
+			$lista="";
+			foreach($wynik->result as $odbior)
+			{
+				$lista='<tr><td><a href="?przyciskStudent=pobierzZarchiwizowanyProjekt&idProjekt='.$odbior->id_projekt.'">'.$odbior->nazwa.'</a></td></tr>'.$lista;
+			}
+			$lista='<table>'.$lista.'</table>';
+			$_SESSION['result']=$wynik->result;
+			return $lista;
+		}
+	}
+	
+	public function pokazZarchiwizowanyProjekt($idProjektu,$adresFormularza)
+	{				
+				$wiadomosc='id_projekt='.$idProjektu;
+				$adres=$this->api->getFromArchiv;
+				$wynikProjekt=$this->requestApi($wiadomosc,$adres);
+				$adres=$this->api->getGrade;
+				$wynikOcena=$this->requestApi($wiadomosc,$adres);
+				$wynikProjekt=json_decode($wynikProjekt);
+				$wynikOcena=json_decode($wynikOcena);
+				if($wynikProjekt->status==200)
+				{
+					if(file_exists($adresFormularza)){
+						$html=file_get_contents($adresFormularza);
+						$replace='<p>Nazwa='.$wynikProjekt->result->archiwum->nazwa.'</p>';
+						$replace=$replace.'<p>Opis='.$wynikProjekt->result->archiwum->dane->projekt->opis.'</p>';
+						$replace=$replace.'<p>Termin='.$wynikProjekt->result->archiwum->dane->projekt->termin.'</p>';
+						$replace=$replace.'<p>Miejsce='.$wynikProjekt->result->archiwum->dane->projekt->miejsce.'</p>';
+						$replace=$replace.'<p>Wytyczne='.$wynikProjekt->result->archiwum->dane->projekt->wytyczne.'</p>';
+						if($wynikOcena->status==200)
+						{
+							$replace=$replace.'<p>Ocena='.$wynikOcena->result[0]->ocena.'</p>';
+							$replace=$replace.'<p>Komentarz do oceny='.$wynikOcena->result[0]->komentarz.'</p>';
+						}
+					
+						$html=str_replace('{wynik}',$replace,$html);
+					}
+					return $html;
+				}
+		return 0;
+	}
 
 }
 ?>

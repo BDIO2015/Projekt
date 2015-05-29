@@ -40,5 +40,6 @@
 	"addAttachment": "http://deveo.pl/efdi/webAPI/addAttachment",
 	"deleteAttachment": "http://deveo.pl/efdi/webAPI/deleteAttachment",
 	"getAttachment": "http://deveo.pl/efdi/webAPI/getAttachment",
-	"updateProject": "http://deveo.pl/efdi/webAPI/updateProject"
+	"updateProject": "http://deveo.pl/efdi/webAPI/updateProject",
+	"getArchivedProjects": "http://deveo.pl/efdi/webAPI/getArchivedProjects"
 }

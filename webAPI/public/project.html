@@ -596,3 +596,40 @@
             400 - zle parametry
     </td>
 </tr>
+
+<!-- GET_ARCHIVED_PROJECTS -->
+<tr>
+    <td rowspan="6" class="method-name">getArchivedProjects</td>
+    <td colspan="2" class="method-description">pobiera id oraz nazwy wszystkich zarchiwizowanych projektór</td>
+</tr>
+<tr>
+    <td class="method-using-key">Parametry wejsciowe</td>
+    <td class="method-using-val">
+            <ul>
+                    <b>URL: </b>http://deveo.pl/efdi/webAPI/getArchivedProjects</br></br>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Dane zwracane</td>
+    <td class="method-using-val">
+            <ul>
+                    <li>status (200 - poprawna odpowiedź)</li>
+            </ul>
+    </td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad komunikatu POST</td>
+    <td class="method-using-val"></td>
+</tr>
+<tr>
+    <td class="method-using-key">Przyklad poprawnej odpowiedzi</td>
+    <td class="method-using-val">{"status":200,"result":[{"id_archiwum":1,"id_projekt":2,"nazwa":"opis"},{"id_archiwum":2,"id_projekt":1,"nazwa":"projekt1_archiwizowany"}]}</td>
+</tr>
+<tr>
+    <td class="method-using-key">Komunikaty bledow</td>
+    <td class="method-using-val">
+            401 - blad autoryzacji</br>
+            400 - zle parametry
+    </td>
+</tr>

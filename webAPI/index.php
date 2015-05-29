@@ -75,6 +75,7 @@ switch($method)
 
 	case "archiveProject": $result = $db->getProjectController()->archiveProject(); break;
 	case "getFromArchiv": $result = $db->getProjectController()->getFromArchiv(); break;
+	case "getArchivedProjects": $result = $db->getProjectController()->getArchivedProjects(); break;
 
 	//threadController
 	case "addThread": $result = $db->getThreadController()->addThread(); break;

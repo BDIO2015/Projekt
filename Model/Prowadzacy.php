@@ -162,7 +162,7 @@ class Prowadzacy extends Student{
 	{
 		$tresc=$_POST['tresc'];
 		$adres=$this->api->addThread;
-		$wiadomosc='id_projekt='.$idProjektu.'&text='.$tresc;
+		$wiadomosc='id_projekt='.$idProjektu.'&text='.$tresc.'&id_zalacznik=""';
 		$wynik=$this->requestApi($wiadomosc,$adres);
 		return $wynik;
 	}

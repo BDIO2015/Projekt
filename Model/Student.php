@@ -314,11 +314,16 @@ class Student extends Gosc{
 			if(!file_exists($sciezka.$file_name2)){
 				move_uploaded_file($_FILES['plik']['tmp_name'], $sciezka.$file_name2);
 				$idWatek=$_SESSION['idWatek'];
+				$idProjekt=$_SESSION['idProjektu'];
 				$wiadomosc='sciezka='.$file_name2.'&id_watek='.$idWatek;
 				$adres=$this->api->addAttachment;
 				$wynik=$this->requestApi($wiadomosc,$adres);
 				$wynik=json_decode($wynik);
-				if($wynik->status==200)
+				$wiadomosc='id_projekt='.$idProjekt.'&id_nadrzedny='.$idWatek.'&text=Plik '.$file_name2.'&id_zalacznik='.$wynik->sciezka;
+				$adres=$this->api->addComment;
+				$wynik=$this->requestApi($wiadomosc,$adres);
+				$wynik=json_decode($wynik);
+				if($wynik->status==201)
 					return 'Plik został wysłany';
 				else
 					return 'Pliku nie udało się wysłać';

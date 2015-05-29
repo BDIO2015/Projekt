@@ -393,7 +393,7 @@ function usunProjekt(){
 }
 
 $("input#stworzWatek").click(function(){ //zdarzenie obslugujące przycisk archiwizuj
-	var tresc=$("#trescWatku").val();;
+	var tresc=$("#trescWatku").val();
 	if(tresc.length!=0)
 	{
 		nowyWatek(tresc);

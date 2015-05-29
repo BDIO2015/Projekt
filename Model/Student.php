@@ -293,8 +293,43 @@ class Student extends Gosc{
 		$wiadomosc='id_uzytkownik='.$idUz.'&id_projekt='.$idProjektu;
 		$adres=$this->api->addUser;
 		$wynik=$this->requestApi($wiadomosc,$adres);
-		$wynik=json_decode($wynik);
 		return $wynik;
+	}
+	public function wyslijPlik()
+	{
+		$max_rozmiar = 1024*1024;
+	if (is_uploaded_file($_FILES['plik']['tmp_name'])) {
+    if ($_FILES['plik']['size'] > $max_rozmiar) {
+        return 'Błąd! Plik jest za duży!';
+    } else {
+        $wynik= '<p>Odebrano plik. Początkowa nazwa: '.$_FILES['plik']['name'].'</p>';
+        if (isset($_FILES['plik']['type'])) {
+            $wynik=$wynik. '<p>Typ: '.$_FILES['plik']['type'].'</p>';
+        }
+		$sciezka = str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']).'/Files/';
+		$file_name=$_FILES['plik']['name'];
+		$i=0;
+		$file_name2=$file_name;
+		while(1){
+			if(!file_exists($sciezka.$file_name2)){
+				move_uploaded_file($_FILES['plik']['tmp_name'], $sciezka.$file_name2);
+				$idWatek=$_SESSION['idWatek'];
+				$wiadomosc='sciezka='.$file_name2.'&id_watek='.$idWatek;
+				$adres=$this->api->addAttachment;
+				$wynik=$this->requestApi($wiadomosc,$adres);
+				$wynik=json_decode($wynik);
+				if($wynik->status==200)
+					return 'Plik został wysłany';
+				else
+					return 'Pliku nie udało się wysłać';
+			}
+			$i++;
+			$file_name2=str_replace('.', '_'.$i.'.', $file_name);
+		}
+    }
+	} else {
+		return 'Błąd przy przesyłaniu danych!';
+		}
 	}
 
 }

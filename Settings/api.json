@@ -36,5 +36,8 @@
 	"activateUser": "http://deveo.pl/efdi/webAPI/activateUser",
 	"evaluateProject": "http://deveo.pl/efdi/webAPI/evaluateProject",
 	"resetPass": "http://deveo.pl/efdi/webAPI/resetPass",
-	"getGrade": "http://deveo.pl/efdi/webAPI/getGrade"
+	"getGrade": "http://deveo.pl/efdi/webAPI/getGrade",
+	"addAttachment": "http://deveo.pl/efdi/webAPI/addAttachment",
+	"deleteAttachment": "http://deveo.pl/efdi/webAPI/deleteAttachment",
+	"getAttachment": "http://deveo.pl/efdi/webAPI/getAttachment"
 }

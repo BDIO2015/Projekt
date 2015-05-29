@@ -137,16 +137,22 @@ class Prowadzacy extends Student{
 		if($wynik->status==200)
 		{
 			$lista='<tr><td style="width: 10%;">'.$wynik->result->date.'</td><td colspan="2">'.$wynik->result->text.'</td></tr>';
+			$pliki="";
 			foreach($wynik->result->komentarze as $odbierz)
 			{
 				$lista=$lista.'<tr><td>'.$odbierz->date.'</td><td>'.$odbierz->text.'</td><td style="width: 18px;"><a href=?przyciskProwadzacy=usunKomentarz&idKomentarz='.$odbierz->id_watek.'">X</a></td></tr>';
-
 			}
+				$pliki=$pliki.$wynik->result->id_zalacznik;
 			$lista='<table border="1" cellspacing="0" style="width:100%;">'.$lista.'</table><br />
 							<form method="get" id="obslugaProjektu">
 							<input type="submit" name="przyciskProwadzacy" id="nowyKomentarz" value="Nowy Komentarz">
 							<input type="submit" name="przyciskProwadzacy" id="usunWatek" value="Usuń Wątek">
 							</form>';
+			$lista=$lista.'<form action="index.php" method="POST" ENCTYPE="multipart/form-data">
+   <input type="file" name="plik"/><br/>
+   <input type="submit" name="przyciskProwadzacy" value="Wyślij plik"/>
+  </form>';
+			$lista=$lista.$pliki;
 			$_SESSION['result']=$wynik->result;
 			return $lista;
 		}

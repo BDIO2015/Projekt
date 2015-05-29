@@ -100,6 +100,10 @@ class prowadzacyController{
 				case "Usuń Wątek":
 					$this->prowadzacy->usunWatek($_SESSION['idWatek']);
 				break;
+				case "Wyślij plik":
+					$wynik=$this->prowadzacy->wyslijPlik();
+					$this->gui->setContainer($wynik);
+				break;
 			}
 		}
 		$this->gui->showGui();

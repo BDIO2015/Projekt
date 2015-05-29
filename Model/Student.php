@@ -218,6 +218,10 @@ class Student extends Gosc{
 					if(file_exists($adresFormularza)){
 						$html=file_get_contents($adresFormularza);
 						$_SESSION['nazwaProjektu']=$wynikProjekt->result->nazwa;
+						$_SESSION['opisProjektu']=$wynikProjekt->result->opis;
+						$_SESSION['terminProjektu']=$wynikProjekt->result->termin;
+						$_SESSION['miejsceProjektu']=$wynikProjekt->result->miejsce;
+						$_SESSION['wytyczneProjektu']=$wynikProjekt->result->wytyczne;
 						$replace='<p>Nazwa='.$wynikProjekt->result->nazwa.'</p>';
 						$replace=$replace.'<p>Opis='.$wynikProjekt->result->opis.'</p>';
 						$replace=$replace.'<p>Termin='.$wynikProjekt->result->termin.'</p>';

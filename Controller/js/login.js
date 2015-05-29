@@ -657,6 +657,48 @@ $("input#stworzWatek").click(function(){ //zdarzenie obslugujące przycisk archi
 					}
 			});
 	}
-
+$("input#aktualizujProjekt").click(function(){ //zdarzenie obslugujące przycisk aktualizujProjekt
+		var nazwa=$("#nazwaProjektu").val();
+		var opis=$("#opisProjektu").val();
+		var termin=$("#terminProjektu").val();
+		var miejsce=$("#miejsceProjektu").val();
+		var wytyczne=$("#wytyczneProjektu").val();
+		aktualizujProjekt(nazwa, opis, termin, miejsce, wytyczne);
+	})
+	function aktualizujProjekt(nazwa, opis, termin, miejsce, wytyczne){
+		$.ajax({
+				url:'ajaxController.php',
+				dataType:'json',
+				type:'POST',
+				data:{
+					"przyciskProwadzacy":"aktualizujProjekt",
+					"nazwaProjektu":nazwa,
+					"opisProjektu":opis,
+					"terminProjektu":termin,
+					"miejsceProjektu":miejsce,
+					"wytyczneProjektu":wytyczne
+					},
+					success:function(json){
+						if(json["status"]==200)
+						{
+							alert("zaktualizowano projekt");
+							
+						}
+						else if(json["status"]==400)
+						{
+							alert("zle param");
+						
+						}
+						else
+						{
+							alert("Nie udało się");
+						
+						}
+					},
+					error:function(err){
+						alert("Blad");
+					}
+			});
+	}
 
 });

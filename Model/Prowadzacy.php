@@ -224,5 +224,29 @@ class Prowadzacy extends Student{
 		$wynik=json_decode($wynik);
 		return $wynik;
 	}
+	public function uzupelnienieEdycjiProjektu($idProjektu)
+	{
+		$lista='<form id="edycjaProjektu">				
+				Nazwa: <input type="text" name="nazwaProjektu" id="nazwaProjektu" value="'.$_SESSION['nazwaProjektu'].'" /><br />
+				Opis: <input type="text" name="opisProjektu" id="opisProjektu" value="'.$_SESSION['opisProjektu'].'" /><br />
+				Termin: <input type="text" name="terminProjektu" id="terminProjektu" value="'.$_SESSION['terminProjektu'].'" /><br />
+				Miejsce: <input type="text" name="miejsceProjektu" id="miejsceProjektu" value="'.$_SESSION['miejsceProjektu'].'" /><br />
+				Wytyczne: <input type="text" name="wytyczneProjektu" id="wytyczneProjektu" value="'.$_SESSION['wytyczneProjektu'].'" /><br />
+				<input type="button" value="Aktualizuj projekt" name="przyciskProwadzacy" id="aktualizujProjekt" /></form>';
+				
+		return $lista;
+	}
+	public function edytujProjekt($idProjektu)
+	{
+		$nazwaProjektu=$_POST['nazwaProjektu'];
+		$opisProjektu=$_POST['opisProjektu'];
+		$terminProjektu=$_POST['terminProjektu'];
+		$miejsceProjektu=$_POST['miejsceProjektu'];
+		$wytyczneProjektu=$_POST['wytyczneProjektu'];
+		$wiadomosc='id_projekt='.$idProjektu.'&nazwa='.$nazwaProjektu.'&opis='.$opisProjektu.'&termin='.$terminProjektu.'&miejsce='.$miejsceProjektu.'&wytyczne='.$wytyczneProjektu;
+		$adres=$this->api->updateProject;
+		$wynik=$this->requestApi($wiadomosc,$adres);	
+		return $wynik;
+	}
 }
 ?>

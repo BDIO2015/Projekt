@@ -104,6 +104,15 @@ class prowadzacyController{
 					$wynik=$this->prowadzacy->wyslijPlik();
 					$this->gui->setContainer($wynik);
 				break;
+				case "Edytuj projekt":
+					$wynik=$this->prowadzacy->uzupelnienieEdycjiProjektu($_SESSION['idProjektu']);
+					$this->gui->setContainer($wynik);
+					
+				break;
+				case "aktualizujProjekt":
+					$wynik=$this->prowadzacy->edytujProjekt($_SESSION['idProjektu']);
+					return $wynik;
+				break;
 			}
 		}
 		$this->gui->showGui();

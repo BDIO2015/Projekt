@@ -27,9 +27,9 @@ class threadController{
 					}
 					else
 					{
-						$stmt = $this->conn->prepare("INSERT INTO `watek` (`id_watek`, `id_projekt`, `text`, `id_nadrzedny`, `id_zalacznik`, `date`) 
-													  VALUES (NULL,?, ?, NULL, NULL, NULL)");
-						$stmt->bind_param("isi", $_POST['id_projekt'], $_POST['text']);
+						$stmt = $this->conn->prepare("INSERT INTO `watek` (`id_watek`, `id_projekt`, `text`, `id_nadrzedny`, `date`) 
+													  VALUES (NULL,?, ?, NULL, NULL)");
+						$stmt->bind_param("is", $_POST['id_projekt'], $_POST['text']);
 
 					}
                   	$result = $stmt->execute();
@@ -97,8 +97,8 @@ class threadController{
 			}
 			else
 			{
-				$stmt = $this->conn->prepare("INSERT INTO `watek` (`id_watek`, `id_projekt`, `text`, `id_nadrzedny`, `id_zalacznik`, `date`)
-											  VALUES (NULL,?, ?, ?, NULL, NULL)");
+				$stmt = $this->conn->prepare("INSERT INTO `watek` (`id_watek`, `id_projekt`, `text`, `id_nadrzedny`, `date`)
+											  VALUES (NULL,?, ?, ?, NULL)");
 				$stmt->bind_param("isi", $_POST['id_projekt'], $_POST['text'], $_POST['id_nadrzedny']);
 			}
 			$result = $stmt->execute();

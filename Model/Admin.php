@@ -141,7 +141,7 @@ public function uzupelnienieFormularza()
 		$adres=$this->api->updateUser;
 		$wynik=$this->requestApi($wiadomosc,$adres);
 		
-	}
+		}
 			
 		public function wyswietlStud()
 	
@@ -216,5 +216,80 @@ public function uzupelnienieFormularza()
 		
 			return $lista;	
 	}
+	
+	
+	
+	public function uzupelnienieFormularzaAdmin()
+	{
+		$idadmin=$_SESSION['userId'];
+		$adres=$this->api->showAllUsers;
+		$wynik=$this->requestApi('id_uzytkownik='.$idadmin,$adres);
+		$wynik=json_decode($wynik);
+		$lista="";
+		
+		foreach($wynik->result as $odbior)
+			{
+				if($odbior->id_uzytkownik==$idadmin)
+				{
+				$_SESSION['loginAdmina']=$odbior->login;
+				$imie=$odbior->imie;
+				$nazwisko=$odbior->nazwisko;
+				$telefon=$odbior->telefon;
+				$id_sieciowy=$odbior->id_sieciowy;
+				}
+			}
+			return $wynik='Edycja danych osobowych:
+		<form id="edytujUser">
+		
+		Imię: <input type="text" name="imie"id="imie" value="'.$imie.'" /><br />
+		Nazwisko: <input type="text" name="nazwisko"id="nazwisko" value="'.$nazwisko.'"/><br />
+		Nr telefonu: <input type="text" name="nrtel"id="nrtel" value="'.$telefon.'"/><br />
+		ID sieciowe: <input type="text" name="idsiec"id="idsiec"value="'.$id_sieciowy.'" /><br />
+		
+		<input type="submit" value="Wprowadź zmiany" name="przyciskAdmin" id="wprowadzZmiany" /><br />
+		</form>
+		
+		<form id=edytujHasloAdmin>
+		Edytuj hasło: <br>
+		Stare hasło: <INPUT TYPE="text" NAME="starehaslo">
+		Nowe hasło: <input type="password" name="nowehaslo" id="nowehaslo"/><br />
+		<input type="submit" value="Zmień hasło" name="przyciskAdmin" id="zmienHaslo" /></form>';
+		
+		
+	}
+	
+	public function edytujKontoAdmin()
+		{
+			
+		$idUz=$_SESSION['userId'];
+		$imieUz=$_POST['imie'];
+		$nazwiskoUz=$_POST['nazwisko'];
+		$telefonUz=$_POST['nrtel'];
+		$idSiecioweUz=$_POST['idsiec'];
+		
+		$wiadomosc='id_uzytkownik='.$idUz.'&imie='.$imieUz.'&nazwisko='.$nazwiskoUz.'&telefon='.$telefonUz.'&id_sieciowy='.$idSiecioweUz;
+		$adres=$this->api->updateUser;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+		
+		}
+		
+	public function zmienHasloAdmin()
+	{
+		$idUz=$_SESSION['userId'];
+		$nazwaUz=$_SESSION['loginAdmina'];
+		$wiadomosc='id_uzytkownik='.$idUz.'&login='.$nazwaUz.'&haslo='.$_POST['starehaslo'].'&nowe_haslo='.$_POST['nowehaslo'];
+		$adres=$this->api->changePass;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+		$wynik=json_decode($wynik);
+		if($wynik->status==200)
+		{
+			$wynik=json_encode($wynik);
+			return $wynik;
+		}
+		return 0;
+	}
+	
+	
+	
 }
 ?>

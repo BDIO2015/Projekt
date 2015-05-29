@@ -85,6 +85,16 @@ class adminController{
 				$this->gui->setContainer($wynik);
 				break;	
 				
+				case "Edytuj konto":
+				$wynik=$this->admin->uzupelnienieFormularzaAdmin();
+				$this->gui->setContainer($wynik);
+				break;
+				
+				
+				case "Zmień hasło":
+
+					return $this->admin->zmienHasloAdmin();
+				break;
 				
 			
 			}		

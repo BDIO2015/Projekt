@@ -700,5 +700,43 @@ $("input#aktualizujProjekt").click(function(){ //zdarzenie obslugujące przycisk
 					}
 			});
 	}
+	
+	$("#resetPass").submit(function(e) {
+		var username = $(this).find("input[name='username']").val();
+		var email = $(this).find('input[name="email"]').val();
+		
+		e.preventDefault();
+		resetujHaslo(username, email);
+	});
+	
+function resetujHaslo(username, email)
+{
+	if (!username.length && !email.length) {
+		alert('Wypełnij wszystkie pola');
+		return;
+	}
+	
+	$.ajax('ajaxController.php', {
+		dataType: 'json',
+		method: 'POST',
+		data: {
+			przyciskGosc: "resetPass",
+			username: username,
+			email: email
+		}
+	}).done(function(json) {
+		console.log(json);
+		switch (json.status) {
+			case 200:
+				window.location = 'index.php';
+				alert('Nowe hasło zostało wysłane na emaila');
+			break;
+			case 400:
+			case 404:
+				alert(json.result);
+			break;
+		}
+	});
+}
 
 });

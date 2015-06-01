@@ -37,7 +37,9 @@
 			$_SESSION['userSpecjalizacja']=$wynik->result->user->id_specjalizacja;
 			$_SESSION['userKatedra']=$wynik->result->user->id_katedra;
 			$_SESSION['userSieciowe']=$wynik->result->user->id_sieciowy;
-		
+			if (isset($wynik->result->user->tytul)) {
+				$_SESSION['userTytul']=$wynik->result->user->tytul;
+			}
 		
 		}
 		$wynik=json_encode($wynik);

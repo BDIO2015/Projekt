@@ -52,6 +52,21 @@ class prowadzacyController{
 					$this->gui->setContainer($wynik);
 				break;
 				
+				case "Edytuj konto":
+					ob_start();
+					include __DIR__ . '/../../View/prowadzacy/container/containerEdytujKonto.phtml';
+					$body = ob_get_clean();
+					$this->gui->setContainer($body);															
+				break;
+				
+				case "zmienHaslo":
+				 	return $this->prowadzacy->zmienHaslo();
+				break;
+				
+				case "przeslijZmiany":
+				 	return $this->prowadzacy->edytujKonto();
+				break;
+				
 				case "Wiadomości":															
 					$this->gui->setContainer("View/prowadzacy/container/containerMenuWiadomosci.html");
 				break;

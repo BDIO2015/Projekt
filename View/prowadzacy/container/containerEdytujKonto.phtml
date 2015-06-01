@@ -1,0 +1,20 @@
+﻿<div id="containerEdytujKontoProwadzacy">
+Edycja danych osobowych:
+<form action="" method="post" id="edytujKontoProwadzacego">
+Imię: <input type="text" name="imie" value="<?php echo $_SESSION['userImie'] ?>"/><br />
+Nazwisko: <input type="text" name="nazwisko" value="<?php echo $_SESSION['userNazwisko'] ?>" /><br />
+Nr telefonu: <input type="text" name="nrtel" value="<?php echo $_SESSION['userTelefon'] ?>" /><br />
+ID wydziału: <input type="text" name="idwydz" value="<?php echo $_SESSION['userWydzial'] ?>" /><br />
+ID katedry: <input type="text" name="idkat" value="<?php echo $_SESSION['userKatedra'] ?>" /><br />
+ID specjalizacji: <input type="text" name="idspec"  value="<?php echo $_SESSION['userSpecjalizacja'] ?>" /><br />
+Tytuł: <input type="text" name="tytul" value="<?php echo $_SESSION['userTytul'] ?>" /><br />
+ID sieciowe: <input type="text" name="idsiec" value="<?php echo $_SESSION['userSieciowe'] ?>" /><br />
+<input type="submit" value="Prześlij" name="przeslij" /></form>
+
+Zmień hasło:
+<form action="" method="post" id="zmienHasloProwadzacego">
+Login: <input type="text" name="username" /><br />
+Hasło: <input type="password" name="password"/><br />
+Nowe hasło: <input type="password" name="newpassword"/><br />
+<input type="submit" value="Zmień" name="zmien" /></form>
+</div>

@@ -257,7 +257,7 @@ function sprawdz(adresat){
 		zmienHaslo(username,password,newpassword);
 	});
 	
-	function zmienHaslo(username2,password2,newpassword2){
+	function zmienHaslo(username2,password2,newpassword2) {
 			$.ajax({
 				url:'ajaxController.php',
 				dataType:'json',
@@ -289,7 +289,50 @@ function sprawdz(adresat){
 						alert("Blad");
 					}
 			});
-			}
+	}
+	
+	$("#zmienHasloProwadzacego").submit(function(e){
+		var username=$(this).find("input[name='username']").val();
+		var password=$(this).find("input[name='password']").val();
+		var newpassword=$(this).find("input[name='newpassword']").val();
+		
+		e.preventDefault();
+		zmienHasloProwadzacego(username,password,newpassword);
+	});
+	
+	function zmienHasloProwadzacego(username,password,newpassword) {
+			$.ajax({
+				url:'ajaxController.php',
+				dataType:'json',
+				type:'POST',
+				data:{
+					"przyciskProwadzacy":"zmienHaslo",
+					"username":username,
+					"password":password,
+					"newpassword":newpassword,
+					},
+					success:function(json){
+						if(json["status"]==200)
+						{
+							alert("Pomyslna zmiana hasla");
+							window.open('index.php','_self');
+						}
+						else if(json["status"]==400)
+						{
+							alert("zle param");
+							window.open('index.php','_self');
+						}
+						else
+						{
+							alert("Nie udało się");
+							window.open('index.php','_self');
+						}
+					},
+					error:function(err){
+						alert("Blad");
+					}
+			});
+	}
 	
 	//------------------------------------------------
 	$("input#przeslijZmiany").click(function(){
@@ -390,8 +433,60 @@ function sprawdz(adresat){
 			});
 			}	
 			
+	$("#edytujKontoProwadzacego").submit(function(e) {
+		var imie=$(this).find("input[name='imie']").val();
+		var nazwisko=$(this).find("input[name='nazwisko']").val();
+		var nrtel=$(this).find("input[name='nrtel']").val();
+		var idwydz=$(this).find("input[name='idwydz']").val();
+		var idspec=$(this).find("input[name='idspec']").val();
+		var idkat=$(this).find("input[name='idkat']").val();
+		var idsiec=$(this).find("input[name='idsiec']").val();
+		var tytul=$(this).find("input[name='tytul']").val();
+		
+		e.preventDefault();
+		edytujKontoProwadzacego(imie,nazwisko,nrtel,idwydz,idspec,idkat,idsiec,tytul);
+	});	
+		
+	function edytujKontoProwadzacego(imie,nazwisko,nrtel,idwydz,idspec,idkat,idsiec, tytul){
+		$.ajax({
+			url:'ajaxController.php',
+			dataType:'json',
+			type:'POST',
+			data:{
+				"przyciskProwadzacy":"przeslijZmiany",
+				"imie":imie,
+				"nazwisko":nazwisko,
+				"nrtel":nrtel,
+				"idwydz":idwydz,
+				"idspec":idspec,
+				"idkat":idkat,
+				"idsiec":idsiec,
+				"tytul": tytul
+				},
+				success:function(json){
+					if(json["status"]==200)
+					{
+						alert("Zaktualizowano pomyślnie");
+						window.open('index.php','_self');
+					}
+					else if(json["status"]==400)
+					{
+						alert("Błędne dane");
+						window.open('index.php','_self');
+					}
+					else
+					{
+						alert("Nie udało się");
+						window.open('index.php','_self');
+					}
+				},
+				error:function(err){
+					alert("Blad");
+				}
+		});
+	}
 			
-			$("input#archiwizuj").click(function(){ //zdarzenie obslugujące przycisk archiwizuj
+	$("input#archiwizuj").click(function(){ //zdarzenie obslugujące przycisk archiwizuj
 		archiwizuj();
 	});
 	

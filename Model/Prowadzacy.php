@@ -18,6 +18,39 @@ class Prowadzacy extends Student{
 		return $wynik;
 	}
 	
+	public function edytujKonto()
+	{
+		$idUz=$_SESSION['userId'];
+		$imieUz=$_POST['imie'];
+		$nazwiskoUz=$_POST['nazwisko'];
+		$telefonUz=$_POST['nrtel'];
+		$idWydzialuUz=$_POST['idwydz'];
+		$idSpecjalizacjiUz=$_POST['idspec'];
+		$idKatedryUz=$_POST['idkat'];
+		$idSiecioweUz=$_POST['idsiec'];
+		$tytul = $_POST['tytul'];
+		
+		$wiadomosc='id_uzytkownik='.$idUz.'&imie='.$imieUz.'&nazwisko ='.$nazwiskoUz.'&telefon='.$telefonUz.'&id_wydzial='.$idWydzialuUz.'&id_specjalizacja='.$idSpecjalizacjiUz.'&id_katedra='.$idKatedryUz.'&id_sieciowy='.$idSiecioweUz.'&tytul='.$tytul;
+		$adres=$this->api->updateUser;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+		$wynik=json_decode($wynik);
+		if($wynik->status==200)
+		{
+			$wynik=json_encode($wynik);
+			$_SESSION['userImie']=$imieUz;
+			$_SESSION['userNazwisko']=$nazwiskoUz;
+			$_SESSION['userTelefon']=$telefonUz;
+			$_SESSION['userWydzial']=$idWydzialuUz;
+			$_SESSION['userSpecjalizacja']=$idSpecjalizacjiUz;
+			$_SESSION['userKatedra']=$idKatedryUz;
+			$_SESSION['userSieciowe']=$idSiecioweUz;
+			$_SESSION['userTytul']=$tytul;
+			return $wynik;
+		}
+		
+		return 0;
+	}
+	
 	public function pobierzWiadomosci()
 	{
 		$idOdbiorcy=$_SESSION['userId'];

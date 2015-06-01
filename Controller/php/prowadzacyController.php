@@ -52,6 +52,37 @@ class prowadzacyController{
 					$this->gui->setContainer($wynik);
 				break;
 				
+				case "Wiadomości":															
+					$this->gui->setContainer("View/prowadzacy/container/containerMenuWiadomosci.html");
+				break;
+				
+				case "Napisz wiadomość":
+					$this->gui->setContainer("View/prowadzacy/container/containerNowaWiadomosc.html");
+				break;
+				
+				case "Otrzymane":
+					$wynik=$this->prowadzacy->pobierzWiadomosci();
+					$wynik=$this->prowadzacy->podmien("View/prowadzacy/container/containerOdebrane.html",$wynik,"{wiadomosci}");
+					$this->gui->setContainer($wynik);
+				break;
+				
+				case "Wysłane":
+					$this->gui->setContainer("View/prowadzacy/container/containerWyslane.html");
+				break;
+				
+				case "pobierzWiadomosc":
+					$wynik=$this->prowadzacy->pokazWiadomosc($_GET['idWiadomosc']);
+					$this->gui->setContainer($wynik);
+				break;
+				
+				case "wyslijWiadomosc":
+					return $this->prowadzacy->wiadomoscWyslij();
+				break;
+				
+				case "sprawdzCzyIstnieje":
+				 	return $this->prowadzacy->sprawdzCzyIstnieje();
+				break;
+				
 				case "pobierzZarchiwizowanyProjekt":	
 					$_SESSION['idProjektu']=$_GET['idProjekt'];
 					$wynik=$this->prowadzacy->pokazZarchiwizowanyProjekt($_GET['idProjekt'],"View/prowadzacy/container/containerProjektZarchiwizowanyProwadzacy.html");

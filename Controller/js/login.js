@@ -31,9 +31,35 @@ $(document).ready(function(e) {
 		{
 			var wynik=sprawdz(odbiorca);
 			wynik.success(function(wynik){
+				console.log(wynik);
 			if( wynik.status==200 )
 			{
 				wyslij(wynik.result.id_uzytkownik,tytul,tresc);
+			}
+			else
+			{
+				alert("Taki użytkownik nie istnieje");
+			}
+			});
+			
+		}
+		
+	});
+	$("#napiszWiadomosc").submit(function(e){ //zdarzenie obslugujące przycisk wyslijWiadomosc
+		var odbiorca=$(this).find("input[name='nazwa']").val();
+		var tytul=$(this).find("input[name='tytul']").val();
+		var tresc=$(this).find("textarea[name='tresc']").val();
+		
+		e.preventDefault();
+		console.log(odbiorca);
+		console.log(tytul);console.log(tresc);
+		if(tresc.length!=0 && odbiorca.length!=0 && tytul.length!=0)
+		{
+			var wynik=sprawdzAdresataJakoProwadzacy(odbiorca);
+			wynik.success(function(wynik){
+			if( wynik.status==200 )
+			{
+				wyslijJakoProwadzacy(wynik.result.id_uzytkownik,tytul,tresc);
 			}
 			else
 			{
@@ -126,6 +152,39 @@ function wyslij(adresat,temat,wiadomosc){
 					 }
 			 });
 }
+
+function sprawdzAdresataJakoProwadzacy(adresat) {
+	return $.ajax({
+		url:'ajaxController.php',
+		dataType:'json',
+		type:'POST',
+		data:{
+			"przyciskProwadzacy":"sprawdzCzyIstnieje",
+			"nazwaUzytkownika":adresat
+			},
+	});
+}
+	
+function wyslijJakoProwadzacy(adresat,temat,wiadomosc){
+			$.ajax({
+			 url:"ajaxController.php",
+			 dataType:'json',
+			 type:'POST',
+			 data:
+			 {
+				"przyciskProwadzacy":"wyslijWiadomosc",
+				"nazwaUzytkownika":adresat,
+				"tytul":temat,
+				"trescWiadomosci":wiadomosc
+			 },
+			 success : function(json)
+					 {
+						 alert("Wiadomość została wysłana");
+						 window.open('index.php','_self');
+					 }
+			 });
+}
+
 function sprawdz(adresat){
 			return $.ajax({
 				url:'ajaxController.php',
@@ -775,5 +834,4 @@ $("#stworzRaport").submit(function(e){ //zdarzenie obslugujące przycisk archiwi
 			}
 		});
 	}
-
 });

@@ -18,6 +18,29 @@ class Prowadzacy extends Student{
 		return $wynik;
 	}
 	
+	public function pobierzWiadomosci()
+	{
+		$idOdbiorcy=$_SESSION['userId'];
+		$wiadomosc='id_uzytkownik='.$idOdbiorcy;
+		$adres=$this->api->getReceivedMessages;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+		$wynik=json_decode($wynik);
+		if($wynik->status==200)
+		{
+			$lista="";
+			foreach ($wynik->result->wiadomosci as $odebrana)
+			{
+				$tytul='<tr><td><a href="?przyciskProwadzacy=pobierzWiadomosc&idWiadomosc='.$odebrana->id_wiadomosc.'">'.$odebrana->tytul.'</a></td>';
+				$data='<td>Data: '.$odebrana->data.'</td></tr>';
+				$lista=$tytul.$data.$lista;
+			}
+			$lista='<table>'.$lista.'</table>';
+			$_SESSION['wiadomosci']=$wynik->result->wiadomosci;
+			return $lista;
+		}
+		else
+		return 'Blad';
+	}
 	
 	public function pokazPrzypisanychStudentow()
 	{

@@ -89,11 +89,40 @@ class adminController{
 				$wynik=$this->admin->uzupelnienieFormularzaAdmin();
 				$this->gui->setContainer($wynik);
 				break;
+								
+				case "Zmień Hasło":
+				$this->gui->setContainer("View/admin/container/containerZmianyHasla.html");
+				break;	
 				
+				case "Modyfikuj":
+				$wynik=$this->admin->modyfikujHaslo();
+				$wynik=$this->admin->uzupelnienieFormularzaAdmin();
+				$this->gui->setContainer($wynik);
+				break;
 				
-				case "Zmień hasło":
-
-					return $this->admin->zmienHasloAdmin();
+				case "Wiadomości":
+				$this->gui->setContainer("View/admin/container/containerMenuWiadomosciAdmin.html");
+				break;
+				
+				case "Otrzymane":
+				$wynik=$this->admin->pobierzWiadomosci();
+				$wynik=$this->admin->podmien("View/admin/container/containerOdebraneAdmin.html",$wynik,"{wiadomosci}");
+				$this->gui->setContainer($wynik);
+				break;
+				
+				case "pobierzWiadomosc":
+					$wynik=$this->admin->pokazWiadomosc($_GET['idWiadomosc']);
+					$this->gui->setContainer($wynik);
+				break;
+				
+				case "Napisz wiadomość":
+					$this->gui->setContainer("View/admin/container/containerNowaWiadomoscAdmin.html");
+				break;
+				
+				case "wyslijWiadomoscAdmin":
+				$wynik=$this->admin->wyslijWiadomoscAdmin();
+				$this->gui->setContainer($wynik);
+				
 				break;
 				
 			

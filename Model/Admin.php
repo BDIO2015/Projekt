@@ -247,13 +247,10 @@ public function uzupelnienieFormularza()
 		ID sieciowe: <input type="text" name="idsiec"id="idsiec"value="'.$id_sieciowy.'" /><br />
 		
 		<input type="submit" value="Wprowadź zmiany" name="przyciskAdmin" id="wprowadzZmiany" /><br />
-		</form>
+		<input type="submit" value="Zmień Hasło" name="przyciskAdmin" id="zmienHasloAdmin" /><br />
+		</form>';
 		
-		<form id=edytujHasloAdmin>
-		Edytuj hasło: <br>
-		Stare hasło: <INPUT TYPE="text" NAME="starehaslo">
-		Nowe hasło: <input type="password" name="nowehaslo" id="nowehaslo"/><br />
-		<input type="submit" value="Zmień hasło" name="przyciskAdmin" id="zmienHaslo" /></form>';
+	
 		
 		
 	}
@@ -273,23 +270,74 @@ public function uzupelnienieFormularza()
 		
 		}
 		
-	public function zmienHasloAdmin()
+	
+		public function modyfikujHaslo()
+		{
+			
+			
+				
+				$wiadomosc='id_uzytkownik='.$_SESSION['userId'].'&login='.$_SESSION['loginAdmina'].'&haslo='.$_POST['starehasloadmin'].'&nowe_haslo='.$_POST['nowehasloadmin'];
+				$adres=$this->api->changePass;
+				$wynik=$this->requestApi($wiadomosc,$adres);
+				$wynik=json_decode($wynik);
+				if($wynik->status==200){
+					
+					echo("<SCRIPT LANGUAGE='JavaScript'>window.alert('Operacja zmiany hasła została wykonana poprawnie')</SCRIPT>"); 
+				}
+				else if($wynik->status==400)
+				{
+					echo("<SCRIPT LANGUAGE='JavaScript'>window.alert('Podano złe parametry')</SCRIPT>"); 
+					
+				}
+				
+		}
+		
+		public function pobierzWiadomosci()
 	{
-		$idUz=$_SESSION['userId'];
-		$nazwaUz=$_SESSION['loginAdmina'];
-		$wiadomosc='id_uzytkownik='.$idUz.'&login='.$nazwaUz.'&haslo='.$_POST['starehaslo'].'&nowe_haslo='.$_POST['nowehaslo'];
-		$adres=$this->api->changePass;
+		$idOdbiorcy=$_SESSION['userId'];
+		$wiadomosc='id_uzytkownik='.$idOdbiorcy;
+		$adres=$this->api->getReceivedMessages;
 		$wynik=$this->requestApi($wiadomosc,$adres);
 		$wynik=json_decode($wynik);
 		if($wynik->status==200)
 		{
-			$wynik=json_encode($wynik);
-			return $wynik;
+			$lista="";
+			foreach ($wynik->result->wiadomosci as $odebrana)
+			{
+				$tytul='<tr><td><a href="?przyciskAdmin=pobierzWiadomosc&idWiadomosc='.$odebrana->id_wiadomosc.'">'.$odebrana->tytul.'</a></td>';
+				$data='<td>Data: '.$odebrana->data.'</td></tr>';
+				$lista=$tytul.$data.$lista;
+			}
+			$lista='<table>'.$lista.'</table>';
+			$_SESSION['wiadomosci']=$wynik->result->wiadomosci;
+			return $lista;
+		}
+		else
+		return 'Blad';
+	}
+	
+	public function pokazWiadomosc($idWiadomosci)
+	{
+		$wiadomosci=$_SESSION['wiadomosci'];
+		foreach($wiadomosci as $odebrana)
+		{
+			if($odebrana->id_wiadomosc==$idWiadomosci)
+			 return $odebrana->tresc;
 		}
 		return 0;
 	}
 	
-	
+	public function wyslijWiadomoscAdmin()
+	{
+		
+		$adresatAdmin=$_POST['adresatAdmin'];
+		$tytulAdmin=$_POST['tytulAdmin'];
+		$trescWiadomosciAdmin=$_POST['trescWiadomosciAdmin'];
+		
+		return $adresatAdmin.$tytulAdmin.$trescWiadomosciAdmin;
+		
+		
+	}
 	
 }
 ?>

@@ -893,6 +893,12 @@ function resetujHaslo(username, email)
 	});
 }
 
+$("input#Modyfikuj").click(function(){
+		
+		var starehasloadmin=$("#starehasloadmin").val();
+		var nowehasloadmin=$("#nowehasloadmin").val();
+	});
+
 $("#stworzRaport").submit(function(e){ //zdarzenie obslugujące przycisk archiwizuj
 	var trescInput = $(this).find("textarea[name='tresc']");
 	var tresc=trescInput.val();

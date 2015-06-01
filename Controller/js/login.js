@@ -739,4 +739,41 @@ function resetujHaslo(username, email)
 	});
 }
 
+$("#stworzRaport").submit(function(e){ //zdarzenie obslugujące przycisk archiwizuj
+	var trescInput = $(this).find("textarea[name='tresc']");
+	var tresc=trescInput.val();
+	
+	e.preventDefault();
+	if(tresc.length)
+	{
+		nowyRaport(tresc);
+	}
+});
+	function nowyRaport(tresc){
+		$.ajax({
+			url:'ajaxController.php',
+			dataType:'json',
+			type:'POST',
+			data:{
+				"przyciskStudent":"Stwórz raport",
+				"tresc":tresc
+				},
+			success : function(json) {
+					 if(json["status"]==201)
+					 {
+						alert("Raport został dodany");
+						window.open('index.php','_self');
+					 }
+					 else
+					 {
+						 trescInput.css({ border:"#FF0033 solid 2px"});
+						 alert("Nie udalo sie :(");
+					 }
+			},
+			error : function(err) {
+				alert("Blad");
+			}
+		});
+	}
+
 });

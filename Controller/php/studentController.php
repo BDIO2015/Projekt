@@ -47,7 +47,7 @@ class studentController{
 					$_SESSION['idProjektu']=$_GET['idProjekt'];
 					$wynik=$this->student->pokazProjekt($_GET['idProjekt'],"View/student/container/containerProjektStudent.html");
 					$wynik=$this->student->podmien($wynik,$this->student->wyswietlStudentow($_GET['idProjekt'],1),'{uczestnicy}');
-					$wynik=$wynik.$this->student->pobierzRaporty($_GET['idProjekt']).$this->student->pobierzWatki($_GET['idProjekt']);
+					$wynik=$wynik.$this->student->pobierzRaporty($_GET['idProjekt']).$this->student->pobierzWatki($_GET['idProjekt'],'Student');
 					$this->gui->setContainer($wynik);
 				break;
 				case "pobierzZarchiwizowanyProjekt":	
@@ -62,7 +62,18 @@ class studentController{
 					$wynik=$this->student->dolaczenieDoProjektu($_SESSION['idProjektu']);
 				
 				break;
-				
+				case "pobierzKomentarz":
+					$_SESSION['idWatek']=$_GET['idWatek'];
+					$wynik=$this->student->pobierzWatek($_SESSION['idWatek']);
+					$this->gui->setContainer($wynik);
+				break;
+				case "Nowy Komentarz":
+					$this->gui->setContainer("View/prowadzacy/container/containerNowyKomentarz.html");
+				break;
+				case "Wyślij plik":
+					$wynik=$this->student->wyslijPlik();
+					$this->gui->setContainer($wynik);
+				break;
 				case "Nowy raport":
 					$this->gui->setContainer("View/student/container/containerNowyRaport.html");
 				break;

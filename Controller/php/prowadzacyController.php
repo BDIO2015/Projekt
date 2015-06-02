@@ -45,7 +45,7 @@ class prowadzacyController{
 				case "pobierzProjekt":
 					$_SESSION['idProjektu']=$_GET['idProjekt'];
 					$wynik=$this->prowadzacy->pokazProjekt($_GET['idProjekt'],"View/prowadzacy/container/containerProjektProwadzacy.html");
-					$wynik=$wynik.$this->prowadzacy->pobierzRaporty($_GET['idProjekt']).$this->prowadzacy->pobierzWatki($_GET['idProjekt']);
+					$wynik=$wynik.$this->prowadzacy->pobierzRaporty($_GET['idProjekt']).$this->prowadzacy->pobierzWatki($_GET['idProjekt'],'Prowadzacy');
 					$wynik=$this->prowadzacy->podmien($wynik,$this->prowadzacy->wyswietlStudentow($_GET['idProjekt'],1),'{uczestnicy}');
 					$wynik=$this->prowadzacy->podmien($wynik,$this->prowadzacy->wyswietlStudentow($_GET['idProjekt'],0),'{oczekujacy}');
 					$wynik=$this->prowadzacy->podmien($wynik,$this->prowadzacy->wyswietlWszystkichStudentow(),'{wszyscy}');
@@ -146,7 +146,7 @@ class prowadzacyController{
 					$this->gui->setContainer("View/prowadzacy/container/containerNowyKomentarz.html");
 				break;
 				case "Dodaj komentarz":
-					$this->prowadzacy->nowyKomentarz($_SESSION['idProjektu'],$_SESSION['idWatek']);
+					return $this->prowadzacy->nowyKomentarz($_SESSION['idProjektu'],$_SESSION['idWatek']);
 				break;
 				case "usunKomentarz":
 					$this->prowadzacy->usunKomentarz();
@@ -168,6 +168,9 @@ class prowadzacyController{
 				case "aktualizujProjekt":
 					$wynik=$this->prowadzacy->edytujProjekt($_SESSION['idProjektu']);
 					return $wynik;
+				break;
+				case "pobierzZalacznik":
+					$this->prowadzacy->pobierzPlik($_GET['idZalacznik']);
 				break;
 			}
 		}

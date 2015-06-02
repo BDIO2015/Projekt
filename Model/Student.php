@@ -273,7 +273,7 @@ class Student extends Gosc{
 		return $lista;
 	}
 	
-	public function pobierzWatki($idProjektu)
+	public function pobierzWatki($idProjektu,$user)
 	{
 		$wiadomosc='id_projekt='.$idProjektu;
 		$adres=$this->api->getThreads;
@@ -284,9 +284,37 @@ class Student extends Gosc{
 			$lista="";
 			foreach($wynik->result->watki as $odbierz)
 			{
-				$lista='<tr><td><a href="?przyciskStudent=pobierzKomentarz&idWatek='.$odbierz->id_watek.'">'.$odbierz->text.' </a>'.$odbierz->date.'</a></td></tr>'.$lista;
+				$lista='<tr><td><a href="?przycisk'.$user.'=pobierzKomentarz&idWatek='.$odbierz->id_watek.'">'.$odbierz->text.' </a>'.$odbierz->date.'</a></td></tr>'.$lista;
 			}
 			$lista='<table>'.$lista.'</table>';
+			$_SESSION['result']=$wynik->result;
+			return $lista;
+		}
+	}
+	public function pobierzWatek($idWatku)
+	{
+		$wiadomosc='id_watek='.$idWatku;
+		$adres=$this->api->getThread;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+		$wynik=json_decode($wynik);
+		if($wynik->status==200)
+		{
+			$lista='<tr><td style="width: 10%;">'.$wynik->result->date.'</td><td colspan="2">'.$wynik->result->text.'</td></tr>';
+			$pliki="";
+			foreach($wynik->result->komentarze as $odbierz)
+			{
+				$lista=$lista.'<tr><td>'.$odbierz->date.'</td><td>'.$odbierz->text.'</td></tr>';
+			}
+				$pliki=$pliki.$wynik->result->id_zalacznik;
+			$lista='<table border="1" cellspacing="0" style="width:100%;">'.$lista.'</table><br />
+							<form method="get" id="obslugaProjektu">
+							<input type="submit" name="przyciskStudent" id="nowyKomentarz" value="Nowy Komentarz">
+							</form>';
+			$lista=$lista.'<form action="index.php" method="POST" ENCTYPE="multipart/form-data">
+   <input type="file" name="plik"/><br/>
+   <input type="submit" name="przyciskStudent" value="Wyślij plik"/>
+  </form>';
+			$lista=$lista.$pliki;
 			$_SESSION['result']=$wynik->result;
 			return $lista;
 		}
@@ -323,7 +351,7 @@ class Student extends Gosc{
 				$adres=$this->api->addAttachment;
 				$wynik=$this->requestApi($wiadomosc,$adres);
 				$wynik=json_decode($wynik);
-				$wiadomosc='id_projekt='.$idProjekt.'&id_nadrzedny='.$idWatek.'&text=Plik '.$file_name2.'&id_zalacznik='.$wynik->sciezka;
+				$wiadomosc='id_projekt='.$idProjekt.'&id_nadrzedny='.$idWatek.'&text='.$file_name2.'&id_zalacznik='.$wynik->sciezka;
 				$adres=$this->api->addComment;
 				$wynik=$this->requestApi($wiadomosc,$adres);
 				$wynik=json_decode($wynik);
@@ -390,6 +418,19 @@ class Student extends Gosc{
 				}
 		return 0;
 	}
-
+	public function pobierzPlik($idZalacznik)
+	{
+		$wiadomosc='id_zalacznik='.$idZalacznik;
+		$adres=$this->api->getAttachment;
+		$wynik=$this->requestApi($wiadomosc,$adres);
+		$wynik=json_decode($wynik);
+		$nazwaPliku =str_replace('http://deveo.pl/efdi/files/','',$wynik->url);
+		$dane = './Files/'.$nazwaPliku;
+		header('Content-Type:application/force-download');
+		header('Content-Disposition: attachment; filename='.$nazwaPliku.';');
+		header('Content-Length:'.@filesize($dane));
+		readfile($dane);
+		exit();
+	}
 }
 ?>

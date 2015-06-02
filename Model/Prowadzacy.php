@@ -114,27 +114,7 @@ class Prowadzacy extends Student{
 			$_SESSION['result']=$wynik->result;
 			return $lista;
 		}
-	}
-	
-	public function pobierzWatki($idProjektu)
-	{
-		$wiadomosc='id_projekt='.$idProjektu;
-		$adres=$this->api->getThreads;
-		$wynik=$this->requestApi($wiadomosc,$adres);
-		$wynik=json_decode($wynik);
-		if($wynik->status==200)
-		{
-			$lista="";
-			foreach($wynik->result->watki as $odbierz)
-			{
-				$lista='<tr><td><a href="?przyciskProwadzacy=pobierzKomentarz&idWatek='.$odbierz->id_watek.'">'.$odbierz->text.' </a>'.$odbierz->date.'</a></td></tr>'.$lista;
-			}
-			$lista='<table>'.$lista.'</table>';
-			$_SESSION['result']=$wynik->result;
-			return $lista;
-		}
-	}
-	
+	}	
 	public function wyswietlStudentow($idProjektu,$zatwierdzony)
 	{
 		$wiadomosc='id_projekt='.$idProjektu.'&zatwierdzony='.$zatwierdzony;
@@ -196,7 +176,10 @@ class Prowadzacy extends Student{
 			$pliki="";
 			foreach($wynik->result->komentarze as $odbierz)
 			{
+				if($odbierz->id_zalacznik==NULL)
 				$lista=$lista.'<tr><td>'.$odbierz->date.'</td><td>'.$odbierz->text.'</td><td style="width: 18px;"><a href=?przyciskProwadzacy=usunKomentarz&idKomentarz='.$odbierz->id_watek.'">X</a></td></tr>';
+				else
+				$lista=$lista.'<tr><td>'.$odbierz->date.'</td><td><p>Plik: <a href="ajaxController.php?przyciskProwadzacy=pobierzZalacznik&idZalacznik='.$odbierz->id_zalacznik.'">'.$odbierz->text.'</a></p></td><td style="width: 18px;"><a href=?przyciskProwadzacy=usunKomentarz&idKomentarz='.$odbierz->id_watek.'">X</a></td></tr>';
 			}
 				$pliki=$pliki.$wynik->result->id_zalacznik;
 			$lista='<table border="1" cellspacing="0" style="width:100%;">'.$lista.'</table><br />
@@ -227,6 +210,7 @@ class Prowadzacy extends Student{
 		$wiadomosc='id_projekt='.$idProjektu.'&id_nadrzedny='.$idWatku.'&text='.$trescKomentarza;
 		$adres=$this->api->addComment;
 		$wynik=$this->requestApi($wiadomosc,$adres);
+		return $wynik;
 	}
 	public function usunKomentarz(){
 		$idKomentarza=$_GET['idKomentarz'];

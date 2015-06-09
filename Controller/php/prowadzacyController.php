@@ -101,7 +101,6 @@ class prowadzacyController{
 				case "pobierzZarchiwizowanyProjekt":	
 					$_SESSION['idProjektu']=$_GET['idProjekt'];
 					$wynik=$this->prowadzacy->pokazZarchiwizowanyProjekt($_GET['idProjekt'],"View/prowadzacy/container/containerProjektZarchiwizowanyProwadzacy.html");
-					$wynik=$wynik.$this->prowadzacy->pobierzWatki($_GET['idProjekt']);
 					$wynik=$this->prowadzacy->podmien($wynik,$this->prowadzacy->wyswietlStudentowZarchiwizowanych($_GET['idProjekt'],1),'{uczestnicy}');
 					$this->gui->setContainer($wynik);
 				break;

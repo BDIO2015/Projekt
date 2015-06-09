@@ -53,7 +53,6 @@ class studentController{
 				case "pobierzZarchiwizowanyProjekt":	
 					$_SESSION['idProjektu']=$_GET['idProjekt'];
 					$wynik=$this->student->pokazZarchiwizowanyProjekt($_GET['idProjekt'],"View/prowadzacy/container/containerProjektZarchiwizowanyProwadzacy.html");
-					$wynik=$wynik.$this->student->pobierzWatki($_GET['idProjekt']);
 					$wynik=$this->student->podmien($wynik,"Brak dostepu",'{uczestnicy}');
 					$this->gui->setContainer($wynik);
 				break;

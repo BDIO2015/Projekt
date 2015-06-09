@@ -105,7 +105,7 @@ class adminController{
 				break;
 				
 				case "Otrzymane":
-				$wynik=$this->admin->pobierzWiadomosci();
+				$wynik=$this->admin->pobierzWiadomosci("przyciskAdmin");
 				$wynik=$this->admin->podmien("View/admin/container/containerOdebraneAdmin.html",$wynik,"{wiadomosci}");
 				$this->gui->setContainer($wynik);
 				break;
@@ -120,9 +120,7 @@ class adminController{
 				break;
 				
 				case "wyslijWiadomoscAdmin":
-				$wynik=$this->admin->wyslijWiadomoscAdmin();
-				$this->gui->setContainer($wynik);
-				
+				return $this->student->wiadomoscWyslij();
 				break;
 				
 			

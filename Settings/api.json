@@ -41,5 +41,6 @@
 	"deleteAttachment": "http://deveo.pl/efdi/webAPI/deleteAttachment",
 	"getAttachment": "http://deveo.pl/efdi/webAPI/getAttachment",
 	"updateProject": "http://deveo.pl/efdi/webAPI/updateProject",
-	"getArchivedProjects": "http://deveo.pl/efdi/webAPI/getArchivedProjects"
+	"getArchivedProjects": "http://deveo.pl/efdi/webAPI/getArchivedProjects",
+	"isUserActive": "http://deveo.pl/efdi/webAPI/isUserActive"
 }

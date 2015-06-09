@@ -27,6 +27,7 @@ $(document).ready(function(e) {
 		var odbiorca=$("#nazwaUzytkownika").val();
 		var tytul=$("#tytul").val();
 		var tresc=$("#trescWiadomosci").val();
+		var nadawca=$("input#wyslijWiadomosc").attr('name');
 		if(tresc.length!=0 && odbiorca.length!=0 && tytul.length!=0)
 		{
 			var wynik=sprawdz(odbiorca);
@@ -34,7 +35,7 @@ $(document).ready(function(e) {
 				console.log(wynik);
 			if( wynik.status==200 )
 			{
-				wyslij(wynik.result.id_uzytkownik,tytul,tresc);
+				wyslij(wynik.result.id_uzytkownik,tytul,tresc,nadawca);
 			}
 			else
 			{
@@ -133,18 +134,12 @@ function login(user,password){
 					}		
 			})
 }
-function wyslij(adresat,temat,wiadomosc){
+function wyslij(adresat,temat,wiadomosc,nadawca){
 			$.ajax({
 			 url:"ajaxController.php",
 			 dataType:'json',
 			 type:'POST',
-			 data:
-			 {
-				"przyciskStudent":"wyslijWiadomosc",
-				"nazwaUzytkownika":adresat,
-				"tytul":temat,
-				"trescWiadomosci":wiadomosc
-			 },
+			 data: nadawca+"=wyslijWiadomosc&nazwaUzytkownika="+adresat+"&tytul="+temat+"&trescWiadomosci="+wiadomosc,
 			 success : function(json)
 					 {
 						 alert("Wiadomość została wysłana");

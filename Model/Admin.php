@@ -290,32 +290,7 @@ public function uzupelnienieFormularza()
 					
 				}
 				
-		}
-		
-		public function pobierzWiadomosci()
-	{
-		$idOdbiorcy=$_SESSION['userId'];
-		$wiadomosc='id_uzytkownik='.$idOdbiorcy;
-		$adres=$this->api->getReceivedMessages;
-		$wynik=$this->requestApi($wiadomosc,$adres);
-		$wynik=json_decode($wynik);
-		if($wynik->status==200)
-		{
-			$lista="";
-			foreach ($wynik->result->wiadomosci as $odebrana)
-			{
-				$tytul='<tr><td><a href="?przyciskAdmin=pobierzWiadomosc&idWiadomosc='.$odebrana->id_wiadomosc.'">'.$odebrana->tytul.'</a></td>';
-				$data='<td>Data: '.$odebrana->data.'</td></tr>';
-				$lista=$tytul.$data.$lista;
-			}
-			$lista='<table>'.$lista.'</table>';
-			$_SESSION['wiadomosci']=$wynik->result->wiadomosci;
-			return $lista;
-		}
-		else
-		return 'Blad';
-	}
-	
+		}	
 	public function pokazWiadomosc($idWiadomosci)
 	{
 		$wiadomosci=$_SESSION['wiadomosci'];
@@ -326,18 +301,6 @@ public function uzupelnienieFormularza()
 		}
 		return 0;
 	}
-	
-	public function wyslijWiadomoscAdmin()
-	{
-		
-		$adresatAdmin=$_POST['adresatAdmin'];
-		$tytulAdmin=$_POST['tytulAdmin'];
-		$trescWiadomosciAdmin=$_POST['trescWiadomosciAdmin'];
-		
-		return $adresatAdmin.$tytulAdmin.$trescWiadomosciAdmin;
-		
-		
-	}
-	
+
 }
 ?>

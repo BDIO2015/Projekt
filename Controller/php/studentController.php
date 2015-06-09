@@ -98,7 +98,7 @@ class studentController{
 				break;
 				
 				case "Otrzymane":
-					$wynik=$this->student->pobierzWiadomosci();
+					$wynik=$this->student->pobierzWiadomosci("przyciskStudent");
 					$wynik=$this->student->podmien("View/student/container/containerOdebraneStudent.html",$wynik,"{wiadomosci}");
 					$this->gui->setContainer($wynik);
 				break;

@@ -76,7 +76,7 @@ class prowadzacyController{
 				break;
 				
 				case "Otrzymane":
-					$wynik=$this->prowadzacy->pobierzWiadomosci();
+					$wynik=$this->prowadzacy->pobierzWiadomosci("przyciskProwadzacy");
 					$wynik=$this->prowadzacy->podmien("View/prowadzacy/container/containerOdebrane.html",$wynik,"{wiadomosci}");
 					$this->gui->setContainer($wynik);
 				break;
@@ -123,12 +123,14 @@ class prowadzacyController{
 				case "akceptujStudentaPrzycisk":
 					 $_SESSION['idStudent']=$_GET['idStudenta'];
 					 $this->prowadzacy->dolaczenieStudentaDoProjektu($_SESSION['idProjektu'],$_SESSION['idStudent']);
-				   	return $this->prowadzacy->akceptujStudenta($_SESSION['idProjektu'],$_SESSION['idStudent']);
+				   	 $this->prowadzacy->akceptujStudenta($_SESSION['idProjektu'],$_SESSION['idStudent']);
+					 header('Location: index.php?przyciskProwadzacy=pobierzProjekt&idProjekt='.$_SESSION['idProjektu']);
 				break;
 				
 				case "usunStudentaPrzycisk":
 					 $_SESSION['idStudent']=$_GET['idStudenta'];
 					 $this->prowadzacy->usuniecieStudentaZProjektu($_SESSION['idProjektu'],$_SESSION['idStudent']);
+					 header('Location: index.php?przyciskProwadzacy=pobierzProjekt&idProjekt='.$_SESSION['idProjektu']);
 				break;
 				case "Ocena":
 					$this->gui->setContainer("View/prowadzacy/container/containerOcenaProwadzacy.html");	

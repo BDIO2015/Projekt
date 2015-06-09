@@ -31,7 +31,7 @@ class Student extends Gosc{
 		$wynik=$this->requestApi($wiadomosc,$adres);
 		return $wynik;
 	}
-	public function pobierzWiadomosci()
+	public function pobierzWiadomosci($user)
 	{
 		$idOdbiorcy=$_SESSION['userId'];
 		$wiadomosc='id_uzytkownik='.$idOdbiorcy;
@@ -41,13 +41,20 @@ class Student extends Gosc{
 		if($wynik->status==200)
 		{
 			$lista="";
+			$adres=$this->api->isUserExist;
 			foreach ($wynik->result->wiadomosci as $odebrana)
 			{
-				$tytul='<tr><td><a href="?przyciskStudent=pobierzWiadomosc&idWiadomosc='.$odebrana->id_wiadomosc.'">'.$odebrana->tytul.'</a></td>';
+				$wiadomosc='id_uzytkownik='.$odebrana->id_nadawca;
+				$wynik2=$this->requestApi($wiadomosc,$adres);
+				$wynik2=json_decode($wynik2);
+				$nadawca="";
+				if($wynik->status==200)
+				$nadawca='<tr><td>'.$wynik2->result->login.'</td>';
+				$tytul='<td><a href="?'.$user.'=pobierzWiadomosc&idWiadomosc='.$odebrana->id_wiadomosc.'">'.$odebrana->tytul.'</a></td>';
 				$data='<td>Data: '.$odebrana->data.'</td></tr>';
-				$lista=$tytul.$data.$lista;
+				$lista=$nadawca.$tytul.$data.$lista;
 			}
-			$lista='<table>'.$lista.'</table>';
+			$lista='<table><tr><td>Nadawca</td><td>Tytuł Wiadomości</td><td>Data</td></tr>'.$lista.'</table>';
 			$_SESSION['wiadomosci']=$wynik->result->wiadomosci;
 			return $lista;
 		}
